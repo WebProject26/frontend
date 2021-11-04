@@ -1,0 +1,33 @@
+.headBackground{
+
+    background-color: rgb(9, 134, 162);
+    height: 60px;
+    display: flex;
+    align-items: center;
+   
+}
+.headContainer{
+    display: flex;
+    align-items: center;
+    gap: 45px;
+    height: 50px;
+}
+
+
+.headLogo{
+  font-size: x-large;
+  font-weight: bold;
+  color: aliceblue;
+}
+
+.headerbothButtonstyle{
+    
+}
+
+.headB1{
+
+}
+
+.headB2{
+
+}
