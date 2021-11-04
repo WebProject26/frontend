@@ -1,0 +1,28 @@
+.frame {
+    width: 480px;
+    height:320px;
+    border: 1px solid #3B7080
+}
+
+.input {
+    width: 90%;
+    height: 15%;
+}
+
+.buttonContainer {
+    display: flex;
+    width: 90%;
+    height: 15%;
+}
+
+.login {
+    border-radius: 30;
+    border: 1px solid #3B7080;
+    background-color: #ADE25D;
+}
+
+.register {
+    border-radius: 30;
+    border: 1px solid #3B7080;
+    background-color: #fff;
+}
