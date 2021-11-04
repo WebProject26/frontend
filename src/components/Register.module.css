@@ -4,11 +4,10 @@
     top: 20%;
     margin-left: -240px;
     width: 480px;
-    height:320px;
+    height:680px;
     border: 2px solid #3B7080;
     display: flex;
     flex-direction: column;
-    text-align: center;
     -webkit-transition: all 1s ease-in-out;
     -moz-transition: all 1s ease-in-out;
     -o-transition: all 1s ease-in-out;
@@ -23,7 +22,19 @@
     font-size: 18px;
 }
 
-.buttonsContainer {
+.name {
+    width: 48%;
+}
+
+.city {
+    width: 60%;
+}
+
+.zip {
+    width: 36%;
+}
+
+.container {
     margin-top: 6%;
     margin-left: 5%;
     display: flex;
@@ -35,7 +46,7 @@
 .login {
     border-radius: 30px;
     border: 1px solid #3B7080;
-    background-color: #ADE25D;
+    background-color: #fff;
     width: 48%;
     cursor: pointer;
 }
@@ -43,13 +54,24 @@
 .register {
     border-radius: 30px;
     border: 1px solid #3B7080;
-    background-color: #fff;
+    background-color: #ADE25D;
     width: 48%;
     cursor: pointer;
+}
+
+.label {
+    font-size: 20px;
+}
+
+.isManager {
+    margin-top: 6%;
+    margin-left: 5%;
+    margin-right: 5px;
 }
 
 .error {
     color: red;
     font-size: 24px;
     margin-top: 4%;
+    text-align: center;
 }

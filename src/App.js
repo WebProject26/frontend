@@ -1,6 +1,11 @@
 //import styles from './App.module.css';
 //import axios from './axios';
+import React from 'react';
 import Login from './components/Login'
+import Register from './components/Register'
+
+
+
 
 class App extends React.Component {
   constructor(props)
@@ -8,25 +13,30 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-     
+      logForm: false,
+      regForm: false
     }
   }
-/*
-  componentDidMount() {
-    axios.get('http://localhost:3030/products')
-      .then(response => this.setState( { products: response.data }))
-      .catch(error => console.log(error))
 
-    axios.get('http://localhost:3030/cart')
-         .then(response => this.setState( { cart: response.data } ))
-         .catch(error => console.log(error))
+  login = () => {
+    this.setState({ logForm: this.state.logForm? false: true })
+    this.setState({ regForm: false})
+    console.log(this.state.logForm)
   }
-  */
+
+  register = () => {
+    this.setState({ regForm: this.state.regForm? false: true })
+    this.setState({ logForm: false})
+    console.log(this.state.regForm)
+  }
 
   render() {
     return (
-      <div className= { styles.App }>
-        <Login></Login>
+      <div>
+        <Login view = {this.state.logForm} loginClick = {this.login} regClick = {this.register}></Login>
+        <Register view = {this.state.regForm} regClick = {this.register} loginClick = {this.login}></Register>
+        <button onClick={this.login}>login</button>
+        <button onClick={this.register}>register</button>
       </div>
     )
   }
