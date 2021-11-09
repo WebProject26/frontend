@@ -10,24 +10,39 @@
     display: flex;
     align-items: center;
     gap: 45px;
-    height: 50px;
 }
 
 
 .headLogo{
-  font-size: x-large;
+  font-size: 59px;
   font-weight: bold;
-  color: aliceblue;
+  color: white;
+  
 }
 
-.headerbothButtonstyle{
-    
-}
 
 .headB1{
-
+  background-color:#bbbbbb;
+	border-radius:24px;
+	color:#090606;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+  margin-left: 1150px;
+  border-color: #000000;
+  border-width: 1.5px;
+  cursor: pointer;
 }
 
 .headB2{
+  background-color:transparent;
+	display:inline-block;
+  padding:none;
+  border:none;
+	color:#000000;
+	font-family:Arial;
+	font-size:17px;
+	text-decoration:none;
+  cursor: pointer;
 
 }

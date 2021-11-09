@@ -1,0 +1,48 @@
+.headBackground{
+
+    background-color: rgb(9, 134, 162);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    
+   
+}
+.headContainer{
+    display: flex;
+    align-items: center;
+    gap: 45px;
+    height: 50px;
+}
+
+
+.headLogo{
+  font-size: 59px;
+  font-weight: bold;
+  color: white;
+}
+
+
+.headB1{
+    color: black;
+    background: #bbbbbb;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: inline;
+    margin-left: 1200px;
+    border-color: black;
+    border-width: 1.5px;
+    cursor: pointer;
+}
+
+.headB2{
+    background: #bbbbbb;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: inline;
+    border-color: black;
+    border-width: 1.5px;
+    cursor: pointer;
+
+}
