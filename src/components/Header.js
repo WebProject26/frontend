@@ -5,10 +5,10 @@ export default function Header() {
     return (
         <div className ={styles.headBackground}>
             <div className ={styles.headContainer}>
-                <div classname ={styles.headLogo}>Order26</div>
-                <div className ={styles.headerbothButtonstyle}>
-                    <button>Register</button>
-                    <button>Login</button>
+                <div className ={styles.headLogo}>Order26</div>
+                <div>
+                    <button className={styles.headB1}>Register</button>
+                    <button className={styles.headB2}>Login</button>
                 </div>
             </div>
         </div>
