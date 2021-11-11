@@ -5,10 +5,10 @@ import {registerValidation} from './validation'
 
 const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
     //changing the horizontal position of the register window, based on the state in App.js
-    const [ height, setHeight ] = useState('')
+    const [ padding, setPadding ] = useState('')
     let leftPosition
     view? leftPosition = '50%' : leftPosition = '-20%'
-    const leftStyle = {left: leftPosition, height: height }
+    const leftStyle = {left: leftPosition, paddingBottom: padding }
 
     //hooks handling the register input fields
     const [ email, setEmail ] = useState('')
@@ -59,6 +59,57 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
     //variables for border colors
     let errorBorder = { borderColor: '#970c11' }
     let normalBorder = { borderColor: '#3b7080' }
+
+    //array with possible error messages and hooks to change between them
+    const errorsArray = ['That email is registered', 'Passwords do not match', 'Invalid Credentials']
+    const [ error, setError ] = useState(errorsArray[2])
+
+    //functions for showing and hiding the error messages
+    function errorDisplay() {
+        setPadding('3%')
+            setTimeout( () => {
+                setDisplayError(showError)
+                setTimeout( () => {
+                    setDisplayError({opacity: 1})
+                }, 100)
+            }, 750)
+    }
+    function errorHide() {
+        setDisplayError({opacity: 0})
+                setTimeout( () => {
+                    setDisplayError(hideError)
+                    setTimeout( () => {
+                        setPadding('1%')
+                    }, 100)
+                }, 730)
+    }
+
+    //this is called when the email field is out of focus... it checks if the entered email is already in DB and displays an error
+    function userExists() {
+        axios.get(`https://webproject26.herokuapp.com/register/${email}`)
+        .then( function(res) {
+            if (res.data) {
+            setEmailBorderColor(errorBorder)
+            setError(errorsArray[0])
+            errorDisplay()
+            } else {
+                errorHide()
+                setEmailBorderColor(normalBorder)
+            }
+        })
+    }
+    
+    //Checks the repeated password for a match with the password
+    function matchPassword() {
+        if (password !== repeatPassword) {
+            setError(errorsArray[1])
+            errorDisplay()
+            setRepeatPasswordBorderColor(errorBorder)
+        } else {
+            errorHide()
+            setRepeatPasswordBorderColor(normalBorder)
+        }
+    }
 
     //hooks for changing the border of the fields based on valid input
     const [ emailBorderColor, setEmailBorderColor ] = useState(normalBorder)
@@ -123,16 +174,12 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
         !validationArray[5] ? setAddressBorderColor(errorBorder) : setAddressBorderColor(normalBorder)
         !validationArray[6] ? setCityBorderColor(errorBorder) : setCityBorderColor(normalBorder)
         !validationArray[7] ? setZipBorderColor(errorBorder) : setZipBorderColor(normalBorder)
+
+
         
         if (allValid) {
-            if ( height === 680 ) { //if there was an error displayed, it first hides the error message and adjust the height of the window
-                setDisplayError({opacity: 0})
-                setTimeout( () => {
-                    setDisplayError(hideError)
-                    setTimeout( () => {
-                        setHeight(640)
-                    }, 100)
-                }, 730)
+            if ( padding === '3%' ) { //if there was an error displayed, it first hides the error message and adjust the height of the window
+                errorHide()
             }
             axios.post('https://webproject26.herokuapp.com/register', payload)
             .then(res => console.log(res.data))
@@ -141,22 +188,17 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
                 regClick()
             }, 1000)
         } else { //if allValid is false, the error message is displayed and the height of the window is adjusted
-            setHeight(680)
-            setTimeout( () => {
-                setDisplayError(showError)
-                setTimeout( () => {
-                    setDisplayError({opacity: 1})
-                }, 100)
-            }, 750)
+            setError(errorsArray[2])
+            errorDisplay()
         }
     }
 
 
     return (
         <div className = {styles.frame} style = {leftStyle} >
-            <input onChange = { emailField } style = { emailBorderColor } className = { styles.input } type="text" placeholder="your@email.com"></input>
+            <input onChange = { emailField } onBlur = { userExists } style = { emailBorderColor } className = { styles.input } type="text" placeholder="your@email.com"></input>
             <input onChange = { passwordField } style = { passwordBorderColor } className = { styles.input } type="password" placeholder="Password"></input>
-            <input onChange = { repeatPasswordField }style = { repeatPasswordBorderColor }  className = { styles.input } type="password" placeholder="Repeat password"></input>
+            <input onChange = { repeatPasswordField } onBlur = { matchPassword } style = { repeatPasswordBorderColor }  className = { styles.input } type="password" placeholder="Repeat password"></input>
             <div className = { styles.container }>
                 <input onChange = { firstNameField } style = { firstNameBorderColor } className = { styles.name } type = "text" placeholder="First name"></input>
                 <input onChange = { lastNameField } style = { lastNameBorderColor } className = { styles.name } type = "text" placeholder="Last name"></input>
@@ -174,7 +216,7 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
                 <button onClick={ loginClick } style = { loginButtonSize } className = { styles.login }>Login</button>
                 <button onClick={ register } style = { registerButtonSize } className = { styles.register }>Register</button>
             </div>
-            <p className = { styles.error } style = { displayError } >Invalid credentials</p>
+            <p className = { styles.error } style = { displayError } >{error}</p>
         </div>
     );
 };

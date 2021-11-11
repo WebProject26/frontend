@@ -6,10 +6,10 @@ import { loginValidation } from './validation'
 const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f }) => {
     //changing the vertical position of the login window, based on the state in App.js
     //height is changed if there is an error on display
-    const [ height, setHeight ] = useState('')
+    const [ padding, setPadding ] = useState('')
     let topPosition
     view? topPosition = '20%' : topPosition = '-50%'
-    let topStyle = {top: topPosition, height: height }
+    let topStyle = {top: topPosition, paddingBottom: padding }
 
     //hooks handling the input for the user and pass fields
     const [ email, setEmail ] = useState('')
@@ -74,12 +74,12 @@ const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f }) => {
         !validationArray[1] ? setPasswordBorderColor(errorBorder) : setPasswordBorderColor(normalBorder)
         
         if (allValid) { 
-            if ( height === 320 ) { //if there was an error displayed, it first hides the error message and adjust the height of the window
+            if ( padding === '1%' ) { //if there was an error displayed, it first hides the error message and adjust the height of the window
                 setDisplayError({opacity: 0})
                 setTimeout( () => {
                     setDisplayError(hideError)
                     setTimeout( () => {
-                        setHeight(270)
+                        setPadding('0%')
                     }, 100)
                 }, 730)
             }
@@ -90,7 +90,7 @@ const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f }) => {
                 loginClick()
              }, 1000)
         } else { //if allValid is false, the error message is displayed and the height of the window is adjusted
-            setHeight(320)
+            setPadding('1%')
             setTimeout( () => {
                 setDisplayError(showError)
                 setTimeout( () => {

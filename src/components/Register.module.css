@@ -1,24 +1,32 @@
 .frame {
     position: absolute;
+    top: 50%;
     left: 50%;
-    top: 20%;
-    margin-left: -240px;
-    width: 480px;
-    height:640px;
+    transform: translate(-50%, -50%);
+    width: 15%;
+    height:37%;
     border: 2px solid #3B7080;
     display: flex;
     flex-direction: column;
+    padding-bottom: 1%;
     -webkit-transition: all 1s ease-in-out;
     -moz-transition: all 1s ease-in-out;
     -o-transition: all 1s ease-in-out;
     transition: all 1s ease-in-out;
 }
 
+@media (max-width: 1921px) {
+    .frame { 
+        width: 30%;
+        height:55%;
+    }
+}
+
 .input {
     margin-left: 4%;
-    margin-top: 6%;
+    margin-top: 5%;
     width: 90%;
-    height: 48px;
+    height: 15%;
     font-size: 18px;
     border: 1px solid #3b7080;
     outline: none;
@@ -43,11 +51,11 @@
 }
 
 .container {
-    margin-top: 6%;
+    margin-top: 5%;
     margin-left: 5%;
     display: flex;
     width: 90%;
-    height: 48px;
+    height: 15%;
     justify-content: space-between;
 }
 
@@ -74,14 +82,17 @@
 .isManager {
     margin-top: 6%;
     margin-left: 5%;
-    margin-right: 5px;
+    margin-right: 2%;
+    margin-bottom: -2%;
 }
 
 .error {
+    position: absolute;
+    bottom: -2%;
     color: red;
     font-size: 24px;
     margin-top: 4%;
-    text-align: center;
+    align-self: center;
     opacity: 0;
     -webkit-transition: all 1s ease-in-out;
     -moz-transition: all 1s ease-in-out;

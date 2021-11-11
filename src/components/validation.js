@@ -1,6 +1,6 @@
 function registerValidation( email, password, repeatPassword, firstName, lastName, address, city, zip ) {
     let validEmail = /\S+@\S+\.\S+/.test(email)
-    let validPassword = password.length < 6 ? false : true
+    let validPassword = password.length < 1 ? false : true
     let validRepeatPassword = repeatPassword === password ? true : false
     let validFirstName = firstName.length > 0 ? true : false
     let validLastName = lastName.length > 0 ? true : false

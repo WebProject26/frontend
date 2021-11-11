@@ -1,4 +1,4 @@
-//import styles from './App.module.css';
+import styles from './App.module.css';
 //import axios from './axios';
 import React from 'react';
 import Login from './components/Login'
@@ -30,7 +30,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className= { styles.abc }>
         <Login view = {this.state.logForm} loginClick = {this.login} regClick = {this.register}/>
         <Register view = {this.state.regForm} regClick = {this.register} logClick = {this.login}/>
         <button onClick={this.login}>login</button>
