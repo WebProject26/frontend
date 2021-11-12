@@ -3,7 +3,7 @@ import styles from './Login.module.css'
 import axios from 'axios'
 import { loginValidation } from './validation'
 
-const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f }) => {
+const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser = f => f }) => {
     //changing the vertical position of the login window, based on the state in App.js
     //height is changed if there is an error on display
     const [ padding, setPadding ] = useState('')
@@ -25,6 +25,25 @@ const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f }) => {
     //variables for border colors
     let errorBorder = { borderColor: '#970c11' }
     let normalBorder = { borderColor: '#3b7080' }
+
+    function errorDisplay() {
+        setPadding('1%')
+            setTimeout( () => {
+                setDisplayError(showError)
+                setTimeout( () => {
+                    setDisplayError({opacity: 1})
+                }, 100)
+            }, 730)
+    }
+    function errorHide() {
+        setDisplayError({opacity: 0})
+            setTimeout( () => {
+                setDisplayError(hideError)
+                setTimeout( () => {
+                    setPadding('0%')
+                }, 100)
+            }, 730)
+    }
 
     //hooks for changing the border of the fields based on valid input
     const [ emailBorderColor, setEmailBorderColor ] = useState(normalBorder)
@@ -73,30 +92,23 @@ const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f }) => {
         !validationArray[0] ? setEmailBorderColor(errorBorder) : setEmailBorderColor(normalBorder)
         !validationArray[1] ? setPasswordBorderColor(errorBorder) : setPasswordBorderColor(normalBorder)
         
-        if (allValid) { 
-            if ( padding === '1%' ) { //if there was an error displayed, it first hides the error message and adjust the height of the window
-                setDisplayError({opacity: 0})
-                setTimeout( () => {
-                    setDisplayError(hideError)
-                    setTimeout( () => {
-                        setPadding('0%')
-                    }, 100)
-                }, 730)
-            }
+        if (allValid) {
             axios.put('https://webproject26.herokuapp.com/login', payload)
-            .then(res => console.log(res.data))
-            .catch(error => console.log(error))
-            setTimeout( () =>{
-                loginClick()
-             }, 1000)
+            .then((res) => {
+                localStorage.setItem('token26', res.data.token)
+                setUser(res.data)
+                console.log(res.data)
+                errorHide()
+                setTimeout( () =>{
+                    loginClick()
+                 }, 1500)
+            })
+            .catch((error) => {
+                console.log(error)
+                errorDisplay()
+            })
         } else { //if allValid is false, the error message is displayed and the height of the window is adjusted
-            setPadding('1%')
-            setTimeout( () => {
-                setDisplayError(showError)
-                setTimeout( () => {
-                    setDisplayError({opacity: 1})
-                }, 100)
-            }, 730)
+            errorDisplay()
         }
     }
 
