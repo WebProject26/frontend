@@ -1,0 +1,15 @@
+.abc {
+    width: 60%;
+    margin: auto;
+}
+
+@media ( max-aspect-ratio: 16/8 ) {
+    .abc {
+        width: 80%
+    }
+}
+
+.header {
+    background-color: #3B7080;
+    height: 4rem;
+}

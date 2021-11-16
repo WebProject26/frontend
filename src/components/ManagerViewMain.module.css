@@ -1,0 +1,18 @@
+.mainContainer {
+    margin-left: 3%;
+    width: 94%;
+    height: auto;
+    border: 2px solid #3B7080;
+    display: flex;
+}
+
+.addRestaurant {
+    width: 22%;
+    margin: 2%;border: 2px solid #3B7080;
+    height: 10rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    font-size: 6.5rem;
+    text-align: center;
+    cursor: pointer;
+}

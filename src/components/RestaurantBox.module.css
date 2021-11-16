@@ -1,0 +1,27 @@
+.boxContainer {
+    width: 22%;
+    margin: 2%;
+}
+
+.restaurantBox {
+    width: 100%;
+    border: 2px solid #3B7080;
+    height: 10rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.nameRating, .priceTags {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.name {
+    font-weight: 600;
+}
+
+.rating {
+    font-weight: 600;
+}

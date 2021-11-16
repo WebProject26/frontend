@@ -1,0 +1,26 @@
+.testImg {
+    width: 94%;
+    height: 12rem;
+    background-color: #fff;
+    border: 2px solid #3B7080;
+    position: relative;
+    left: 3%;
+    margin-top: 2%;
+    text-align: center;
+    font-size: 4rem;
+    background-image: url(../images/testPizza.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.addCategory {
+    width: 94%;
+    position: relative;
+    left: 3%;
+    height: 4rem;
+    background-color: #fff;
+    margin-top: 1%;
+    font-size: 3rem;
+    margin-bottom: 1%;
+    border: 2px solid #3B7080;
+}

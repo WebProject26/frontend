@@ -12,10 +12,10 @@ function registerValidation( email, password, repeatPassword, firstName, lastNam
 }
 
 function loginValidation(email, password) {
-    let validEmail = /\S+@\S+\.\S+/.test(email)
+    //let validEmail = /\S+@\S+\.\S+/.test(email)
     let validPassword = password.length > 0 ? true : false
 
-    return [ validEmail, validPassword]
+    return [ /*validEmail,*/ validPassword]
 }
 
 export { registerValidation, loginValidation }
