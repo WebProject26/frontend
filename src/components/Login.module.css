@@ -71,3 +71,14 @@
     transition: all 1s ease-in-out;
     align-self: center;
 }
+
+.closeButton {
+    width: 1.2rem;
+    height: 1.2rem;
+    position: absolute;
+    right: 0;
+    margin: .5%;
+    cursor: pointer;
+    border: 1px solid #3B7080;
+    background-color: #fff;
+}

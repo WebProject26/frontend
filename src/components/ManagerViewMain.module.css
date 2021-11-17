@@ -4,15 +4,24 @@
     height: auto;
     border: 2px solid #3B7080;
     display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
 }
 
 .addRestaurant {
-    width: 22%;
-    margin: 2%;border: 2px solid #3B7080;
+    width: 20%;
+    margin: 2%;
+    border: 2px solid #3B7080;
     height: 10rem;
     background-repeat: no-repeat;
     background-size: contain;
     font-size: 6.5rem;
     text-align: center;
     cursor: pointer;
+}
+
+.link {
+    width: 20%;
+    margin: 2%;
 }

@@ -3,7 +3,7 @@ import styles from './Login.module.css'
 import axios from 'axios'
 import { loginValidation } from './validation'
 
-const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser = f => f }) => {
+const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser = f => f, setOwnRestaurants = f => f }) => {
     //changing the vertical position of the login window, based on the state in App.js
     //height is changed if there is an error on display
     const [ padding, setPadding ] = useState('')
@@ -98,10 +98,16 @@ const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser
                 localStorage.setItem('token26', res.data.token)
                 setUser(res.data)
                 console.log(res.data)
+                console.log(res.data.token)
                 errorHide()
+                if(res.data.ismanager) {
+                    axios.get('https://webproject26.herokuapp.com/restaurants', { params: { managerid: res.data.id } } )
+                    .then( res => setOwnRestaurants(res.data) )
+                    .catch( err => console.log( err ) )
+                  }
                 setTimeout( () =>{
                     loginClick()
-                 }, 1500)
+                 }, padding === '1%' ? 1500 : 1000 )
             })
             .catch((error) => {
                 console.log(error)
@@ -114,6 +120,7 @@ const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser
 
     return (
         <div className = {styles.frame} style = {topStyle} >
+            <button onClick = { loginClick } className = { styles.closeButton }>x</button>
             <input onChange = { emailField } style = { emailBorderColor } className = {styles.input} type="text" placeholder="your@email.com"></input>
             <input onChange = { passwordField } style = { passwordBorderColor } className = {styles.input} type="password" placeholder="password"></input>
             <div className = {styles.buttonsContainer}>

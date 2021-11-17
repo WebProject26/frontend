@@ -196,6 +196,7 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
 
     return (
         <div className = {styles.frame} style = {leftStyle} >
+            <button onClick = { regClick } className = { styles.closeButton }>x</button>
             <input onChange = { emailField } onBlur = { userExists } style = { emailBorderColor } className = { styles.input } type="text" placeholder="your@email.com"></input>
             <input onChange = { passwordField } style = { passwordBorderColor } className = { styles.input } type="password" placeholder="Password"></input>
             <input onChange = { repeatPasswordField } onBlur = { matchPassword } style = { repeatPasswordBorderColor }  className = { styles.input } type="password" placeholder="Repeat password"></input>
