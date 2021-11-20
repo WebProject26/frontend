@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom'
 
 function ManagerViewMain(props) {
 
-    console.log(props)
-
     return (
         <div className = { styles.mainContainer }>
             { props.restaurants.map( (restaurant, index) => <Link to = {`:${restaurant.id}`} className = { styles.link } key = { index }><RestaurantBox key = { index } restaurant = { {...restaurant} }/></Link>) }

@@ -4,6 +4,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import ManagerViewRestaurant from './components/ManagerViewRestaurant'
 import ManagerViewMain from './components/ManagerViewMain';
+import RestaurantOrders from './components/RestaurantOrders'
 import axios from 'axios';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 
@@ -32,9 +33,12 @@ class App extends React.Component {
       console.log( this.state.user )
       console.log( this.state.user.ismanager )
       if(this.state.user.ismanager) {
-        axios.get('https://webproject26.herokuapp.com/restaurants', { params: { managerid: this.state.user.id } } )
+        let payload = { managerid : this.state.user.id }
+        console.log( payload )
+        axios.get('https://webproject26.herokuapp.com/restaurants', { params : payload } )
         .then( ( res ) => {
           this.setOwnRestaurants(res.data)
+          console.log( res.data )
         })
         .catch( err => console.log( err ) )
       }
@@ -78,11 +82,15 @@ class App extends React.Component {
         <button onClick= { this.login }>login</button>
         <button onClick= { this.register }>register</button>
         <button onClick= { this.logout }>logout</button>
+        <Link to = '/'><button >Front page</button></Link>
+        <Link to = '/restaurants'><button >Restaurant manager</button></Link>
+        <Link to = '/orders'><button >Orders manager</button></Link>
       </div>
       <Routes>
-          <Route path = '/' element = { <Link to = '/restaurants'><button >sds</button></Link> } />
-          <Route path = '/restaurants' element = { <div className= { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants } /></div> } />
-          <Route path = '/restaurants/:id' element = { <div className= { styles.abc }><ManagerViewRestaurant /></div> } />
+          <Route path = '/' element = { <div className = { styles.abc }><div>All restaurants will be visible here </div></div> } />
+          <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants } /></div> } />
+          <Route path = '/restaurants/:id' element = { <div className = { styles.abc }><ManagerViewRestaurant /></div> } />
+          <Route path = '/orders' element = { <div className = { styles.abc }><RestaurantOrders /></div> } />
       </Routes>
       <div>
         <Login view = { this.state.logForm } loginClick = { this.login } regClick = { this.register } setUser = { this.setUser } setOwnRestaurants = { this.setOwnRestaurants }/>

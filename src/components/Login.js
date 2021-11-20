@@ -97,11 +97,11 @@ const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser
             .then((res) => {
                 localStorage.setItem('token26', res.data.token)
                 setUser(res.data)
-                console.log(res.data)
-                console.log(res.data.token)
                 errorHide()
                 if(res.data.ismanager) {
-                    axios.get('https://webproject26.herokuapp.com/restaurants', { params: { managerid: res.data.id } } )
+                    let payload = { managerid : res.data.id }
+                    console.log(payload)
+                    axios.get('https://webproject26.herokuapp.com/restaurants', { params: payload } )
                     .then( res => setOwnRestaurants(res.data) )
                     .catch( err => console.log( err ) )
                   }
