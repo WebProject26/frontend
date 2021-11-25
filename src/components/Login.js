@@ -101,7 +101,7 @@ const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser
                 if(res.data.ismanager) {
                     let payload = { managerid : res.data.id }
                     console.log(payload)
-                    axios.get('https://webproject26.herokuapp.com/restaurants', { params: payload } )
+                    axios.get('https://webproject26.herokuapp.com/restaurants', { headers : payload } )
                     .then( res => setOwnRestaurants(res.data) )
                     .catch( err => console.log( err ) )
                   }

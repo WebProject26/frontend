@@ -1,48 +1,119 @@
 import React, { useState } from 'react';
 import styles from './RestaurantInfo.module.css'
+import axios from 'axios'
 
 function RestaurantInfo(props) {
 
+    let restaurant = props.info
+    console.log(restaurant)
+
     let priceArray = [1, 2, 3, 4, 5]
-    const [ priceLevel, setPriceLevel ] = useState(priceArray[0])
+    const [ priceLevel, setPriceLevel ] = useState(restaurant? restaurant.costlevel : 1)
     function chooseLevel(level) {
         setPriceLevel(priceArray[level])
     }    
     
-    let data = {
-        name: "pizza",
-        address: "tiilite 7",
-        email: "test@test.com",
-        webpage:  "www.pizza.com",
-        hours: "8am-23pm",
-        price: priceLevel,
-        phone: "0449574092",
-        tags: "piiza, burger, kebap",
-        delivery: "6"
-
-    }
     const [ edit, setEdit ] = useState(false)
 
     function editSave() {
         edit? setEdit(false) : setEdit(true)
+        console.log(payload)
+    }
+
+    const [ restName, setRestName ] = useState(restaurant ? restaurant.name : '')
+    const nameField = ( event ) => {
+        setRestName(event.target.value)
+    }
+    const [ restAddress, setRestAddress ] = useState(restaurant ? restaurant.address : '')
+    const addressField = ( event ) => {
+        setRestAddress(event.target.value)
+    }
+    const [ restTags, setRestTags ] = useState(restaurant ? restaurant.tags : '')
+    const tagsField = ( event ) => {
+        setRestTags(event.target.value)
+    }
+    const [ restPhone, setRestPhone ] = useState(restaurant ? restaurant.phoneNumber : '')
+    const phoneField = ( event ) => {
+        setRestPhone(event.target.value)
+    }
+    const [ restWebsite, setRestWebsite ] = useState(restaurant ? restaurant.website : '')
+    const websiteField = (event) => {
+        setRestWebsite(event.target.value)
+    }
+    const [ restEmail, setRestEmail ] = useState(restaurant ? restaurant.emailAddress : '')
+    const emailField = (event) => {
+        setRestEmail(event.target.value)
+    }
+    const [ restOpenHour, setRestOpenHour ] = useState(restaurant ? restaurant.openinghours[0].slice(11, 13) : '00')
+    const openHourField = (event) => {
+        setRestOpenHour(event.target.value)
+    }
+    const [ restOpenMin, setRestOpenMin ] = useState(restaurant ? restaurant.openinghours[0].slice(14, 16) : '00')
+    const openMinField = (event) => {
+        setRestOpenMin(event.target.value)
+    }
+    const [ restCloseHour, setRestCloseHour ] = useState(restaurant ? restaurant.openinghours[1].slice(11, 13) : '00')
+    const closeHourField = (event) => {
+        setRestCloseHour(event.target.value)
+    }
+    const [ restCloseMin, setRestCloseMin ] = useState(restaurant ? restaurant.openinghours[1].slice(14, 16) : '00')
+    const closeMinField = (event) => {
+        setRestCloseMin(event.target.value)
+    }
+    const [ deliveryFee, setDeliveryFee ] = useState(restaurant ? restaurant.deliveryfee : '')
+    const deliveryField = (event) => {
+        setDeliveryFee(event.target.value)
+    }
+
+    let token = localStorage.getItem('token26')
+    let payload = { 
+        token,
+        restaurantName : restName,
+        rating: Math.floor(Math.random() * 50),
+        costlevel: priceLevel,
+        tags: [restTags],
+        deliveryFee: deliveryFee,
+        address: restAddress,
+        phoneNumber : restPhone,
+        website: restWebsite,
+        emailAddress: restEmail,
+        openingHours: [`2016-06-22T${restOpenHour}:${restOpenMin}:00.000Z`, `2016-06-23T${restCloseHour}:${restCloseMin}:00.000Z`],
+    }
+ 
+    const updateRestaurant = () => { 
+        console.log(payload)
+        axios.put(`https://webproject26.herokuapp.com/restaurants/${ restaurant.id }`, payload )
+        .then( (res) => {
+            //window.location.reload()
+            console.log(res)
+            })
+        .catch( err => console.log(err))
+        editSave()
+        
     }
 
     let output = <div className = { styles.editContainer }> 
                     <div className = { styles.separateEdits }>
                         Restaurant name:
-                        <input className = { styles.inputField } defaultValue = { data.name }></input>
+                        <input className = { styles.inputField } defaultValue = { restaurant ? restaurant.name : '' } onChange = { nameField }></input>
                         Restaurant address:
-                        <input className = { styles.inputField }></input>
+                        <input className = { styles.inputField } defaultValue = { restaurant ? restaurant.address : '' } onChange = { addressField }></input>
                         Email address:
-                        <input className = { styles.inputField }></input>
+                        <input className = { styles.inputField } defaultValue = { restaurant ? restaurant.emailAddress : '' } onChange = { emailField }></input>
                     </div>
                     <div className = { styles.separateEdits }>
                         Restaurant Webpage:
-                        <input className = { styles.inputField }></input>
+                        <input className = { styles.inputField } defaultValue = { restaurant ? restaurant.website : '' } onChange = { websiteField }></input>
                         <div className = { styles.hoursPrice }>
                             <div className = { styles.hours }>
                                 Opening hours:
-                                <input className = { styles.inputFieldHours }></input>
+                                    <div className = { styles.hoursContainer }>
+                                    <input type = 'number' className = { styles.inputFieldHours } defaultValue = { restaurant? restaurant.openinghours[0].slice(11, 13) : '' } onChange = { openHourField }></input>:
+                                    <input type = 'number' className = { styles.inputFieldHours } defaultValue = { restaurant? restaurant.openinghours[0].slice(14, 16) : '' } onChange = { openMinField }></input>
+                                    to
+                                    <input type = 'number' className = { styles.inputFieldHours } defaultValue = { restaurant? restaurant.openinghours[1].slice(11, 13) : '' } onChange = { closeHourField }></input>:
+                                    <input type = 'number' className = { styles.inputFieldHours } defaultValue = { restaurant? restaurant.openinghours[1].slice(14, 16) : '' } onChange = { closeMinField }></input>
+                                </div>
                             </div>
                             <div className = { styles.priceLevel }>
                                 Price level:
@@ -52,14 +123,14 @@ function RestaurantInfo(props) {
                             </div>
                         </div>
                         Phone number:
-                        <input className = { styles.inputField }></input>
+                        <input className = { styles.inputField } defaultValue = { restaurant ? restaurant.phoneNumber : '' } type='number' onChange = { phoneField }></input>
                     </div>
                     <div className = { styles.separateEdits }>
                         Tags:
-                        <input className = { styles.inputField }></input>
+                        <input className = { styles.inputField } defaultValue = { restaurant ? restaurant.tags.map(tag => tag)  : ''} onChange={ tagsField }></input>
                         Delivery fee:
-                        <input className = { styles.inputField }></input>
-                        <button className = { styles.saveChanges } onClick = { editSave } >Save changes</button>
+                        <input type = 'number' className = { styles.inputField } defaultValue = { restaurant ? restaurant.deliveryfee : '' } onChange={ deliveryField }></input>
+                        <button className = { styles.saveChanges } onClick = { updateRestaurant } >Save changes</button>
                     </div>
                 </div>
 
@@ -67,41 +138,41 @@ function RestaurantInfo(props) {
                     <div className = { styles.separateEdits }>
                         <div className = { styles.info }>
                             <span className = { styles.fieldName }>Restaurant name:</span>
-                            <span className = { styles.fieldValue }>{data.name}</span>
+                            <span className = { styles.fieldValue }>{ restaurant ? restaurant.name : '' }</span>
                             <span className = { styles.fieldName }>Restaurant address:</span>
-                            <span className = { styles.fieldValue }>{data.address}</span>
+                            <span className = { styles.fieldValue }>{restaurant ? restaurant.address : '' }</span>
                             <span className = { styles.fieldName }>Email address:</span>
-                            <span className = { styles.fieldValue }>{data.email}</span>
+                            <span className = { styles.fieldValue }>{restaurant ? restaurant.emailAddress : '' }</span>
                         </div>
                     </div>
                     <div className = { styles.separateEdits }>
                         <div className = { styles.info }>
                             <span className = { styles.fieldName }>Restaurant Webpage:</span>
-                            <span className = { styles.fieldValue }>{data.webpage}</span>
+                            <span className = { styles.fieldValue }>{restaurant ? restaurant.website : '' }</span>
                         </div>
                         <div className = { styles.info }>
                             <div className = { styles.hoursPrice }>
                                 <div className = { styles.hours }>
                                     <span className = { styles.fieldName }>Opening hours:</span>
-                                    <span className = { styles.fieldValue }>{data.hours}</span>
+                                    <span className = { styles.fieldValue }>{ restaurant? restaurant.openinghours[0].slice(11, 13) : '' }:{ restaurant? restaurant.openinghours[0].slice(14, 16) : '' } to { restaurant? restaurant.openinghours[1].slice(11, 13) : '' }:{ restaurant? restaurant.openinghours[1].slice(14, 16) : '' }</span>
                                 </div>
                                 <div className = { styles.priceLevels }>
                                     <span className = { styles.fieldName }>Price level:</span>
-                                    <span className = { styles.fieldValue }>{data.price}</span>
+                                    <span className = { styles.fieldValue }>{restaurant ? restaurant.costlevel : 1 }</span>
                                 </div>
                             </div>
                         </div>
                         <div className = { styles.info }>
                             <span className = { styles.fieldName }>Phone number:</span>
-                            <span className = { styles.fieldValue }>{data.phone}</span>
+                            <span className = { styles.fieldValue }>{restaurant ? restaurant.phoneNumber : '' }</span>
                         </div>
                     </div>
                     <div className = { styles.separateEdits }>
                         <div className = { styles.info }>
                             <span className = { styles.fieldName }>Tags:</span>
-                            <span className = { styles.fieldValue }>{data.tags}</span>
+                            <span className = { styles.fieldValue }>{restaurant ? restaurant.tags.map(tag => tag) : '' }</span>
                             <span className = { styles.fieldName }>Delivery fee:</span>
-                            <span className = { styles.fieldValue }>${data.delivery}</span>
+                            <span className = { styles.fieldValue }>${restaurant ? restaurant.deliveryfee : '' }</span>
                             <button className = { styles.saveChanges } onClick = { editSave } >Edit info</button>
                         </div>
                     </div>

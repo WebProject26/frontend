@@ -9,7 +9,7 @@ function ManagerViewMain(props) {
 
     return (
         <div className = { styles.mainContainer }>
-            { props.restaurants.map( (restaurant, index) => <Link to = {`:${restaurant.id}`} className = { styles.link } key = { index }><RestaurantBox key = { index } restaurant = { {...restaurant} }/></Link>) }
+            { props.restaurants.map( (restaurant, index) => <Link to = {restaurant.id} className = { styles.link } key = { index }><RestaurantBox key = { index } restaurant = { {...restaurant} }/></Link>) }
             <div className = { styles.addRestaurant }>+</div>
         </div>
     );
