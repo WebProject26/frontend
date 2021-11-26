@@ -7,9 +7,17 @@ import { Link } from 'react-router-dom'
 
 function ManagerViewMain(props) {
 
+    
+    const setOpenRestaurant = (restaurant) => {
+        localStorage.removeItem('openRestaurant')
+        localStorage.setItem('openRestaurant', JSON.stringify(restaurant))
+        console.log(localStorage.getItem('openRestaurant'))
+    }
+    
+
     return (
         <div className = { styles.mainContainer }>
-            { props.restaurants.map( (restaurant, index) => <Link to = {restaurant.id} className = { styles.link } key = { index }><RestaurantBox key = { index } restaurant = { {...restaurant} }/></Link>) }
+            { props.restaurants.map( (restaurant, index) => <Link to = {restaurant.id} className = { styles.link } key = { index } onClick = { () => {setOpenRestaurant(restaurant)}}><RestaurantBox key = { index } restaurant = { {...restaurant} }/></Link>) }
             <div className = { styles.addRestaurant }>+</div>
         </div>
     );

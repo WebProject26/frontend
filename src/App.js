@@ -44,7 +44,6 @@ class App extends React.Component {
     })
   }
 
-
   login = () => {
     this.setState({ logForm: this.state.logForm? false: true })
     this.setState({ regForm: false })
@@ -84,8 +83,8 @@ class App extends React.Component {
       </div>
       <Routes>
           <Route path = '/' element = { <div className = { styles.abc }><div>All restaurants will be visible here </div></div> } />
-          <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants } /></div> } />
-          <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant restaurants = { this.state.ownRestaurants } /></div> } />
+          <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants }/></div> } />
+          <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant /></div> } />
           <Route path = '/orders' element = { <div className = { styles.abc }><RestaurantOrders /></div> } />
       </Routes>
       <div>
