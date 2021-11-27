@@ -1,0 +1,27 @@
+.boxContainer {
+    width:20%;
+    margin: 1%;
+}
+
+.foodBox {
+    width: 100%;
+    border: 2px solid #3B7080;
+    height: 10rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.namePrice, .description {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.name {
+    font-weight: 600;
+}
+
+.cost {
+    font-weight: 600;
+}

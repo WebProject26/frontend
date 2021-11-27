@@ -67,6 +67,14 @@ class App extends React.Component {
     this.setState({ ownRestaurants: restaurantsArray })
   }
 
+  getMenuItems = (restaurantId) => {
+    axios.get(`https://webproject26.herokuapp.com/menu/${restaurantId}`)
+    .then( (res) => {
+      localStorage.setItem('menu26', JSON.stringify(res.data))
+    })
+    .catch( err => console.log( err ))
+  }
+
 
   render() {
   
@@ -83,7 +91,7 @@ class App extends React.Component {
       </div>
       <Routes>
           <Route path = '/' element = { <div className = { styles.abc }><div>All restaurants will be visible here </div></div> } />
-          <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants }/></div> } />
+          <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants } getMenuItems = { this.getMenuItems }/></div> } />
           <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant /></div> } />
           <Route path = '/orders' element = { <div className = { styles.abc }><RestaurantOrders /></div> } />
       </Routes>

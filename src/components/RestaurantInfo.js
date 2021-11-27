@@ -5,7 +5,7 @@ import axios from 'axios'
 function RestaurantInfo(props) {
 
     let restaurant = JSON.parse(localStorage.getItem('openRestaurant'))
-    console.log(restaurant)
+    //console.log(restaurant)
 
     let priceArray = [1, 2, 3, 4, 5]
     const [ priceLevel, setPriceLevel ] = useState(restaurant.costlevel)
@@ -121,11 +121,11 @@ function RestaurantInfo(props) {
                             <div className = { styles.hours }>
                                 Opening hours:
                                     <div className = { styles.hoursContainer }>
-                                    <input type = 'number' className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[0].slice(11, 13)} onChange = { openHourField }></input>:
-                                    <input type = 'number' className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[0].slice(14, 16)} onChange = { openMinField }></input>
+                                    <input type = 'number' min = '0' max = '23' className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[0].slice(11, 13)} onChange = { openHourField }></input>:
+                                    <input type = 'number' min = '0' max = '59' className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[0].slice(14, 16)} onChange = { openMinField }></input>
                                     to
-                                    <input type = 'number' className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[1].slice(11, 13)} onChange = { closeHourField }></input>:
-                                    <input type = 'number' className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[1].slice(14, 16)} onChange = { closeMinField }></input>
+                                    <input type = 'number' min = '0' max = '23' className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[1].slice(11, 13)} onChange = { closeHourField }></input>:
+                                    <input type = 'number' min = '0' max = '59' className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[1].slice(14, 16)} onChange = { closeMinField }></input>
                                 </div>
                             </div>
                             <div className = { styles.priceLevel }>

@@ -11,7 +11,7 @@ function ManagerViewMain(props) {
     const setOpenRestaurant = (restaurant) => {
         localStorage.removeItem('openRestaurant')
         localStorage.setItem('openRestaurant', JSON.stringify(restaurant))
-        console.log(localStorage.getItem('openRestaurant'))
+        props.getMenuItems(restaurant.id)
     }
     
 
