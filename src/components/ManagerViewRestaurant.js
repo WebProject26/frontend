@@ -2,19 +2,21 @@ import React, { useState} from 'react';
 import styles from './ManagerViewRestaurant.module.css'
 import RestaurantInfo from './RestaurantInfo'
 import RestaurantCategory from './RestaurantCategory'
+import { useParams } from 'react-router';
  
 function ManagerViewRestaurant(props) {
 
-    const [menuItems, setMenuItems] = useState(JSON.parse(localStorage.getItem('menu26')))
+    let { restaurantId } = useParams()
+    let foodItems = JSON.parse(localStorage.getItem('menu26'))
+    const [menuItems, setMenuItems] = useState(foodItems[0].restaurantid === restaurantId ? foodItems : [])
     //console.log(menuItems)
 
     let uniqueCategories = []
     let [newCategory, setNewCategory] = useState([])
 
     if(menuItems) {
-        console.log()
         let categories = menuItems.map( item => item.foodcategory )
-        console.log(categories)
+        //console.log(categories)
         let uniqueEntries = (value, index, self) => {
             return self.indexOf(value) === index
         }

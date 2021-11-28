@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 function ManagerViewMain(props) {
 
-    
+
     const setOpenRestaurant = (restaurant) => {
         localStorage.removeItem('openRestaurant')
         localStorage.setItem('openRestaurant', JSON.stringify(restaurant))

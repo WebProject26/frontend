@@ -72,7 +72,9 @@ class App extends React.Component {
     .then( (res) => {
       localStorage.setItem('menu26', JSON.stringify(res.data))
     })
-    .catch( err => console.log( err ))
+    .catch( (err) => {
+      console.log( err )
+    })
   }
 
 

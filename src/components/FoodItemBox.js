@@ -3,7 +3,7 @@ import styles from './FoodItemBox.module.css'
 
 export default function FoodItemBox(props) {
 
-    console.log(props)
+    //console.log(props)
     return (
         <div className = { styles.boxContainer } >
             <div className = { styles.foodBox } style = {{ backgroundImage: `url(${props.item.imageURL})`}}/>

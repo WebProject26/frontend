@@ -30,7 +30,7 @@ function RestaurantInfo(props) {
     }
     const [ restTags, setRestTags ] = useState(restaurant.tags)
     const tagsField = ( event ) => {
-        setRestTags(event.target.value)
+        setRestTags(event.target.value.split(','))
     }
     const [ restPhone, setRestPhone ] = useState(restaurant.phoneNumber)
     const phoneField = ( event ) => {
@@ -70,7 +70,7 @@ function RestaurantInfo(props) {
         token,
         restaurantName : restName,
         costlevel: priceLevel,
-        tags: [restTags],
+        tags: restTags,
         deliveryFee: deliveryFee,
         address: restAddress,
         phoneNumber : restPhone,
@@ -82,7 +82,7 @@ function RestaurantInfo(props) {
         name : restName,
         id : restaurant.id,
         costlevel: priceLevel,
-        tags: [restTags],
+        tags: restTags,
         deliveryfee: deliveryFee,
         address: restAddress,
         phoneNumber : restPhone,
@@ -93,11 +93,12 @@ function RestaurantInfo(props) {
  
     const updateRestaurant = () => { 
         console.log(payload)
+        console.log(localSave)
         localStorage.removeItem('openRestaurant')
         localStorage.setItem('openRestaurant', JSON.stringify(localSave))
         axios.put(`https://webproject26.herokuapp.com/restaurants/${ restaurant.id }`, payload )
         .then( (res) => {
-            //window.location.reload()
+            window.location.reload()
             console.log(res)
             })
         .catch( err => console.log(err))
@@ -182,8 +183,8 @@ function RestaurantInfo(props) {
                     </div>
                     <div className = { styles.separateEdits }>
                         <div className = { styles.info }>
-                            <span className = { styles.fieldName }>Tags:</span>
-                            <span className = { styles.fieldValue }>{restaurant.tags.map(tag => tag)}</span>
+                            <span className = { styles.fieldName }>Tags: Separate with comma!</span>
+                            <span className = { styles.fieldValue }>{restaurant.tags.map(tag => ' ' + tag)} </span>
                             <span className = { styles.fieldName }>Delivery fee:</span>
                             <span className = { styles.fieldValue }>${restaurant.deliveryfee}</span>
                             <button className = { styles.saveChanges } onClick = { editSave } >Edit info</button>
