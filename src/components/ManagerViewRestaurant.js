@@ -24,8 +24,6 @@ function ManagerViewRestaurant(props) {
         uniqueCategories = filteredCategories
     }
 
-
-
     const addCategory = () => {
         setNewCategory([...newCategory, 'something'])
         console.log(newCategory)
