@@ -21,7 +21,23 @@
     cursor: pointer;
 }
 
-.link {
+.linkContainer {
     width: 20%;
     margin: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.link {
+    width: 100%;
+    
+    text-decoration: none;
+    color: black;
+}
+
+.deleteButton {
+    width: 100%;
+    margin-top: 2%;
+    border: 1px solid #3B7080;
+    cursor: pointer;
 }

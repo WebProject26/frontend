@@ -5,6 +5,8 @@ import axios from 'axios'
 
 export default function AddFoodItemBox(props) {
 
+    //let menuItems = JSON.parse(localStorage.getItem('menu26'))
+
     let { restaurantId } = useParams()
 
     const [ itemName, setItemName ] = useState('')
@@ -32,6 +34,7 @@ export default function AddFoodItemBox(props) {
         foodcategory: props.category
     }
 
+    /*
     let newItem = { 
         name: itemName,
         description: description,
@@ -40,13 +43,19 @@ export default function AddFoodItemBox(props) {
         foodcategory: props.category,
         restaurantid: restaurantId
     }
+    */
 
     const saveItem = () => {
         console.log(payload)
-        /*axios.post(`https://webproject26.herokuapp.com/menu/${restaurantId}`, payload)
-        .then( res => console.log(res))
-        .catch( err => console.log(err))*/
-        props.importNewItem(newItem)
+        axios.post(`https://webproject26.herokuapp.com/menu/${restaurantId}`, payload)
+        .then( (res) => {
+            console.log(res)
+            props.getMenu(restaurantId)
+        })
+        .catch( err => console.log(err))
+        //props.importNewItem(newItem)
+        //menuItems.push(newItem);
+        //localStorage.setItem('menu26', JSON.stringify(menuItems));
     }
 
     return (

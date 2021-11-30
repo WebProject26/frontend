@@ -140,7 +140,7 @@ function RestaurantInfo(props) {
                         <input className = { styles.inputField } defaultValue = {restaurant.phoneNumber} type='number' onChange = { phoneField }></input>
                     </div>
                     <div className = { styles.separateEdits }>
-                        Tags:
+                        Tags: Separate with comma!
                         <input className = { styles.inputField } defaultValue = {restaurant.tags.map(tag => tag)} onChange={ tagsField }></input>
                         Delivery fee:
                         <input type = 'text' className = { styles.inputField } defaultValue = {restaurant.deliveryfee} onChange={ deliveryField }></input>
@@ -183,7 +183,7 @@ function RestaurantInfo(props) {
                     </div>
                     <div className = { styles.separateEdits }>
                         <div className = { styles.info }>
-                            <span className = { styles.fieldName }>Tags: Separate with comma!</span>
+                            <span className = { styles.fieldName }>Tags:</span>
                             <span className = { styles.fieldValue }>{restaurant.tags.map(tag => ' ' + tag)} </span>
                             <span className = { styles.fieldName }>Delivery fee:</span>
                             <span className = { styles.fieldValue }>${restaurant.deliveryfee}</span>

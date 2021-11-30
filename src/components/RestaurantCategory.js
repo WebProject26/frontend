@@ -5,7 +5,8 @@ import AddFoodItem from './AddFoodItem'
 
 function RestaurantCategory(props) {
 
-    const [ categoryItems, setCategoryItems ] = useState(props.items)
+    //const [ categoryItems, setCategoryItems ] = useState(props.items)
+    let categoryItems = props.items
 
     const [ newItem, setNewItem ] = useState([])
 
@@ -13,10 +14,10 @@ function RestaurantCategory(props) {
         setNewItem([...newItem, 'something'])
     }
 
-    const importNewItem = (foodItem) => {
-        setCategoryItems([...categoryItems, foodItem])
-        setNewItem([])
-    }
+    //const importNewItem = (foodItem) => {
+       // setCategoryItems([...categoryItems, foodItem])
+      //  setNewItem([])
+    //}
 
     console.log(props.items)
     return (
@@ -24,7 +25,7 @@ function RestaurantCategory(props) {
         <h1 className = { styles.categoryName }>{props.items[0] ? props.items[0].foodcategory : props.name}</h1>
         <div className = { styles.categoryContainer }>
             { categoryItems.map( (item, index) => <FoodItemBox key = { index } item = { {...item} }/>) }
-            { newItem.map( (item, index) => <AddFoodItem key = { index } category = { props.items[0] ? props.items[0].foodcategory : props.name } importNewItem = { importNewItem } />) }
+            { newItem.map( (item, index) => <AddFoodItem key = { index } category = { props.items[0] ? props.items[0].foodcategory : props.name } /*importNewItem = { importNewItem }*/ getMenu = { props.getMenu }/>) }
             <div className = { styles.addFoodItem } onClick={addItem}>+</div>
         </div>
         </>
