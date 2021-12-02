@@ -2,59 +2,19 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './Register.module.css'
 import {registerValidation} from './validation'
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
+
+    const navigate = useNavigate()
+
     //changing the horizontal position of the register window, based on the state in App.js
     const [ padding, setPadding ] = useState('')
     let leftPosition
     view? leftPosition = '50%' : leftPosition = '-20%'
     const leftStyle = {left: leftPosition, paddingBottom: padding }
-
-    //hooks handling the register input fields
-    const [ email, setEmail ] = useState('')
-    const emailField = (event) => {
-        setEmail(event.target.value)
-    }
-
-    const [ password, setPassword ] = useState('')
-    const passwordField = (event) => {
-        setPassword(event.target.value)
-    }
-
-    const [ repeatPassword, setRepeatPassword ] = useState('')
-    const repeatPasswordField = (event) => {
-        setRepeatPassword(event.target.value)
-    }
-
-    const [ firstName, setFirstName ] = useState('')
-    const firstNameField = (event) => {
-        setFirstName(event.target.value)
-    }
-
-    const [ lastName, setLastName ] = useState('')
-    const lastNameField = (event) => {
-        setLastName(event.target.value)
-    }
-
-    const [ address, setAddress ] = useState('')
-    const addressField = (event) => {
-        setAddress(event.target.value)
-    }
-
-    const [ city, setCity ] = useState('')
-    const cityField = (event) => {
-        setCity(event.target.value)
-    }
-
-    const [ zip, setZip ] = useState('')
-    const zipField = (event) => {
-        setZip(event.target.value)
-    }
-
-    const [ checkBox, setCheckBox ] = useState(false)
-    const checkBoxBoolean = () => {
-        setCheckBox(!checkBox)
-    }
 
     //variables for border colors
     let errorBorder = { borderColor: '#970c11' }
@@ -85,10 +45,12 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
     }
 
     //this is called when the email field is out of focus... it checks if the entered email is already in DB and displays an error
-    function userExists() {
+    function userExists(event) {
+        let email = event.target.value
         axios.get(`https://webproject26.herokuapp.com/register/${email}`)
         .then( function(res) {
-            if (res.data) {
+            console.log(res)
+            if (res.data === true) {
             setEmailBorderColor(errorBorder)
             setError(errorsArray[0])
             errorDisplay()
@@ -100,7 +62,9 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
     }
     
     //Checks the repeated password for a match with the password
-    function matchPassword() {
+    function matchPassword(event) {
+        let password = document.getElementById('password').value
+        let repeatPassword = event.target.value
         if (password !== repeatPassword) {
             setError(errorsArray[1])
             errorDisplay()
@@ -130,7 +94,8 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
     let normalLoginButton = 1
     let clickedLoginButton = 0.95
     const [ loginButtonSize, setLoginButtonSize] = useState({ transform : `scale(${normalLoginButton})` })
-    const loginClick = () => {
+    const loginClick = (event) => {
+        event.preventDefault()
         setLoginButtonSize({ transform: `scale(${clickedLoginButton})` })
         setTimeout( () => {
             setLoginButtonSize({ transform: `scale(${normalLoginButton})` })
@@ -144,7 +109,19 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
     let normalRegisterButton = 1
     let clickedRegisterButton = 0.95
     const [ registerButtonSize, setRegisterButtonSize] = useState({ transform : `scale(${normalRegisterButton})` })
-    const register = () => {
+
+    const register = (event) => {
+        event.preventDefault()
+        let email = event.target.email.value
+        let password = event.target.password.value
+        let repeatPassword = event.target.repeatPassword.value
+        let firstName = event.target.firstName.value
+        let lastName = event.target.lastName.value
+        let address = event.target.address.value
+        let city = event.target.city.value
+        let zip = event.target.zip.value
+        let isManager = event.target.isManager.checked
+
         setRegisterButtonSize({ transform : `scale(${clickedRegisterButton})` })
         setTimeout( () => {
             setRegisterButtonSize({ transform : `scale(${normalRegisterButton})` })
@@ -157,7 +134,7 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
             address : address,
             city : city,
             zip : zip,
-            ismanager : checkBox
+            ismanager : isManager
         }
         //registerValidation is imported function, it checks all input fields and returns an array with Boolean values
         let validationArray = registerValidation(email, password, repeatPassword, firstName, lastName, address, city, zip)
@@ -175,17 +152,20 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
         !validationArray[6] ? setCityBorderColor(errorBorder) : setCityBorderColor(normalBorder)
         !validationArray[7] ? setZipBorderColor(errorBorder) : setZipBorderColor(normalBorder)
 
-
+        console.log(payload)
         
         if (allValid) {
             if ( padding === '3%' ) { //if there was an error displayed, it first hides the error message and adjust the height of the window
                 errorHide()
             }
             axios.post('https://webproject26.herokuapp.com/register', payload)
-            .then(res => console.log(res.data))
+            .then( (res) => {
+                console.log(res.data)
+            })
             .catch(error => console.log(error))
             setTimeout( () =>{
                 regClick()
+                logClick()
             }, 1000)
         } else { //if allValid is false, the error message is displayed and the height of the window is adjusted
             setError(errorsArray[2])
@@ -193,32 +173,37 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
         }
     }
 
+    const closeForm = (event) => {
+        event.preventDefault()
+        regClick()
+    }
+
 
     return (
-        <div className = {styles.frame} style = {leftStyle} >
-            <button onClick = { regClick } className = { styles.closeButton }>x</button>
-            <input onChange = { emailField } onBlur = { userExists } style = { emailBorderColor } className = { styles.input } type="text" placeholder="your@email.com"></input>
-            <input onChange = { passwordField } style = { passwordBorderColor } className = { styles.input } type="password" placeholder="Password"></input>
-            <input onChange = { repeatPasswordField } onBlur = { matchPassword } style = { repeatPasswordBorderColor }  className = { styles.input } type="password" placeholder="Repeat password"></input>
+        <form onSubmit = { register } className = {styles.frame} style = {leftStyle} >
+            <button onClick = { closeForm } className = { styles.closeButton }>x</button>
+            <input name = 'email' onBlur = { userExists } style = { emailBorderColor } className = { styles.input } type="text" placeholder="your@email.com"></input>
+            <input name = 'password' id = 'password' style = { passwordBorderColor } className = { styles.input } type="password" placeholder="Password"></input>
+            <input name = 'repeatPassword' onBlur = { matchPassword } style = { repeatPasswordBorderColor }  className = { styles.input } type="password" placeholder="Repeat password"></input>
             <div className = { styles.container }>
-                <input onChange = { firstNameField } style = { firstNameBorderColor } className = { styles.name } type = "text" placeholder="First name"></input>
-                <input onChange = { lastNameField } style = { lastNameBorderColor } className = { styles.name } type = "text" placeholder="Last name"></input>
+                <input name = 'firstName' style = { firstNameBorderColor } className = { styles.name } type = "text" placeholder="First name"></input>
+                <input name = 'lastName' style = { lastNameBorderColor } className = { styles.name } type = "text" placeholder="Last name"></input>
             </div>
-            <input onChange = { addressField } style = { addressBorderColor } className = { styles.input } type = "text" placeholder="Address"></input>
-            <div className = { styles.container }>
-                <input onChange = { cityField } style = { cityBorderColor } className = { styles.city } type = "text" placeholder="City"></input>
-                <input onChange = { zipField } style = { zipBorderColor } className = { styles.zip } type = "text" placeholder="Zip code"></input>
+            <input name = 'address' style = { addressBorderColor } className = { styles.input } type = "text" placeholder="Address"></input>
+            <div  className = { styles.container }>
+                <input name = 'city' style = { cityBorderColor } className = { styles.city } type = "text" placeholder="City"></input>
+                <input name = 'zip' type = 'number' style = { zipBorderColor } className = { styles.zip } placeholder="Zip code"></input>
             </div>
             <label className = { styles.label }>
-            <input onChange = { checkBoxBoolean }  type ="checkbox" className = { styles.isManager }></input>
+            <input name = 'isManager' type ="checkbox" className = { styles.isManager }></input>
             I am a restaurant manager
             </label>
             <div className = { styles.container }>
                 <button onClick={ loginClick } style = { loginButtonSize } className = { styles.login }>Login</button>
-                <button onClick={ register } style = { registerButtonSize } className = { styles.register }>Register</button>
+                <button type = "submit" style = { registerButtonSize } className = { styles.register }>Register</button>
             </div>
             <p className = { styles.error } style = { displayError } >{error}</p>
-        </div>
+        </form>
     );
 };
 

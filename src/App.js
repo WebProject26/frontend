@@ -44,13 +44,13 @@ class App extends React.Component {
     })
   }
 
-  login = () => {
-    this.setState({ logForm: this.state.logForm? false: true })
+  login = (event) => {
+    this.setState({ logForm: !this.state.logForm })
     this.setState({ regForm: false })
   }
 
   register = () => {
-    this.setState({ regForm: this.state.regForm? false: true })
+    this.setState({ regForm: !this.state.regForm })
     this.setState({ logForm: false })
   }
 
@@ -100,7 +100,7 @@ class App extends React.Component {
       </Routes>
       <div>
         <Login view = { this.state.logForm } loginClick = { this.login } regClick = { this.register } setUser = { this.setUser } setOwnRestaurants = { this.setOwnRestaurants }/>
-        <Register view = { this.state.regForm } regClick = { this.register } logClick = { this.login }/>
+        <Register view = { this.state.regForm } regClick = { this.register } setUser = { this.setUser } logClick = { this.login }/>
       </div>
       </>
       </BrowserRouter>

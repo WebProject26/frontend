@@ -11,17 +11,6 @@ const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser
     view? topPosition = '20%' : topPosition = '-50%'
     let topStyle = {top: topPosition, paddingBottom: padding }
 
-    //hooks handling the input for the user and pass fields
-    const [ email, setEmail ] = useState('')
-    const [ password, setPassword ] = useState('')
-
-    const emailField = (event) => {
-        setEmail(event.target.value)
-    }
-    const passwordField = (event) => {
-        setPassword(event.target.value)
-    }
-
     //variables for border colors
     let errorBorder = { borderColor: '#970c11' }
     let normalBorder = { borderColor: '#3b7080' }
@@ -58,7 +47,8 @@ const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser
     let normalRegisterButton = 1
     let clickedRegisterButton = 0.95
     const [ registerButtonSize, setRegisterButtonSize] = useState({ transform : `scale(${normalRegisterButton})` })
-    const registerClick = () => {
+    const registerClick = (event) => {
+        event.preventDefault()
         setRegisterButtonSize({ transform: `scale(${clickedRegisterButton})` })
         setTimeout( () => {
             setRegisterButtonSize({ transform: `scale(${normalRegisterButton})` })
@@ -68,12 +58,15 @@ const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser
         }, 250)
     }
 
-
     //Hooks for setting the size of the button when clicked and the login function itself
     let normalLoginButton = 1
     let clickedLoginButton = 0.95
     const [ loginButtonSize, setLoginButtonSize ] = useState({ transform : `scale(${normalLoginButton})` })
-    const login = () => {
+
+    const login = (event) => {
+        event.preventDefault()
+        let email = event.target.email.value
+        let password = event.target.password.value
         setLoginButtonSize({ transform : `scale(${clickedLoginButton})` })
         setTimeout( () => {
             setLoginButtonSize({ transform : `scale(${normalLoginButton})` })
@@ -118,17 +111,22 @@ const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser
         }
     }
 
+    const closeForm = (event) => {
+        event.preventDefault()
+        loginClick()
+    }
+
     return (
-        <div className = {styles.frame} style = {topStyle} >
-            <button onClick = { loginClick } className = { styles.closeButton }>x</button>
-            <input onChange = { emailField } style = { emailBorderColor } className = {styles.input} type="text" placeholder="your@email.com"></input>
-            <input onChange = { passwordField } style = { passwordBorderColor } className = {styles.input} type="password" placeholder="password"></input>
+        <form className = {styles.frame} style = {topStyle} onSubmit = { login }>
+            <button onClick = { closeForm } className = { styles.closeButton }>x</button>
+            <input name = 'email' style = { emailBorderColor } className = {styles.input} type="text" placeholder="your@email.com"></input>
+            <input name = 'password' style = { passwordBorderColor } className = {styles.input} type="password" placeholder="password"></input>
             <div className = {styles.buttonsContainer}>
-                <button onClick={ login } style = { loginButtonSize } className = {styles.login}>Login</button>
-                <button onClick={ registerClick } style = { registerButtonSize } className = {styles.register}>Register</button>
+                <button type = 'submit' style = { loginButtonSize } className = {styles.login}>Login</button>
+                <button onClick = { registerClick } style = { registerButtonSize } className = {styles.register}>Register</button>
             </div>
             <p className = {styles.error} style = { displayError } >Invalid credentials</p>
-        </div>
+        </form>
     );
 };
 
