@@ -10,6 +10,8 @@
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
 .namePrice, .description {
@@ -24,4 +26,38 @@
 
 .cost {
     font-weight: 600;
+}
+
+.buttonsDiv {
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input {
+    width: 90%;
+    outline: none;
+}
+
+.deleteEdit {
+    width: 40%;
+    border: 1px solid #3B7080;
+    cursor: pointer;
+}
+
+.deleteEdit:hover {
+    background-color: #3B7080;
+    color: #fff;
+}
+
+.saveButton {
+    width: 100%;
+    border: 1px solid #3B7080;
+    margin-top: 3%;
+}
+
+.saveButton:hover {
+    background-color: #3B7080;
+    color: #fff;
+    cursor: pointer;
 }

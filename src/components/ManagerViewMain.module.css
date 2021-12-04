@@ -41,3 +41,8 @@
     border: 1px solid #3B7080;
     cursor: pointer;
 }
+
+.deleteButton:hover {
+    background-color: #3B7080;
+    color: #fff;
+}

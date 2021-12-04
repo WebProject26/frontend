@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './Register.module.css'
 import {registerValidation} from './validation'
-import { useNavigate } from 'react-router-dom';
 
 
 
 const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
 
-    const navigate = useNavigate()
+    //const navigate = useNavigate()
 
     //changing the horizontal position of the register window, based on the state in App.js
     const [ padding, setPadding ] = useState('')

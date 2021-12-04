@@ -27,6 +27,11 @@
     cursor: pointer;
 }
 
+.addCategory:hover {
+    background-color: #3b7050;
+    color: #fff;
+}
+
 .newCategory {
     height: 3rem;
     font-size: 2rem;

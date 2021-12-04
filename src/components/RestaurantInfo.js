@@ -17,84 +17,87 @@ function RestaurantInfo(props) {
 
     function editSave() {
         edit? setEdit(false) : setEdit(true)
-        console.log(payload)
+        //console.log(payload)
     }
 
-    const [ restName, setRestName ] = useState(restaurant.name)
-    const nameField = ( event ) => {
-        setRestName(event.target.value)
-    }
-    const [ restAddress, setRestAddress ] = useState(restaurant.address)
-    const addressField = ( event ) => {
-        setRestAddress(event.target.value)
-    }
-    const [ restTags, setRestTags ] = useState(restaurant.tags)
-    const tagsField = ( event ) => {
-        setRestTags(event.target.value.split(','))
-    }
-    const [ restPhone, setRestPhone ] = useState(restaurant.phoneNumber)
-    const phoneField = ( event ) => {
-        setRestPhone(event.target.value)
-    }
-    const [ restWebsite, setRestWebsite ] = useState(restaurant.website)
-    const websiteField = (event) => {
-        setRestWebsite(event.target.value)
-    }
-    const [ restEmail, setRestEmail ] = useState(restaurant.emailAddress)
-    const emailField = (event) => {
-        setRestEmail(event.target.value)
-    }
-    const [ restOpenHour, setRestOpenHour ] = useState(restaurant.openinghours[0].slice(11, 13))
     const openHourField = (event) => {
-        setRestOpenHour(event.target.value)
+        //event.preventDefault()
+        let value = event.target.value
+        value > 23 ? event.target.value = 23 : event.target.value = value     
     }
-    const [ restOpenMin, setRestOpenMin ] = useState(restaurant.openinghours[0].slice(14, 16))
-    const openMinField = (event) => {
-        setRestOpenMin(event.target.value)
-    }
-    const [ restCloseHour, setRestCloseHour ] = useState(restaurant.openinghours[1].slice(11, 13))
     const closeHourField = (event) => {
-        setRestCloseHour(event.target.value)
+        event.preventDefault()
+        let value = event.target.value
+        value > 23 ? event.target.value = 23 : event.target.value = value
     }
-    const [ restCloseMin, setRestCloseMin ] = useState(restaurant.openinghours[1].slice(14, 16))
-    const closeMinField = (event) => {
-        setRestCloseMin(event.target.value)
+    const openMinutesField = (event) => {
+        event.preventDefault()
+        let value = event.target.value
+        value > 59 ? event.target.value = 59 : event.target.value = value    
     }
-    const [ deliveryFee, setDeliveryFee ] = useState(restaurant.deliveryfee)
-    const deliveryField = (event) => {
-        setDeliveryFee(event.target.value)
+    const closeMinutesField = (event) => {
+        event.preventDefault()
+        let value = event.target.value
+        value > 59 ? event.target.value = 59 : event.target.value = value    
     }
 
-    let token = localStorage.getItem('token26')
-    let payload = { 
-        token,
-        restaurantName : restName,
-        costlevel: priceLevel,
-        tags: restTags,
-        deliveryFee: deliveryFee,
-        address: restAddress,
-        phoneNumber : restPhone,
-        website: restWebsite,
-        emailAddress: restEmail,
-        openingHours: [`2016-06-22T${restOpenHour}:${restOpenMin}:00.000Z`, `2016-06-23T${restCloseHour}:${restCloseMin}:00.000Z`],
-    }
-    let localSave = { 
-        name : restName,
-        id : restaurant.id,
-        costlevel: priceLevel,
-        tags: restTags,
-        deliveryfee: deliveryFee,
-        address: restAddress,
-        phoneNumber : restPhone,
-        website: restWebsite,
-        emailAddress: restEmail,
-        openinghours: [`2016-06-22T${restOpenHour}:${restOpenMin}:00.000Z`, `2016-06-23T${restCloseHour}:${restCloseMin}:00.000Z`],
-    }
- 
-    const updateRestaurant = () => { 
+    const click = (event) => {
+        event.preventDefault()
+        let name = event.target.name.value
+        let address = event.target.address.value
+        let email = event.target.email.value
+        let website = event.target.website.value
+        let hoursOpen = event.target.hoursOpen.value
+        let minutesOpen = event.target.minutesOpen.value
+        let hoursClose = event.target.hoursClose.value
+        let minutesClose = event.target.minutesClose.value
+        let costLevel = priceLevel
+        let phone = event.target.phone.value
+        let tags = event.target.tags.value.split(',')
+        let delivery = event.target.delivery.value
+
+        if( hoursOpen < 10 && hoursOpen.length < 2 ) {
+            hoursOpen = 0 + hoursOpen;
+        }
+        if( hoursClose < 10 && hoursClose.length < 2 ) {
+            hoursClose = 0 + hoursClose;
+        }
+        if( minutesOpen < 10 && minutesOpen.length < 2 ) {
+            minutesOpen = 0 + minutesOpen;
+        }
+        if( minutesClose < 10 && minutesClose.length < 2 ) {
+            minutesClose = 0 + minutesClose;
+        }
+
+        let localSave = { 
+            name : name,
+            id : restaurant.id,
+            costlevel: priceLevel,
+            tags: tags,
+            deliveryfee: delivery,
+            address: address,
+            phoneNumber : phone,
+            website: website,
+            emailAddress: email,
+            openinghours: [`2016-06-22T${hoursOpen}:${minutesOpen}:00.000Z`, `2016-06-23T${hoursClose}:${minutesClose}:00.000Z`],
+        }
+
+        let token = localStorage.getItem('token26')
+        let payload = { 
+            token: token,
+            restaurantName : name,
+            costlevel: costLevel,
+            tags: tags,
+            deliveryFee: delivery,
+            address: address,
+            phoneNumber : phone,
+            website: website,
+            emailAddress: email,
+            openingHours: [`2016-06-22T${hoursOpen}:${minutesOpen}:00.000Z`, `2016-06-23T${hoursClose}:${minutesClose}:00.000Z`],
+        }
+
         console.log(payload)
-        console.log(localSave)
-        localStorage.removeItem('openRestaurant')
+
         localStorage.setItem('openRestaurant', JSON.stringify(localSave))
         axios.put(`https://webproject26.herokuapp.com/restaurants/${ restaurant.id }`, payload )
         .then( (res) => {
@@ -102,31 +105,30 @@ function RestaurantInfo(props) {
             console.log(res)
             })
         .catch( err => console.log(err))
-        editSave()
-        
+        editSave()        
     }
 
-    let output = <div className = { styles.editContainer }> 
+    let output = <form className = { styles.editContainer } onSubmit = { click }> 
                     <div className = { styles.separateEdits }>
                         Restaurant name:
-                        <input className = { styles.inputField } defaultValue = {restaurant.name} onChange = { nameField }></input>
+                        <input name = 'name' className = { styles.inputField } defaultValue = {restaurant.name}></input>
                         Restaurant address:
-                        <input className = { styles.inputField } defaultValue = {restaurant.address} onChange = { addressField }></input>
+                        <input name = 'address' className = { styles.inputField } defaultValue = {restaurant.address}></input>
                         Email address:
-                        <input className = { styles.inputField } defaultValue = {restaurant.emailAddress } onChange = { emailField }></input>
+                        <input name = 'email' className = { styles.inputField } defaultValue = {restaurant.emailAddress }></input>
                     </div>
                     <div className = { styles.separateEdits }>
                         Restaurant Webpage:
-                        <input className = { styles.inputField } defaultValue = {restaurant.website} onChange = { websiteField }></input>
+                        <input name = 'website' className = { styles.inputField } defaultValue = {restaurant.website}></input>
                         <div className = { styles.hoursPrice }>
                             <div className = { styles.hours }>
                                 Opening hours:
                                     <div className = { styles.hoursContainer }>
-                                    <input type = 'number' min = '0' max = '23' className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[0].slice(11, 13)} onChange = { openHourField }></input>:
-                                    <input type = 'number' min = '0' max = '59' className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[0].slice(14, 16)} onChange = { openMinField }></input>
+                                    <input name = 'hoursOpen' type = 'number'/* min = '0' max = '23' */className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[0].slice(11, 13)} onChange = { openHourField }></input>:
+                                    <input name = 'minutesOpen' type = 'number'/* min = '0' max = '59'*/ className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[0].slice(14, 16)} onChange = { openMinutesField }></input>
                                     to
-                                    <input type = 'number' min = '0' max = '23' className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[1].slice(11, 13)} onChange = { closeHourField }></input>:
-                                    <input type = 'number' min = '0' max = '59' className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[1].slice(14, 16)} onChange = { closeMinField }></input>
+                                    <input name ='hoursClose' type = 'number'/* min = '0' max = '23' */className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[1].slice(11, 13)} onChange = { closeHourField }></input>:
+                                    <input name ='minutesClose' type = 'number'/* min = '0' max = '59' */className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[1].slice(14, 16)} onChange = { closeMinutesField }></input>
                                 </div>
                             </div>
                             <div className = { styles.priceLevel }>
@@ -137,16 +139,16 @@ function RestaurantInfo(props) {
                             </div>
                         </div>
                         Phone number:
-                        <input className = { styles.inputField } defaultValue = {restaurant.phoneNumber} type='number' onChange = { phoneField }></input>
+                        <input name = 'phone' className = { styles.inputField } defaultValue = {restaurant.phoneNumber} type='number'></input>
                     </div>
                     <div className = { styles.separateEdits }>
                         Tags: Separate with comma!
-                        <input className = { styles.inputField } defaultValue = {restaurant.tags.map(tag => tag)} onChange={ tagsField }></input>
+                        <input name = 'tags' className = { styles.inputField } defaultValue = {restaurant.tags.map(tag => tag)}></input>
                         Delivery fee:
-                        <input type = 'text' className = { styles.inputField } defaultValue = {restaurant.deliveryfee} onChange={ deliveryField }></input>
-                        <button className = { styles.saveChanges } onClick = { updateRestaurant } >Save changes</button>
+                        <input name = 'delivery' type = 'number' className = { styles.inputField } defaultValue = {restaurant.deliveryfee}></input>
+                        <button type = 'submit' className = { styles.saveChanges } >Save changes</button>
                     </div>
-                </div>
+                </form>
 
     let output2 = <div className = { styles.editContainer }> 
                     <div className = { styles.separateEdits }>

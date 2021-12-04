@@ -23,6 +23,8 @@ class App extends React.Component {
     }
   }
 
+
+
   componentDidMount() {
     var token = localStorage.getItem( 'token26' )
     let payload = { token: token }
@@ -70,11 +72,13 @@ class App extends React.Component {
   getMenuItems = (restaurantId) => {
     axios.get(`https://webproject26.herokuapp.com/menu/${restaurantId}`)
     .then( (res) => {
-      window.location.reload()
       localStorage.setItem('menu26', JSON.stringify(res.data))
+      window.location.reload()
     })
     .catch( (err) => {
       console.log( err )
+      localStorage.removeItem('menu26')
+      window.location.reload()
     })
   }
 

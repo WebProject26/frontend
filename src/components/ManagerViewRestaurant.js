@@ -9,7 +9,7 @@ function ManagerViewRestaurant(props) {
     let { restaurantId } = useParams()
     let foodItems = JSON.parse(localStorage.getItem('menu26'))
     //const [ menuItems, setMenuItems ] = useState([])
-    let menuItems = foodItems[0].restaurantid === restaurantId ? foodItems : []
+    let menuItems = foodItems ? foodItems[0].restaurantid === restaurantId ? foodItems : [] : []
     
     let uniqueCategories = []
     let [newCategory, setNewCategory] = useState([])

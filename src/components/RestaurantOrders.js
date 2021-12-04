@@ -1,7 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './RestaurantOrders.module.css'
+import axios from 'axios'
 
 function RestaurantOrders(props) {
+
+
+    useEffect(() => {
+        let token = localStorage.getItem('token26')
+            let payload = { token }
+            axios.get('https://webproject26.herokuapp.com/orders', { params : payload } )
+            .then( ( res ) => {
+              console.log(res.data)
+            })
+            .catch( err => console.log( err ) )
+        setInterval(() => {
+            let token = localStorage.getItem('token26')
+            let payload = { token }
+            axios.get('https://webproject26.herokuapp.com/orders', { params : payload } )
+            .then( ( res ) => {
+              console.log(res.data)
+            })
+            .catch( err => console.log( err ) )
+        }, 15000)
+    })
+
     return (
         <>
             <div className = { styles.topBar }>
