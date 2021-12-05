@@ -1,12 +1,14 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import styles from './ManagerViewRestaurant.module.css'
 import RestaurantInfo from './RestaurantInfo'
 import RestaurantCategory from './RestaurantCategory'
 import { useParams } from 'react-router';
+
  
 function ManagerViewRestaurant(props) {
 
     let { restaurantId } = useParams()
+
     let foodItems = JSON.parse(localStorage.getItem('menu26'))
     //const [ menuItems, setMenuItems ] = useState([])
     let menuItems = foodItems ? foodItems[0].restaurantid === restaurantId ? foodItems : [] : []

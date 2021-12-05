@@ -21,7 +21,7 @@ function RestaurantInfo(props) {
     }
 
     const openHourField = (event) => {
-        //event.preventDefault()
+        event.preventDefault()
         let value = event.target.value
         value > 23 ? event.target.value = 23 : event.target.value = value     
     }
@@ -41,7 +41,7 @@ function RestaurantInfo(props) {
         value > 59 ? event.target.value = 59 : event.target.value = value    
     }
 
-    const click = (event) => {
+    const saveInfo = (event) => {
         event.preventDefault()
         let name = event.target.name.value
         let address = event.target.address.value
@@ -75,6 +75,7 @@ function RestaurantInfo(props) {
             costlevel: priceLevel,
             tags: tags,
             deliveryfee: delivery,
+            rating: restaurant.review,
             address: address,
             phoneNumber : phone,
             website: website,
@@ -87,6 +88,7 @@ function RestaurantInfo(props) {
             token: token,
             restaurantName : name,
             costlevel: costLevel,
+            rating: restaurant.review,
             tags: tags,
             deliveryFee: delivery,
             address: address,
@@ -108,7 +110,7 @@ function RestaurantInfo(props) {
         editSave()        
     }
 
-    let output = <form className = { styles.editContainer } onSubmit = { click }> 
+    let output = <form className = { styles.editContainer } onSubmit = { saveInfo }> 
                     <div className = { styles.separateEdits }>
                         Restaurant name:
                         <input name = 'name' className = { styles.inputField } defaultValue = {restaurant.name}></input>

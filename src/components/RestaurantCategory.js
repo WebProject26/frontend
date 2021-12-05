@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './RestaurantCategory.module.css'
 import FoodItemBox from './FoodItemBox'
 import AddFoodItem from './AddFoodItem'
@@ -13,14 +13,6 @@ function RestaurantCategory(props) {
     const addItem = () => {
         setNewItem([...newItem, 'something'])
     }
-
-    //const importNewItem = (foodItem) => {
-       // setCategoryItems([...categoryItems, foodItem])
-      //  setNewItem([])
-    //}
-    useEffect(() => {
-        console.log(props.items)
-    })
     
     return (
         <>

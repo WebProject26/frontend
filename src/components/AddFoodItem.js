@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './AddFoodItem.module.css'
 import { useParams } from 'react-router'
 import axios from 'axios'
@@ -9,66 +9,36 @@ export default function AddFoodItemBox(props) {
 
     let { restaurantId } = useParams()
 
-    const [ itemName, setItemName ] = useState('')
-    const [ description, setDescription ] = useState('')
-    const [ price, setPrice ] = useState('')
+    const saveItem = (event) => {
+        event.preventDefault()
+        let payload = { 
+            token: localStorage.getItem('token26'),
+            itemName: event.target.name.value,
+            description: event.target.description.value,
+            cost: event.target.price.value,
+            imageURL: "https://i.redd.it/l8ts2vmr85y71.png",
+            foodcategory: props.category
+        }
 
-    const nameSet = (event) => {
-        setItemName(event.target.value)
-    }
-
-    const descriptionSet = (event) => {
-        setDescription(event.target.value)
-    }
-
-    const priceSet = (event) => {
-        setPrice(event.target.value)
-    }
-
-    let payload = { 
-        token: localStorage.getItem('token26'),
-        itemName: itemName,
-        description: description,
-        cost: price,
-        imageURL: "https://i.redd.it/l8ts2vmr85y71.png",
-        foodcategory: props.category
-    }
-
-    /*
-    let newItem = { 
-        name: itemName,
-        description: description,
-        cost: price,
-        imageURL: "https://i.redd.it/l8ts2vmr85y71.png",
-        foodcategory: props.category,
-        restaurantid: restaurantId
-    }
-    */
-
-    const saveItem = () => {
-        console.log(payload)
         axios.post(`https://webproject26.herokuapp.com/menu/${restaurantId}`, payload)
         .then( (res) => {
             console.log(res)
             props.getMenu(restaurantId)
         })
         .catch( err => console.log(err))
-        //props.importNewItem(newItem)
-        //menuItems.push(newItem);
-        //localStorage.setItem('menu26', JSON.stringify(menuItems));
     }
 
     return (
-        <div className = { styles.boxContainer } >
+        <form className = { styles.boxContainer } onSubmit={ saveItem }>
             <div className = { styles.foodBox } >
                 Item name:
-                <input className = { styles.input } onChange={ nameSet }></input>
+                <input name = 'name' className = { styles.input }></input>
                 Description: 
-                <input className = { styles.input } onChange={ descriptionSet }></input>
+                <input name = 'description' className = { styles.input }></input>
                 Price:
-                <input className = { styles.input } onChange={ priceSet }></input>
+                <input name = 'price' className = { styles.input }></input>
             </div>
-            <button className = { styles.saveButton } onClick={ saveItem }>Save</button>
-        </div>          
+            <button type = 'submit' className = { styles.saveButton }>Save</button>
+        </form>          
     )
 }

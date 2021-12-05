@@ -4,7 +4,8 @@ import axios from 'axios'
 
 export default function FoodItemBox(props) {
 
-    console.log(props)
+    console.log(props.item)
+
     const deleteItem = () => {
         let token = localStorage.getItem('token26')
         let payload = { 
@@ -19,21 +20,42 @@ export default function FoodItemBox(props) {
         .catch( err => console.log(err))
     }
 
+    
+
     const change = () => {
         setOutput(editItem)
     }
 
-    const editItem = <div className = { styles.boxContainer } >
+    const saveEdit = (event) => {
+        event.preventDefault()
+        let token = localStorage.getItem('token26')
+        let payload = { 
+            token: token,
+            itemid: props.item.id,
+            itemName: event.target.name.value,
+            description: event.target.description.value,
+            cost: event.target.price.value,
+            foodcategory: props.item.foodcategory
+        }
+        axios.put(`https://webproject26.herokuapp.com/menu/${props.item.restaurantid}`, payload )
+        .then( res => {
+            console.log(res)
+            props.getMenu(props.item.restaurantid)
+        })
+        .catch(err=> console.log(err))
+    }
+
+    const editItem = <form className = { styles.boxContainer } onSubmit = { saveEdit }>
                         <div className = { styles.foodBox } >
                             Item name:
-                            <input className = { styles.input } defaultValue = { props.item.name }></input>
+                            <input name = 'name' className = { styles.input } defaultValue = { props.item.name }></input>
                             Description: 
-                            <input className = { styles.input } defaultValue = { props.item.description }></input>
+                            <input name = 'description' className = { styles.input } defaultValue = { props.item.description }></input>
                             Price:
-                            <input className = { styles.input } defaultValue = { props.item.cost }></input>
+                            <input name = 'price' className = { styles.input } defaultValue = { props.item.cost }></input>
                         </div>
-                        <button className = { styles.saveButton } >Save</button>
-                    </div>
+                        <button type ='submit' className = { styles.saveButton } >Save</button>
+                    </form>
     
     const savedItem = <div className = { styles.boxContainer } >
                         <div className = { styles.foodBox } style = {{ backgroundImage: `url(${props.item.imageURL})`}}/>
@@ -49,10 +71,8 @@ export default function FoodItemBox(props) {
                             <button className = { styles.deleteEdit } onClick = { change }>Edit</button>
                         </div>
                       </div>
-    
+
     const [ output, setOutput ] = useState(savedItem)
-    
- 
 
     return (
         <>{ output }</>

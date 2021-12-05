@@ -23,19 +23,19 @@ class App extends React.Component {
     }
   }
 
-
-
   componentDidMount() {
     var token = localStorage.getItem( 'token26' )
     let payload = { token: token }
     axios.get('https://webproject26.herokuapp.com/login', { params: payload } )
     .then( ( res ) => {
       this.setUser( res.data )
+      console.log('userSet')
       if(this.state.user.ismanager) {
         let payload = { managerid : this.state.user.id }
         axios.get('https://webproject26.herokuapp.com/restaurants', { headers : payload } )
         .then( ( res ) => {
           this.setOwnRestaurants(res.data)
+          console.log('restSet')
         })
         .catch( err => console.log( err ) )
       }
@@ -69,6 +69,7 @@ class App extends React.Component {
     this.setState({ ownRestaurants: restaurantsArray })
   }
 
+
   getMenuItems = (restaurantId) => {
     axios.get(`https://webproject26.herokuapp.com/menu/${restaurantId}`)
     .then( (res) => {
@@ -81,6 +82,7 @@ class App extends React.Component {
       window.location.reload()
     })
   }
+
 
 
   render() {
@@ -99,7 +101,7 @@ class App extends React.Component {
       <Routes>
           <Route path = '/' element = { <div className = { styles.abc }><div>All restaurants will be visible here </div></div> } />
           <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants } getMenuItems = { this.getMenuItems }/></div> } />
-          <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant getMenu = { this.getMenuItems }/></div> } />
+          <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant getMenu = { this.getMenuItems } restaurants = { this.state.ownRestaurants }/></div> } />
           <Route path = '/orders' element = { <div className = { styles.abc }><RestaurantOrders /></div> } />
       </Routes>
       <div>

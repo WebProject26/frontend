@@ -11,6 +11,7 @@ function ManagerViewMain(props) {
     let token = localStorage.getItem('token26')
 
     const setOpenRestaurant = (restaurant) => {
+        console.log(restaurant)
         localStorage.removeItem('openRestaurant')
         localStorage.setItem('openRestaurant', JSON.stringify(restaurant))
         props.getMenuItems(restaurant.id)
@@ -60,9 +61,9 @@ function ManagerViewMain(props) {
     return (
         <div className = { styles.mainContainer }>
             { props.restaurants.map( (restaurant, index) => <div className = { styles.linkContainer } key = { index }>
-                                                              <Link to = {restaurant.id} className = { styles.link } key = { index } onClick = { () => {setOpenRestaurant(restaurant)}}>
-                                                              <RestaurantBox key = { index } restaurant = { {...restaurant} }/></Link>
-                                                              <button className = { styles.deleteButton } key = { index + 1 } onClick = { () => deleteRestaurant(restaurant.id) }>delete</button>
+                                                                <Link to = {restaurant.id} className = { styles.link } key = { index } onClick = { () => {setOpenRestaurant(restaurant)}}>
+                                                                <RestaurantBox key = { index } restaurant = { {...restaurant} }/></Link>
+                                                                <button className = { styles.deleteButton } key = { index + 1 } onClick = { () => deleteRestaurant(restaurant.id) }>delete</button>
                                                             </div>) }
             <div className = { styles.addRestaurant } onClick = { createRestaurant }>+</div>
         </div>

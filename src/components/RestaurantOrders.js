@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './RestaurantOrders.module.css'
 import axios from 'axios'
 
 function RestaurantOrders(props) {
 
+    const [ orders, setOrders ] = useState([])
 
     useEffect(() => {
         let token = localStorage.getItem('token26')
@@ -11,6 +12,7 @@ function RestaurantOrders(props) {
             axios.get('https://webproject26.herokuapp.com/orders', { params : payload } )
             .then( ( res ) => {
               console.log(res.data)
+              setOrders(res.data)
             })
             .catch( err => console.log( err ) )
         setInterval(() => {
@@ -19,10 +21,11 @@ function RestaurantOrders(props) {
             axios.get('https://webproject26.herokuapp.com/orders', { params : payload } )
             .then( ( res ) => {
               console.log(res.data)
+              setOrders(res.data)
             })
             .catch( err => console.log( err ) )
         }, 15000)
-    })
+    }, [])
 
     return (
         <>
@@ -36,6 +39,7 @@ function RestaurantOrders(props) {
             <div className = { styles.fieldsContainer }>
                 <div className = { styles.received }>
                     <div className = { styles.fieldName }>Received</div>
+                    { orders.map( ( order, index ) => <span key = {index }>{order.id}</span>)}
                 </div>
                 <div className = { styles.accepted }>
                     <div className = { styles.fieldName }>Accepted</div>
