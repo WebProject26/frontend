@@ -20,12 +20,6 @@ export default function FoodItemBox(props) {
         .catch( err => console.log(err))
     }
 
-    
-
-    const change = () => {
-        setOutput(editItem)
-    }
-
     const saveEdit = (event) => {
         event.preventDefault()
         let token = localStorage.getItem('token26')
@@ -39,6 +33,7 @@ export default function FoodItemBox(props) {
         }
         axios.put(`https://webproject26.herokuapp.com/menu/${props.item.restaurantid}`, payload )
         .then( res => {
+            setOutput(savedItem)
             console.log(res)
             props.getMenu(props.item.restaurantid)
         })
@@ -68,7 +63,7 @@ export default function FoodItemBox(props) {
                         </div>
                         <div className = { styles.buttonsDiv }>
                             <button className = { styles.deleteEdit } onClick = { deleteItem }>Delete</button>
-                            <button className = { styles.deleteEdit } onClick = { change }>Edit</button>
+                            <button className = { styles.deleteEdit } onClick = { () => { setOutput( editItem )} }>Edit</button>
                         </div>
                       </div>
 

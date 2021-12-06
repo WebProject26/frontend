@@ -23,6 +23,7 @@ export default function AddFoodItemBox(props) {
         axios.post(`https://webproject26.herokuapp.com/menu/${restaurantId}`, payload)
         .then( (res) => {
             console.log(res)
+            props.setNewItem([])
             props.getMenu(restaurantId)
         })
         .catch( err => console.log(err))

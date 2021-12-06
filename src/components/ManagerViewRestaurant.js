@@ -9,9 +9,23 @@ function ManagerViewRestaurant(props) {
 
     let { restaurantId } = useParams()
 
-    let foodItems = JSON.parse(localStorage.getItem('menu26'))
-    //const [ menuItems, setMenuItems ] = useState([])
-    let menuItems = foodItems ? foodItems[0].restaurantid === restaurantId ? foodItems : [] : []
+    if (!props.openRestaurant || props.openRestaurant.id !== restaurantId) {
+        props.setOpenRestaurant(restaurantId)
+    }
+
+    let menuItems
+
+    if ( !props.openMenu ) {
+        menuItems = []
+        props.getMenu(restaurantId)
+    } else if( props.openMenu[0] === 'error') {
+        menuItems = []
+    } else if( props.openMenu[0].restaurantid !== restaurantId ) {
+        menuItems = []
+        props.getMenu(restaurantId)
+    } else {
+        menuItems = props.openMenu
+    }
     
     let uniqueCategories = []
     let [newCategory, setNewCategory] = useState([])
@@ -23,32 +37,27 @@ function ManagerViewRestaurant(props) {
     let filteredCategories = categories.filter(uniqueEntries)
     uniqueCategories = filteredCategories
 
-    const [ categoryName, setCategoryName ] = useState('')
-    const addCategoryName = (event) => {
-        setCategoryName(event.target.value)
-    }
-
-    const removeName = (event) => {
-        event.target.value = ''
-    }
-
-    const addCategory = () => {
-        if(categoryName === '') {
+    const addCategory = (event) => {
+        event.preventDefault()
+        if(event.target.categoryName.value === '') {
             alert('please input category name')
         } else {
-            setNewCategory([...newCategory, categoryName])
+            setNewCategory([...newCategory, event.target.categoryName.value])
             console.log(newCategory)
+            event.target.categoryName.value = ''
         }
     }
 
     return (
         <div>
             <div className = { styles.testImg } ></div>
-            <RestaurantInfo />
+            <RestaurantInfo openRestaurant = { props.openRestaurant } setOpenRestaurant = { props.setOpenRestaurant }/>
             { uniqueCategories.map((category, index) => <RestaurantCategory key = {index} name = { category } items = { menuItems.filter(item => item.foodcategory === category) } getMenu = { props.getMenu } />) }
             { newCategory.map( (category, index) => <RestaurantCategory key = {index} name = {category} items = { [] } getMenu = { props.getMenu } />)}
-            <input type = 'text' className = { styles.newCategory } placeholder = "Category name" onChange = { addCategoryName } onBlur = { removeName } ></input>
-            <button className = { styles.addCategory } onClick={addCategory}>Add category</button>
+            <form className = { styles.newCategoryContainer } onSubmit = { addCategory }>
+                <input type = 'text' name = 'categoryName' className = { styles.newCategory } placeholder = "Category name" ></input>
+                <button className = { styles.addCategoryButton } type = 'submit'>Add category</button>
+            </form>
         </div>
     );
 }

@@ -4,11 +4,10 @@ import axios from 'axios'
 
 function RestaurantInfo(props) {
 
-    let restaurant = JSON.parse(localStorage.getItem('openRestaurant'))
-    //console.log(restaurant)
+    let restaurant = props.openRestaurant
 
     let priceArray = [1, 2, 3, 4, 5]
-    const [ priceLevel, setPriceLevel ] = useState(restaurant.costlevel)
+    const [ priceLevel, setPriceLevel ] = useState( !restaurant ? 1 : restaurant.costlevel )
     function chooseLevel(level) {
         setPriceLevel(priceArray[level])
     }    
@@ -17,7 +16,6 @@ function RestaurantInfo(props) {
 
     function editSave() {
         edit? setEdit(false) : setEdit(true)
-        //console.log(payload)
     }
 
     const openHourField = (event) => {
@@ -69,20 +67,6 @@ function RestaurantInfo(props) {
             minutesClose = 0 + minutesClose;
         }
 
-        let localSave = { 
-            name : name,
-            id : restaurant.id,
-            costlevel: priceLevel,
-            tags: tags,
-            deliveryfee: delivery,
-            rating: restaurant.review,
-            address: address,
-            phoneNumber : phone,
-            website: website,
-            emailAddress: email,
-            openinghours: [`2016-06-22T${hoursOpen}:${minutesOpen}:00.000Z`, `2016-06-23T${hoursClose}:${minutesClose}:00.000Z`],
-        }
-
         let token = localStorage.getItem('token26')
         let payload = { 
             token: token,
@@ -98,13 +82,10 @@ function RestaurantInfo(props) {
             openingHours: [`2016-06-22T${hoursOpen}:${minutesOpen}:00.000Z`, `2016-06-23T${hoursClose}:${minutesClose}:00.000Z`],
         }
 
-        console.log(payload)
-
-        localStorage.setItem('openRestaurant', JSON.stringify(localSave))
         axios.put(`https://webproject26.herokuapp.com/restaurants/${ restaurant.id }`, payload )
         .then( (res) => {
-            window.location.reload()
             console.log(res)
+            props.setOpenRestaurant(restaurant.id)
             })
         .catch( err => console.log(err))
         editSave()        
@@ -113,24 +94,24 @@ function RestaurantInfo(props) {
     let output = <form className = { styles.editContainer } onSubmit = { saveInfo }> 
                     <div className = { styles.separateEdits }>
                         Restaurant name:
-                        <input name = 'name' className = { styles.inputField } defaultValue = {restaurant.name}></input>
+                        <input name = 'name' className = { styles.inputField } defaultValue = { !restaurant ? '' : restaurant.name}></input>
                         Restaurant address:
-                        <input name = 'address' className = { styles.inputField } defaultValue = {restaurant.address}></input>
+                        <input name = 'address' className = { styles.inputField } defaultValue = { !restaurant ? '' : restaurant.address}></input>
                         Email address:
-                        <input name = 'email' className = { styles.inputField } defaultValue = {restaurant.emailAddress }></input>
+                        <input name = 'email' className = { styles.inputField } defaultValue = { !restaurant ? '' : restaurant.emailAddress }></input>
                     </div>
                     <div className = { styles.separateEdits }>
                         Restaurant Webpage:
-                        <input name = 'website' className = { styles.inputField } defaultValue = {restaurant.website}></input>
+                        <input name = 'website' className = { styles.inputField } defaultValue = { !restaurant ? '' : restaurant.website}></input>
                         <div className = { styles.hoursPrice }>
                             <div className = { styles.hours }>
                                 Opening hours:
                                     <div className = { styles.hoursContainer }>
-                                    <input name = 'hoursOpen' type = 'number'/* min = '0' max = '23' */className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[0].slice(11, 13)} onChange = { openHourField }></input>:
-                                    <input name = 'minutesOpen' type = 'number'/* min = '0' max = '59'*/ className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[0].slice(14, 16)} onChange = { openMinutesField }></input>
+                                    <input name = 'hoursOpen' type = 'number' className = { styles.inputFieldHours } defaultValue = { !restaurant ? 0 : restaurant.openinghours[0].slice(11, 13)} onChange = { openHourField }></input>:
+                                    <input name = 'minutesOpen' type = 'number' className = { styles.inputFieldHours } defaultValue = { !restaurant ? 0 : restaurant.openinghours[0].slice(14, 16)} onChange = { openMinutesField }></input>
                                     to
-                                    <input name ='hoursClose' type = 'number'/* min = '0' max = '23' */className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[1].slice(11, 13)} onChange = { closeHourField }></input>:
-                                    <input name ='minutesClose' type = 'number'/* min = '0' max = '59' */className = { styles.inputFieldHours } defaultValue = {restaurant.openinghours[1].slice(14, 16)} onChange = { closeMinutesField }></input>
+                                    <input name ='hoursClose' type = 'number' className = { styles.inputFieldHours } defaultValue = { !restaurant ? 0 : restaurant.openinghours[1].slice(11, 13)} onChange = { closeHourField }></input>:
+                                    <input name ='minutesClose' type = 'number' className = { styles.inputFieldHours } defaultValue = { !restaurant ? 0 : restaurant.openinghours[1].slice(14, 16)} onChange = { closeMinutesField }></input>
                                 </div>
                             </div>
                             <div className = { styles.priceLevel }>
@@ -141,13 +122,13 @@ function RestaurantInfo(props) {
                             </div>
                         </div>
                         Phone number:
-                        <input name = 'phone' className = { styles.inputField } defaultValue = {restaurant.phoneNumber} type='number'></input>
+                        <input name = 'phone' className = { styles.inputField } defaultValue = { !restaurant ? 1234 : restaurant.phoneNumber} type='number'></input>
                     </div>
                     <div className = { styles.separateEdits }>
                         Tags: Separate with comma!
-                        <input name = 'tags' className = { styles.inputField } defaultValue = {restaurant.tags.map(tag => tag)}></input>
+                        <input name = 'tags' className = { styles.inputField } defaultValue = { !restaurant ? '' : restaurant.tags.map(tag => tag)}></input>
                         Delivery fee:
-                        <input name = 'delivery' type = 'number' className = { styles.inputField } defaultValue = {restaurant.deliveryfee}></input>
+                        <input name = 'delivery' type = 'number' className = { styles.inputField } defaultValue = { !restaurant ? 0 : restaurant.deliveryfee}></input>
                         <button type = 'submit' className = { styles.saveChanges } >Save changes</button>
                     </div>
                 </form>
@@ -156,41 +137,41 @@ function RestaurantInfo(props) {
                     <div className = { styles.separateEdits }>
                         <div className = { styles.info }>
                             <span className = { styles.fieldName }>Restaurant name:</span>
-                            <span className = { styles.fieldValue }>{restaurant.name}</span>
+                            <span className = { styles.fieldValue }>{ !restaurant ? '' : restaurant.name}</span>
                             <span className = { styles.fieldName }>Restaurant address:</span>
-                            <span className = { styles.fieldValue }>{restaurant.address}</span>
+                            <span className = { styles.fieldValue }>{ !restaurant ? '' : restaurant.address}</span>
                             <span className = { styles.fieldName }>Email address:</span>
-                            <span className = { styles.fieldValue }>{restaurant.emailAddress}</span>
+                            <span className = { styles.fieldValue }>{ !restaurant ? '' : restaurant.emailAddress}</span>
                         </div>
                     </div>
                     <div className = { styles.separateEdits }>
                         <div className = { styles.info }>
                             <span className = { styles.fieldName }>Restaurant Webpage:</span>
-                            <span className = { styles.fieldValue }>{restaurant.website}</span>
+                            <span className = { styles.fieldValue }>{ !restaurant ? '' : restaurant.website}</span>
                         </div>
                         <div className = { styles.info }>
                             <div className = { styles.hoursPrice }>
                                 <div className = { styles.hours }>
                                     <span className = { styles.fieldName }>Opening hours:</span>
-                                    <span className = { styles.fieldValue }>{restaurant.openinghours[0].slice(11, 13)}:{restaurant.openinghours[0].slice(14, 16)} to {restaurant.openinghours[1].slice(11, 13)}:{restaurant.openinghours[1].slice(14, 16)}</span>
+                                    <span className = { styles.fieldValue }>{ !restaurant ? 12 : restaurant.openinghours[0].slice(11, 13)}:{ !restaurant ? 12 : restaurant.openinghours[0].slice(14, 16)} to { !restaurant ? 12 : restaurant.openinghours[1].slice(11, 13)}:{ !restaurant ? 12 : restaurant.openinghours[1].slice(14, 16)}</span>
                                 </div>
                                 <div className = { styles.priceLevels }>
                                     <span className = { styles.fieldName }>Price level:</span>
-                                    <span className = { styles.fieldValue }>{restaurant.costlevel}</span>
+                                    <span className = { styles.fieldValue }>{ !restaurant ? 1 : restaurant.costlevel}</span>
                                 </div>
                             </div>
                         </div>
                         <div className = { styles.info }>
                             <span className = { styles.fieldName }>Phone number:</span>
-                            <span className = { styles.fieldValue }>{restaurant.phoneNumber}</span>
+                            <span className = { styles.fieldValue }>{ !restaurant ? 1234 : restaurant.phoneNumber}</span>
                         </div>
                     </div>
                     <div className = { styles.separateEdits }>
                         <div className = { styles.info }>
                             <span className = { styles.fieldName }>Tags:</span>
-                            <span className = { styles.fieldValue }>{restaurant.tags.map(tag => ' ' + tag)} </span>
+                            <span className = { styles.fieldValue }>{ !restaurant ? '' : restaurant.tags.map(tag => ' ' + tag)} </span>
                             <span className = { styles.fieldName }>Delivery fee:</span>
-                            <span className = { styles.fieldValue }>${restaurant.deliveryfee}</span>
+                            <span className = { styles.fieldValue }>${ !restaurant ? 0 : restaurant.deliveryfee}</span>
                             <button className = { styles.saveChanges } onClick = { editSave } >Edit info</button>
                         </div>
                     </div>
