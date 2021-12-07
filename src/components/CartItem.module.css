@@ -1,0 +1,23 @@
+.itemLine{
+    display: flex;
+    align-items: center;
+}
+
+.paragraph{
+    margin: 4px;
+}
+
+.itemContainer{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.container{
+    width: 90%;
+}
+
+.quantity{
+    display: flex;
+    justify-content: flex-end;
+}
