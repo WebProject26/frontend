@@ -36,6 +36,7 @@ export default function FoodItemBox(props) {
             setOutput(savedItem)
             console.log(res)
             props.getMenu(props.item.restaurantid)
+            window.location.reload()
         })
         .catch(err=> console.log(err))
     }
@@ -56,7 +57,7 @@ export default function FoodItemBox(props) {
                         <div className = { styles.foodBox } style = {{ backgroundImage: `url(${props.item.imageURL})`}}/>
                         <div className = { styles.namePrice }>
                             <span className = { styles.name }>{ props.item.name }</span>
-                            <span className = { styles.cost }>{ props.item.cost }</span>
+                            <span className = { styles.cost }>€{ props.item.cost }</span>
                         </div>
                         <div className = { styles.description }>
                             <span className = { styles.description }>{ props.item.description }</span>

@@ -24,6 +24,7 @@ export default function AddFoodItemBox(props) {
         .then( (res) => {
             console.log(res)
             props.setNewItem([])
+            props.setNewCategory([])
             props.getMenu(restaurantId)
         })
         .catch( err => console.log(err))

@@ -8,11 +8,21 @@
     margin-top: 2%;
     text-align: center;
     font-size: 4rem;
-    background-image: url(../images/testPizza.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
 }
 
+.imgUpload {
+    position: relative;
+    left: 3%;
+    margin: 1% 0;
+}
+
+.uploadButton {
+    width: 9rem;
+    height: 2rem;
+}
 
 
 .newCategoryContainer {
@@ -43,5 +53,20 @@
 
 .addCategoryButton:hover {
     background-color: #3b7050;
+    color: #fff;
+}
+
+.selectImageButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 2rem;
+    width: 9rem;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+.selectImageButton:hover {
+    background-color: #3b7080;
+    border: 1px solid #3b7080;
     color: #fff;
 }

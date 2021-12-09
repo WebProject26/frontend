@@ -3,7 +3,7 @@ import styles from './Login.module.css'
 import axios from 'axios'
 import { loginValidation } from './validation'
 
-const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser = f => f, setOwnRestaurants = f => f }) => {
+const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser = f => f, setOwnRestaurants = f => f, setUsers = f => f}) => {
     //changing the vertical position of the login window, based on the state in App.js
     //height is changed if there is an error on display
     const [ padding, setPadding ] = useState('')
@@ -97,7 +97,12 @@ const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser
                     axios.get('https://webproject26.herokuapp.com/restaurants', { headers : payload } )
                     .then( res => setOwnRestaurants(res.data) )
                     .catch( err => console.log( err ) )
-                  }
+                    axios.get('https://webproject26.herokuapp.com/register')
+                        .then( res => {
+                        setUsers( res.data )
+                        })
+                        .catch( err => console.log( err ) )
+                }
                 setTimeout( () =>{
                     loginClick()
                  }, padding === '1%' ? 1500 : 1000 )

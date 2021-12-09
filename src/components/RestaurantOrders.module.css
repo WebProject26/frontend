@@ -12,13 +12,12 @@
 }
 
 .buttonsContainer { 
+    position: relative;
+    right: 1%;
     display: flex;
+    gap: 1%;
 }
 
-
-.selectRestaurant {
-    margin-right: 5%;
-}
 
 .fieldsContainer {
     display: flex;
@@ -53,4 +52,5 @@
 .fieldName {
     text-align: center;
     font-size: 1.5rem;
+    border-bottom: 2px solid #3b7080;
 }

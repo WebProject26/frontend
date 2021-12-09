@@ -75,6 +75,7 @@ function RestaurantInfo(props) {
             rating: restaurant.review,
             tags: tags,
             deliveryFee: delivery,
+            imageURL: restaurant.imageURL,
             address: address,
             phoneNumber : phone,
             website: website,
@@ -171,7 +172,7 @@ function RestaurantInfo(props) {
                             <span className = { styles.fieldName }>Tags:</span>
                             <span className = { styles.fieldValue }>{ !restaurant ? '' : restaurant.tags.map(tag => ' ' + tag)} </span>
                             <span className = { styles.fieldName }>Delivery fee:</span>
-                            <span className = { styles.fieldValue }>${ !restaurant ? 0 : restaurant.deliveryfee}</span>
+                            <span className = { styles.fieldValue }>€{ !restaurant ? 0 : restaurant.deliveryfee}</span>
                             <button className = { styles.saveChanges } onClick = { editSave } >Edit info</button>
                         </div>
                     </div>

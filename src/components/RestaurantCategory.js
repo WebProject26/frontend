@@ -18,7 +18,7 @@ function RestaurantCategory(props) {
         <h1 className = { styles.categoryName }>{props.items[0] ? props.items[0].foodcategory : props.name}</h1>
         <div className = { styles.categoryContainer }>
             { categoryItems.map( (item, index) => <FoodItemBox key = { index } item = { {...item} } getMenu = { props.getMenu }/>) }
-            { newItem.map( (item, index) => <AddFoodItem key = { index } category = { props.items[0] ? props.items[0].foodcategory : props.name } setNewItem = { setNewItem } getMenu = { props.getMenu }/>) }
+            { newItem.map( (item, index) => <AddFoodItem key = { index } category = { props.items[0] ? props.items[0].foodcategory : props.name } setNewCategory = { props.setNewCategory } setNewItem = { setNewItem } getMenu = { props.getMenu }/>) }
             <div className = { styles.addFoodItem } onClick={addItem}>+</div>
         </div>
         </>

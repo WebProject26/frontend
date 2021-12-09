@@ -1,0 +1,17 @@
+.orderContainer {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #3B7080;
+    padding: 1%;
+    margin: 1%;
+}
+
+.inDelivery {
+    font-weight: 600;
+    color: green;
+}
+
+.closed {
+    font-weight: 600;
+    color: red;
+}

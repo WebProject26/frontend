@@ -3,6 +3,8 @@ import styles from './ManagerViewRestaurant.module.css'
 import RestaurantInfo from './RestaurantInfo'
 import RestaurantCategory from './RestaurantCategory'
 import { useParams } from 'react-router';
+import axios from 'axios'
+import FormData from 'form-data'
 
  
 function ManagerViewRestaurant(props) {
@@ -11,6 +13,7 @@ function ManagerViewRestaurant(props) {
 
     if (!props.openRestaurant || props.openRestaurant.id !== restaurantId) {
         props.setOpenRestaurant(restaurantId)
+        props.getMenu(restaurantId)
     }
 
     let menuItems
@@ -20,7 +23,7 @@ function ManagerViewRestaurant(props) {
         props.getMenu(restaurantId)
     } else if( props.openMenu[0] === 'error') {
         menuItems = []
-    } else if( props.openMenu[0].restaurantid !== restaurantId ) {
+    } else if( props.openMenu[0] !== 'error' && props.openMenu[0].restaurantid !== restaurantId ) {
         menuItems = []
         props.getMenu(restaurantId)
     } else {
@@ -48,12 +51,63 @@ function ManagerViewRestaurant(props) {
         }
     }
 
+    const [ selectedFile, setSelectedFile] = useState(null)
+
+    const imgUpload = (event) => {
+        event.preventDefault()
+        const formData = new FormData();
+        formData.append("img", selectedFile);
+        axios.post('https://webproject26.herokuapp.com/upload', formData, { headers : {"Content-Type": "multipart/form-data"} }  )
+        .then(res => {
+            console.log(res.data.externalPath)
+            let payload = { 
+                token: localStorage.getItem('token26'),
+                restaurantName : props.openRestaurant.name,
+                costlevel: props.openRestaurant.costlevel,
+                rating: props.openRestaurant.review,
+                tags: props.openRestaurant.tags,
+                deliveryFee: props.openRestaurant.deliveryfee,
+                address: props.openRestaurant.address,
+                phoneNumber : props.openRestaurant.phoneNumber,
+                website: props.openRestaurant.website,
+                emailAddress: props.openRestaurant.emailAddress,
+                openingHours: props.openRestaurant.openinghours,
+                imageURL: `https://webproject26.herokuapp.com${res.data.externalPath}`
+            }
+            axios.put(`https://webproject26.herokuapp.com/restaurants/${ props.openRestaurant.id }`, payload )
+        .then( (res) => {
+            console.log(res)
+            props.setOpenRestaurant(props.openRestaurant.id)
+            window.location.reload()
+            })
+        .catch( err => console.log(err))
+        })
+        .catch( err => console.log(err))
+        console.log(formData)
+      }
+
+    const handleFile = (event) => {
+        event.preventDefault()
+        setSelectedFile(event.target.files[0])
+    }
+
+    const [ imgForm, setImgForm ] = useState(false)
+    const showImgForm = () => {
+        setImgForm(true)
+    }
+
+
+
     return (
         <div>
-            <div className = { styles.testImg } ></div>
+            <div className = { styles.testImg } style = { { backgroundImage: props.openRestaurant? `url(${props.openRestaurant.imageURL})` : ''}}><button className = { styles.selectImageButton } onClick={ showImgForm }>Select image</button></div>
+            { imgForm ? <form className = { styles.imgUpload } onSubmit = { imgUpload } >
+                            <input type = 'file' name = 'img' onChange = { handleFile } className = { styles.chooseFile }></input>
+                            <button type = 'submit' className = { styles.uploadButton }>Upload</button>
+                        </form> : null }
             <RestaurantInfo openRestaurant = { props.openRestaurant } setOpenRestaurant = { props.setOpenRestaurant }/>
-            { uniqueCategories.map((category, index) => <RestaurantCategory key = {index} name = { category } items = { menuItems.filter(item => item.foodcategory === category) } getMenu = { props.getMenu } />) }
-            { newCategory.map( (category, index) => <RestaurantCategory key = {index} name = {category} items = { [] } getMenu = { props.getMenu } />)}
+            { uniqueCategories.map((category, index) => <RestaurantCategory key = {index} name = { category } items = { menuItems.filter(item => item.foodcategory === category) } getMenu = { props.getMenu } setNewCategory = { setNewCategory }/>) }
+            { newCategory.map( (category, index) => <RestaurantCategory key = {index} name = {category} items = { [] } getMenu = { props.getMenu } setNewCategory = { setNewCategory }/>)}
             <form className = { styles.newCategoryContainer } onSubmit = { addCategory }>
                 <input type = 'text' name = 'categoryName' className = { styles.newCategory } placeholder = "Category name" ></input>
                 <button className = { styles.addCategoryButton } type = 'submit'>Add category</button>

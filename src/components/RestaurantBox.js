@@ -6,7 +6,7 @@ function RestaurantBox( props ) {
     let costLevel = props.restaurant.costlevel
     let dolarSign = ''
     for (let i = 0; i < costLevel; i++) {
-        dolarSign += '$'
+        dolarSign += '€'
     }
     let tags = ''
     props.restaurant.tags.map( tag => tags += `${tag} ` )
