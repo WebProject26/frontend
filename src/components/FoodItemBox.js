@@ -1,22 +1,25 @@
 import React, { useState } from 'react'
 import styles from './FoodItemBox.module.css'
 import axios from 'axios'
+import { useParams } from 'react-router'
 
 export default function FoodItemBox(props) {
 
-    console.log(props.item)
+    let { restaurantId } = useParams()
 
-    const deleteItem = () => {
+    const deleteItem = (id) => {
         let token = localStorage.getItem('token26')
         let payload = { 
             token: token,
-            itemid: props.item.id
+            itemid: id
         }
-        axios.delete(`https://webproject26.herokuapp.com/menu/${props.item.restaurantid}`, { data: payload })
+        axios.delete(`https://webproject26.herokuapp.com/menu/${restaurantId}`, { data: payload })
         .then( (res) => {
             console.log(res)
+            props.setNewItem([])
+            props.setNewCategory([])
             props.updateInfo(true)
-            window.location.reload()
+            //window.location.reload()
         })
         .catch( err => console.log(err))
     }
@@ -32,13 +35,14 @@ export default function FoodItemBox(props) {
             cost: event.target.price.value,
             foodcategory: props.item.foodcategory
         }
-        axios.put(`https://webproject26.herokuapp.com/menu/${props.item.restaurantid}`, payload )
+        axios.put(`https://webproject26.herokuapp.com/menu/${restaurantId}`, payload )
         .then( (res) => {
             console.log(res)
-            props.updateInfo(true)
+            props.setNewItem([])
             props.setNewCategory([])
+            props.updateInfo(true)
             setOutput(savedItem)
-            window.location.reload()
+            //window.location.reload()
         })
         .catch(err=> console.log(err))
     }
@@ -65,7 +69,7 @@ export default function FoodItemBox(props) {
                             <span className = { styles.description }>{ props.item.description }</span>
                         </div>
                         <div className = { styles.buttonsDiv }>
-                            <button className = { styles.deleteEdit } onClick = { deleteItem }>Delete</button>
+                            <button className = { styles.deleteEdit } onClick = { () => deleteItem(props.item.id) }>Delete</button>
                             <button className = { styles.deleteEdit } onClick = { () => { setOutput( editItem )} }>Edit</button>
                         </div>
                       </div>

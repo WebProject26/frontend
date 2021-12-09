@@ -9,28 +9,6 @@ import FormData from 'form-data'
  
 function ManagerViewRestaurant(props) {
 
-
-    let { restaurantId } = useParams()
-
-    if (!props.openRestaurant || props.openRestaurant.id !== restaurantId) {
-        props.setOpenRestaurant(restaurantId)
-        //props.getMenu(restaurantId)
-    }
-
-    let menuItems
-
-    if ( !props.openMenu ) {
-        menuItems = []
-        props.getMenu(restaurantId)
-    } else if( props.openMenu[0] === 'error') {
-        menuItems = []
-    } else if( props.openMenu[0] !== 'error' && props.openMenu[0].restaurantid !== restaurantId ) {
-        menuItems = []
-        props.getMenu(restaurantId)
-    } else {
-        menuItems = props.openMenu
-    }
-    /*
     let { restaurantId } = useParams()
 
     const [ menuItems, setMenuItems ] = useState([])
@@ -41,6 +19,7 @@ function ManagerViewRestaurant(props) {
         .then( res => {
             console.log('getting restaurant')
             setOpenRestaurant(res.data)
+            setUpdatingInfo(false)
         })
         .catch( err => {
             console.error( err )
@@ -57,7 +36,7 @@ function ManagerViewRestaurant(props) {
         })
     }, [restaurantId, updatingInfo])
     //console.log(menuItems)
-    //console.log(openRestaurant)*/
+    //console.log(openRestaurant)
     
     let uniqueCategories = []
     let [newCategory, setNewCategory] = useState([])
@@ -103,7 +82,7 @@ function ManagerViewRestaurant(props) {
                 openingHours: props.openRestaurant.openinghours,
                 imageURL: `https://webproject26.herokuapp.com${res.data.externalPath}`
             }
-            axios.put(`https://webproject26.herokuapp.com/restaurants/${ props.openRestaurant.id }`, payload )
+            axios.put(`https://webproject26.herokuapp.com/restaurants/${ openRestaurant.id }`, payload )
         .then( (res) => {
             console.log(res)
             window.location.reload()
@@ -127,14 +106,14 @@ function ManagerViewRestaurant(props) {
 
     return (
         <div>
-            <div className = { styles.testImg } style = { { backgroundImage: props.openRestaurant? `url(${props.openRestaurant.imageURL})` : ''}}><button className = { styles.selectImageButton } onClick={ showImgForm }>Select image</button></div>
+            <div className = { styles.testImg } style = { { backgroundImage: openRestaurant? `url(${openRestaurant.imageURL})` : ''}}><button className = { styles.selectImageButton } onClick={ showImgForm }>Select image</button></div>
             { imgForm ? <form className = { styles.imgUpload } onSubmit = { imgUpload } >
                             <input type = 'file' name = 'img' onChange = { handleFile } className = { styles.chooseFile }></input>
                             <button type = 'submit' className = { styles.uploadButton }>Upload</button>
                         </form> : null }
-            <RestaurantInfo openRestaurant = { props.openRestaurant } />
-            { uniqueCategories.map((category, index) => <RestaurantCategory key = {index} name = { category } items = { menuItems.filter(item => item.foodcategory === category) } setNewCategory = { setNewCategory }/>) }
-            { newCategory.map( (category, index) => <RestaurantCategory key = {index} name = {category} items = { [] } setNewCategory = { setNewCategory }/>)}
+            <RestaurantInfo openRestaurant = { openRestaurant } updateInfo = { setUpdatingInfo }/>
+            { uniqueCategories.map((category, index) => <RestaurantCategory key = {index} name = { category } items = { menuItems.filter(item => item.foodcategory === category) } setNewCategory = { setNewCategory } setUpdatingInfo = { setUpdatingInfo }/>) }
+            { newCategory.map( (category, index) => <RestaurantCategory key = {index} name = {category} items = { [] } setNewCategory = { setNewCategory } setUpdatingInfo = { setUpdatingInfo }/>)}
             <form className = { styles.newCategoryContainer } onSubmit = { addCategory }>
                 <input type = 'text' name = 'categoryName' className = { styles.newCategory } placeholder = "Category name" ></input>
                 <button className = { styles.addCategoryButton } type = 'submit'>Add category</button>

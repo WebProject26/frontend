@@ -119,7 +119,7 @@ class App extends React.Component {
           <Route path = '/' element = { <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants }/></div> } />
           <Route path = '/:restaurantId' element = { <div className = { styles.abc }><CustomerViewRestaurant openRestaurant = { this.state.openRestaurant } openMenu = { this.state.openMenu } setOpenRestaurant = { this.setOpenRestaurant } getMenu = { this.getMenuItems } /></div> } />
           <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants }/></div> } />
-          <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant restaurant = { this.state.openRestaurant } setOpenRestaurant = { this.setOpenRestaurant} getMenu = { this.getMenuItems } openMenu = { this.state.openMenu }/></div> } />
+          <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant /></div> } />
           <Route path = '/orders' element = { <div className = { styles.abc }><RestaurantOrders restaurants = { this.state.ownRestaurants }  openMenu = { this.state.openMenu } getMenu = { this.getMenuItems } users = { this.state.users }/></div> }/>
           <Route path = '*' element = { <div className = { styles.abc }><RestaurantOrders restaurants = { this.state.ownRestaurants }  openMenu = { this.state.openMenu } getMenu = { this.getMenuItems } users = { this.state.users }/></div> }/>
       </Routes>

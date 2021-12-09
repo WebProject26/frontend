@@ -5,8 +5,6 @@ import axios from 'axios'
 
 export default function AddFoodItemBox(props) {
 
-    //let menuItems = JSON.parse(localStorage.getItem('menu26'))
-
     let { restaurantId } = useParams()
 
     const saveItem = (event) => {
