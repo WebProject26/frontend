@@ -86,7 +86,7 @@ function RestaurantInfo(props) {
         axios.put(`https://webproject26.herokuapp.com/restaurants/${ restaurant.id }`, payload )
         .then( (res) => {
             console.log(res)
-            props.setOpenRestaurant(restaurant.id)
+            props.updateInfo(true)
             })
         .catch( err => console.log(err))
         editSave()        

@@ -7,7 +7,7 @@
     border: 2px solid #3B7080;
     height: 10rem;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     cursor: pointer;
 }
 

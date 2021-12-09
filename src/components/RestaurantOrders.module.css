@@ -4,6 +4,9 @@
     background-color: lightgray;
     height: 3rem;
     align-items: center;
+    border: 2px solid #3b7080;
+    border-top: none;
+    border-bottom: none;
 }
 
 .statusText {
@@ -18,6 +21,11 @@
     gap: 1%;
 }
 
+.selectRestaurant {
+    width: 10rem;
+    height: 2rem;
+    cursor: pointer;
+}
 
 .fieldsContainer {
     display: flex;

@@ -5,7 +5,7 @@ import AddFoodItem from './AddFoodItem'
 
 function RestaurantCategory(props) {
 
-    let categoryItems = props.items
+    //let categoryItems = props.items
 
     const [ newItem, setNewItem ] = useState([])
 
@@ -17,8 +17,8 @@ function RestaurantCategory(props) {
         <>
         <h1 className = { styles.categoryName }>{props.items[0] ? props.items[0].foodcategory : props.name}</h1>
         <div className = { styles.categoryContainer }>
-            { categoryItems.map( (item, index) => <FoodItemBox key = { index } item = { {...item} } getMenu = { props.getMenu }/>) }
-            { newItem.map( (item, index) => <AddFoodItem key = { index } category = { props.items[0] ? props.items[0].foodcategory : props.name } setNewCategory = { props.setNewCategory } setNewItem = { setNewItem } getMenu = { props.getMenu }/>) }
+            { props.items.map( (item, index) => <FoodItemBox key = { index } item = { {...item} } setNewCategory = { props.setNewCategory } updateInfo = { props.updateInfo } />) }
+            { newItem.map( (item, index) => <AddFoodItem key = { index } category = { props.items[0] ? props.items[0].foodcategory : props.name } setNewCategory = { props.setNewCategory } setNewItem = { setNewItem } updateInfo = { props.updateInfo } />) }
             <div className = { styles.addFoodItem } onClick={addItem}>+</div>
         </div>
         </>

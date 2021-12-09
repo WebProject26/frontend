@@ -2,11 +2,14 @@ import styles from './App.module.css';
 import React from 'react';
 import Login from './components/Login'
 import Register from './components/Register'
+import Header from './components/Header'
 import ManagerViewRestaurant from './components/ManagerViewRestaurant'
 import ManagerViewMain from './components/ManagerViewMain';
 import RestaurantOrders from './components/RestaurantOrders'
+import CustomerView from './components/CustomerView'
+import CustomerViewRestaurant from './components/CustomerViewRestaurant'
 import axios from 'axios';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
 
 
 class App extends React.Component {
@@ -22,13 +25,17 @@ class App extends React.Component {
       ownRestaurants: [],
       openRestaurant: null,
       openMenu: null,
-      users: []
+      users: [],
+      publicRestaurants: []
     }
   }
 
   componentDidMount() {
     var token = localStorage.getItem( 'token26' )
     let payload = { token: token }
+    axios.get('https://webproject26.herokuapp.com/restaurants')
+    .then( res => this.setState( { publicRestaurants: res.data }))
+    .catch( err => console.error(err))
     axios.get('https://webproject26.herokuapp.com/login', { params: payload } )
     .then( ( res ) => {
       this.setUser( res.data )
@@ -50,7 +57,6 @@ class App extends React.Component {
     })
     .catch(( error ) => {
       console.log( error )
-      this.login()
     })
   }
 
@@ -86,9 +92,10 @@ class App extends React.Component {
     .then( res => {
       this.setState({ openRestaurant: res.data })
     })
-    .catch( err => console.error( err ) )
+    .catch( err => {
+      console.error( err )
+    })
   }
-
 
   getMenuItems = (restaurantId) => {
     axios.get(`https://webproject26.herokuapp.com/menu/${restaurantId}`)
@@ -102,25 +109,19 @@ class App extends React.Component {
   }
 
 
-
   render() {
   
     return (
       <BrowserRouter>
       <>
-      <div className = { styles.header }>
-        <button onClick= { this.login }>login</button>
-        <button onClick= { this.register }>register</button>
-        <button onClick= { this.logout }>logout</button>
-        <Link to = '/'><button >Front page</button></Link>
-        <Link to = '/restaurants'><button >Restaurant manager</button></Link>
-        <Link to = '/orders'><button >Orders manager</button></Link>
-      </div>
+      <Header user = { this.state.user } login = { this.login } register = { this.register } logout = { this.logout }/>
       <Routes>
-          <Route path = '/' element = { <div className = { styles.abc }><div>All restaurants will be visible here </div></div> } />
+          <Route path = '/' element = { <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants }/></div> } />
+          <Route path = '/:restaurantId' element = { <div className = { styles.abc }><CustomerViewRestaurant openRestaurant = { this.state.openRestaurant } openMenu = { this.state.openMenu } setOpenRestaurant = { this.setOpenRestaurant } getMenu = { this.getMenuItems } /></div> } />
           <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants }/></div> } />
-          <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant openMenu = { this.state.openMenu } getMenu = { this.getMenuItems } setOpenRestaurant = { this.setOpenRestaurant } openRestaurant = { this.state.openRestaurant }/></div> } />
+          <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant restaurant = { this.state.openRestaurant } setOpenRestaurant = { this.setOpenRestaurant} getMenu = { this.getMenuItems } openMenu = { this.state.openMenu }/></div> } />
           <Route path = '/orders' element = { <div className = { styles.abc }><RestaurantOrders restaurants = { this.state.ownRestaurants }  openMenu = { this.state.openMenu } getMenu = { this.getMenuItems } users = { this.state.users }/></div> }/>
+          <Route path = '*' element = { <div className = { styles.abc }><RestaurantOrders restaurants = { this.state.ownRestaurants }  openMenu = { this.state.openMenu } getMenu = { this.getMenuItems } users = { this.state.users }/></div> }/>
       </Routes>
       <div>
         <Login view = { this.state.logForm } loginClick = { this.login } regClick = { this.register } setUser = { this.setUser } setOwnRestaurants = { this.setOwnRestaurants } setUsers = { this.setUsers }/>

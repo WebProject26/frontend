@@ -5,7 +5,6 @@ import axios from 'axios'
 
 function RestaurantOrders(props) {
 
-    //console.log(props.openMenu)
     const [ orders, setOrders ] = useState([])
     const [ restaurantId, setRestaurantId ] = useState(0)
     const [ updating, setUpdating ] = useState(false)
@@ -17,7 +16,6 @@ function RestaurantOrders(props) {
     }
 
     let receivedOrders = orders.filter( order => order.status === 0 )
-    //const [ receivedOrders, setReceivedOrders ] = useState(testOrders.filter( order => order.status === 0 ))
     let acceptedOrders = orders.filter( order => order.status === 1 )
     let deliveryOrders = orders.filter( order => order.status === 2 )
     let closedOrders = orders.filter( order => order.status === 3 )

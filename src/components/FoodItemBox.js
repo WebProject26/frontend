@@ -15,7 +15,8 @@ export default function FoodItemBox(props) {
         axios.delete(`https://webproject26.herokuapp.com/menu/${props.item.restaurantid}`, { data: payload })
         .then( (res) => {
             console.log(res)
-            props.getMenu(props.item.restaurantid)
+            props.updateInfo(true)
+            window.location.reload()
         })
         .catch( err => console.log(err))
     }
@@ -32,10 +33,11 @@ export default function FoodItemBox(props) {
             foodcategory: props.item.foodcategory
         }
         axios.put(`https://webproject26.herokuapp.com/menu/${props.item.restaurantid}`, payload )
-        .then( res => {
-            setOutput(savedItem)
+        .then( (res) => {
             console.log(res)
-            props.getMenu(props.item.restaurantid)
+            props.updateInfo(true)
+            props.setNewCategory([])
+            setOutput(savedItem)
             window.location.reload()
         })
         .catch(err=> console.log(err))
