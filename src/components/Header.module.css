@@ -1,5 +1,5 @@
 .headerContainer {
-    background-color: orange;
+    background-color: #3B7080;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -10,7 +10,7 @@
     font-size: 3rem;
     font-weight: bold;
     margin-left: 1%;
-    color: #3B7080;
+    color: orange;
     text-decoration: none;
 }
 
@@ -27,8 +27,8 @@
     font-size: 1.5rem;
     border: none;
     outline: none;
-    background-color: orange;
-    color: #3b7080;
+    background-color: #3B7080;
+    color: orange;
     cursor: pointer;
 }
 .button:hover {

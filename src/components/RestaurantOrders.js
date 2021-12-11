@@ -31,21 +31,22 @@ function RestaurantOrders(props) {
               setUpdating(false)
             })
             .catch( err => console.log( err ) )
-        const checkInterval = setInterval(() => {
-            let token = localStorage.getItem('token26')
-            let payload = { token }
-            axios.get(`https://webproject26.herokuapp.com/orders/${restaurantId}`, { params : payload } )
-            .then( ( res ) => {
-              console.log(res.data)
-              //console.log(restaurantId)
-              setOrders(res.data)
-            })
-            .catch( err => console.log( err ) )
-        }, 10000)
+            const checkInterval = setInterval(() => {
+                let token = localStorage.getItem('token26')
+                let payload = { token }
+                axios.get(`https://webproject26.herokuapp.com/orders/${restaurantId}`, { params : payload } )
+                .then( ( res ) => {
+                console.log(res.data)
+                //console.log(restaurantId)
+                setOrders(res.data)
+                })
+                .catch( err => console.log( err ) )
+            }, 10000)
         return () => clearInterval( checkInterval )
     }, [restaurantId, updating])
 
     let trackedRestaurant = props.restaurants.filter(restaurant => restaurant.id === restaurantId)
+    //console.log(props.openMenu)
 
     return (
         <>

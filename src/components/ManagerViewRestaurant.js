@@ -33,10 +33,9 @@ function ManagerViewRestaurant(props) {
         })
         .catch( (err) => {
             console.log( err )
+            setMenuItems([])
         })
     }, [restaurantId, updatingInfo])
-    //console.log(menuItems)
-    //console.log(openRestaurant)
     
     let uniqueCategories = []
     let [newCategory, setNewCategory] = useState([])
@@ -70,27 +69,27 @@ function ManagerViewRestaurant(props) {
             console.log(res.data.externalPath)
             let payload = { 
                 token: localStorage.getItem('token26'),
-                restaurantName : props.openRestaurant.name,
-                costlevel: props.openRestaurant.costlevel,
-                rating: props.openRestaurant.review,
-                tags: props.openRestaurant.tags,
-                deliveryFee: props.openRestaurant.deliveryfee,
-                address: props.openRestaurant.address,
-                phoneNumber : props.openRestaurant.phoneNumber,
-                website: props.openRestaurant.website,
-                emailAddress: props.openRestaurant.emailAddress,
-                openingHours: props.openRestaurant.openinghours,
+                restaurantName : openRestaurant.name,
+                costlevel: openRestaurant.costlevel,
+                rating: openRestaurant.review,
+                tags: openRestaurant.tags,
+                deliveryFee: openRestaurant.deliveryfee,
+                address: openRestaurant.address,
+                phoneNumber : openRestaurant.phoneNumber,
+                website: openRestaurant.website,
+                emailAddress: openRestaurant.emailAddress,
+                openingHours: openRestaurant.openinghours,
                 imageURL: `https://webproject26.herokuapp.com${res.data.externalPath}`
             }
             axios.put(`https://webproject26.herokuapp.com/restaurants/${ openRestaurant.id }`, payload )
-        .then( (res) => {
-            console.log(res)
-            window.location.reload()
+            .then( (res) => {
+                console.log(res)
+                setUpdatingInfo(true)
+                window.location.reload()
             })
-        .catch( err => console.log(err))
+            .catch( err => console.log(err))
         })
         .catch( err => console.log(err))
-        console.log(formData)
       }
 
     const handleFile = (event) => {
@@ -113,7 +112,7 @@ function ManagerViewRestaurant(props) {
                         </form> : null }
             <RestaurantInfo openRestaurant = { openRestaurant } updateInfo = { setUpdatingInfo }/>
             { uniqueCategories.map((category, index) => <RestaurantCategory key = {index} name = { category } items = { menuItems.filter(item => item.foodcategory === category) } setNewCategory = { setNewCategory } setUpdatingInfo = { setUpdatingInfo }/>) }
-            { newCategory.map( (category, index) => <RestaurantCategory key = {index} name = {category} items = { [] } setNewCategory = { setNewCategory } setUpdatingInfo = { setUpdatingInfo }/>)}
+            { newCategory.map( (category, index) => <RestaurantCategory key = {index} categoryName = {category} items = { [] } setNewCategory = { setNewCategory } setUpdatingInfo = { setUpdatingInfo }/>)}
             <form className = { styles.newCategoryContainer } onSubmit = { addCategory }>
                 <input type = 'text' name = 'categoryName' className = { styles.newCategory } placeholder = "Category name" ></input>
                 <button className = { styles.addCategoryButton } type = 'submit'>Add category</button>

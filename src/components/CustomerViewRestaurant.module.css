@@ -1,0 +1,27 @@
+.testImg {
+    width: 94%;
+    height: 12rem;
+    background-color: #fff;
+    border: 2px solid #3B7080;
+    position: relative;
+    left: 3%;
+    margin-top: 2%;
+    text-align: center;
+    font-size: 4rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.innerContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+

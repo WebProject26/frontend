@@ -60,7 +60,7 @@ class App extends React.Component {
     })
   }
 
-  login = (event) => {
+  login = () => {
     this.setState({ logForm: !this.state.logForm })
     this.setState({ regForm: false })
   }
@@ -104,29 +104,27 @@ class App extends React.Component {
     })
     .catch( (err) => {
       console.log( err )
-      this.setState( { openMenu: ['error']})
+      this.setState( { openMenu: []})
     })
   }
-
 
   render() {
   
     return (
       <BrowserRouter>
       <>
-      <Header user = { this.state.user } login = { this.login } register = { this.register } logout = { this.logout }/>
-      <Routes>
-          <Route path = '/' element = { <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants }/></div> } />
-          <Route path = '/:restaurantId' element = { <div className = { styles.abc }><CustomerViewRestaurant openRestaurant = { this.state.openRestaurant } openMenu = { this.state.openMenu } setOpenRestaurant = { this.setOpenRestaurant } getMenu = { this.getMenuItems } /></div> } />
-          <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants }/></div> } />
-          <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant /></div> } />
-          <Route path = '/orders' element = { <div className = { styles.abc }><RestaurantOrders restaurants = { this.state.ownRestaurants }  openMenu = { this.state.openMenu } getMenu = { this.getMenuItems } users = { this.state.users }/></div> }/>
-          <Route path = '*' element = { <div className = { styles.abc }><RestaurantOrders restaurants = { this.state.ownRestaurants }  openMenu = { this.state.openMenu } getMenu = { this.getMenuItems } users = { this.state.users }/></div> }/>
-      </Routes>
-      <div>
-        <Login view = { this.state.logForm } loginClick = { this.login } regClick = { this.register } setUser = { this.setUser } setOwnRestaurants = { this.setOwnRestaurants } setUsers = { this.setUsers }/>
-        <Register view = { this.state.regForm } regClick = { this.register } setUser = { this.setUser } logClick = { this.login }/>
-      </div>
+        <Header user = { this.state.user } login = { this.login } register = { this.register } logout = { this.logout }/>
+        <Routes>
+            <Route path = '/' element = { <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants }/></div> } />
+            <Route path = '/:restaurantId' element = { <div className = { styles.abc }><CustomerViewRestaurant /></div> } />
+            <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants }/></div> } />
+            <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant /></div> } />
+            <Route path = '/orders' element = { <div className = { styles.abc }><RestaurantOrders restaurants = { this.state.ownRestaurants } openMenu = { this.state.openMenu } getMenu = { this.getMenuItems } users = { this.state.users }/></div> }/>
+        </Routes>
+        <div>
+          <Login view = { this.state.logForm } loginClick = { this.login } regClick = { this.register } setUser = { this.setUser } setOwnRestaurants = { this.setOwnRestaurants } setUsers = { this.setUsers }/>
+          <Register view = { this.state.regForm } regClick = { this.register } setUser = { this.setUser } logClick = { this.login }/>
+        </div>
       </>
       </BrowserRouter>
     )
