@@ -51,7 +51,7 @@ function RestaurantOrders(props) {
     return (
         <>
             <div className = { styles.topBar }>
-                <div className = { styles.statusText }>Orders status: { trackedRestaurant[0]? trackedRestaurant[0].name : '' } </div>
+                <div className = { styles.statusText }>Orders status: <span className = { styles.restaurantName }>{trackedRestaurant[0]? trackedRestaurant[0].name : '' }</span></div>
                 <div className = { styles.buttonsContainer }>
                     { props.restaurants.map( ( restaurant, index ) => <button key = { index } onClick = {() => selectRestaurant(restaurant.id) } className = { styles.selectRestaurant }>{restaurant.name}</button>)}
                 </div>

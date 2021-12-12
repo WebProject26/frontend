@@ -4,14 +4,24 @@
     align-items: center;
     justify-content: space-between;
     border: 2px solid #3B7080;
+    height: 4.5rem;
+    z-index: 5;
+}
+
+.homeLogo {
+    display: flex;
+    margin-left: 1%;
+    
 }
 
 .logo {
     font-size: 3rem;
     font-weight: bold;
-    margin-left: 1%;
     color: orange;
     text-decoration: none;
+}
+.logo:hover {
+    color: #fff;
 }
 
 .buttonsContainer {
@@ -32,5 +42,21 @@
     cursor: pointer;
 }
 .button:hover {
+    color: #fff
+}
+
+.homeButton {
+    font-weight: bold;
+    width: 12rem;
+    height: 4rem;
+    font-size: 2rem;
+    border: none;
+    outline: none;
+    background-color: #3B7080;
+    color: orange;
+    cursor: pointer;
+}
+
+.homeButton:hover {
     color: #fff
 }

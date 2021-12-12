@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './CustomerViewRestaurant.module.css'
 import CustomerRestaurantInfo from './CustomerRestaurantInfo'
 import CustomerViewCategory from './CustomerViewCategory'
+import CustomerOrders from './CustomerOrders';
 import Cart from './Cart';
 import { useParams } from 'react-router';
 import axios from 'axios'
@@ -54,6 +55,17 @@ function CustomerViewRestaurant() {
     let filteredCategories = categories.filter(uniqueEntries)
     uniqueCategories = filteredCategories
 
+    const [ordersView, setOrdersView ] = useState(false)
+    const [ordersX, setOrdersX ] = useState('100%')
+    const [ordersButtonX, setOrdersButtonX ] = useState('0%')
+    const showOrders = () => {
+        setOrdersView(true)
+        setOrdersButtonX('100%')
+        setTimeout(() => {
+            setOrdersX('0%')
+        }, 520)
+    }
+
     return (
         <div className = { styles.container }>
             <div className = { styles.innerContainer }>
@@ -63,6 +75,15 @@ function CustomerViewRestaurant() {
             </div>
             <div className = { styles.cartContainer}>
             <Cart menuItems = {menuItems} cartItemsIds = { cartItemsIds } restaurant = { openRestaurant } updateInfo = { setCartItemsIds } />
+            </div>
+            <button className = {styles.showOrders} style = { {transform: `translateX(${ordersButtonX})`}} onClick = { showOrders }>My orders</button>
+            <div className = { styles.orders } style = { {transform: `translateX(${ordersX})`} } >
+            <CustomerOrders setOrdersX = { setOrdersX }
+                            setOrdersButtonX = { setOrdersButtonX }
+                            ordersView = { ordersView }
+                            setOrdersView = { setOrdersView }
+                            menuItems = { menuItems }
+                            openRestaurant = { openRestaurant }/>
             </div>
         </div>
     )

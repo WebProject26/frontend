@@ -1,7 +1,7 @@
 .topBar { 
     display: flex;
     justify-content: space-between;
-    background-color: lightgray;
+    background-color: #fff;
     height: 3rem;
     align-items: center;
     border: 2px solid #3b7080;
@@ -12,6 +12,13 @@
 .statusText {
     font-size: 2rem;
     margin: 1%;
+    color: orange;
+    font-weight: bold;
+}
+
+.restaurantName {
+    color: #3b7080;
+    font-weight: bold;
 }
 
 .buttonsContainer { 
@@ -25,12 +32,21 @@
     width: 10rem;
     height: 2rem;
     cursor: pointer;
+    background-color: orange;
+    border: 1px solid #3b7080;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #3b7080;
+}
+.selectRestaurant:hover {
+    background-color: #3b7080;
+    color: orange;
 }
 
 .fieldsContainer {
     display: flex;
     justify-content: space-between;
-    background-color: lightgray;
+    background-color: #fff;
 }
 
 .received {

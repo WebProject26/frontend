@@ -1,0 +1,58 @@
+.orderContainer {
+    border: 1px solid #3B7080;
+    margin: 1%;
+
+}
+
+.restaurantName {
+    padding: 1%;
+    font-weight: bold;
+    color: #3B7080;
+    border-bottom: 1px solid #3B7080
+}
+
+.date {
+    border-bottom: 1px solid #3B7080;
+}
+
+.upperRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.middleRow {
+    padding: 1%;
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.lowerRow {
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.total {
+    border-top: 1px solid #3B7080;
+}
+
+.acceptButton {
+    width: 100%;
+    border-top: 1px solid #3B7080;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    cursor: pointer;
+    margin-top: 3%;
+}
+
+.acceptButton:hover {
+    background-color: #3B7080;
+    color: orange;
+}
+
+.status {
+    border-top: 1px solid #3B7080;
+    font-weight: bold;
+}

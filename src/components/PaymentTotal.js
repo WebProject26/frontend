@@ -42,7 +42,7 @@ const PaymentTotal = ({itemsTotal, deliveryFee, orderItems, updateInfo }) => {
             <div className={styles.innerContainer}>
                 <div className={styles.itemContainer}>
                     <h2 className={styles.total}>Items Total</h2>
-                    <h2 className={styles.total}>{itemsTotal === 0 ? itemsTotal : itemsTotal.toFixed(2)}€</h2>
+                    <h2 className={styles.total}>{ itemsTotal.toFixed(2) }€</h2>
                 </div>
                 <div className={styles.itemContainer}>
                     <h2 className={styles.total}>Delivery Fee</h2>
@@ -54,6 +54,7 @@ const PaymentTotal = ({itemsTotal, deliveryFee, orderItems, updateInfo }) => {
                 </div> 
             </div>
             { orderItems[0] ? <button className={styles.button} onClick={ makeOrder }>PAYMENT</button> : null}
+
         </div>
     )
 

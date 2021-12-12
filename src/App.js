@@ -57,6 +57,7 @@ class App extends React.Component {
     })
     .catch(( error ) => {
       console.log( error )
+      this.setUser(null)
     })
   }
 
@@ -112,7 +113,6 @@ class App extends React.Component {
   
     return (
       <BrowserRouter>
-      <>
         <Header user = { this.state.user } login = { this.login } register = { this.register } logout = { this.logout }/>
         <Routes>
             <Route path = '/' element = { <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants }/></div> } />
@@ -125,7 +125,6 @@ class App extends React.Component {
           <Login view = { this.state.logForm } loginClick = { this.login } regClick = { this.register } setUser = { this.setUser } setOwnRestaurants = { this.setOwnRestaurants } setUsers = { this.setUsers }/>
           <Register view = { this.state.regForm } regClick = { this.register } setUser = { this.setUser } logClick = { this.login }/>
         </div>
-      </>
       </BrowserRouter>
     )
   }

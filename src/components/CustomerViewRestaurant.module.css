@@ -17,6 +17,7 @@
 .container {
     display: flex;
     width: 100%;
+    overflow-x: hidden;
 }
 
 .innerContainer {
@@ -25,3 +26,36 @@
     width: 100%;
 }
 
+.cartContainer {
+    width: 30%;
+}
+
+.orders {
+    position: absolute;
+    width: 26%;
+    top: 4.6rem;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    border: 2px solid #3B7080;
+    z-index: 2;
+    transform: translateX(100%);
+    transition: all 1s ease-in-out;
+    overflow-y: scroll;
+}
+
+.showOrders {
+    position: absolute;
+    top: 6rem;
+    right: 0;
+    cursor: pointer;
+    height: 3rem;
+    width: 9rem;
+    background-color: orange;
+    color: #3B7080;
+    font-size: 1.5rem;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    transition: all .5s ease-in-out;
+}
