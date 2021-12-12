@@ -16,7 +16,7 @@ function RestaurantBox( props ) {
             <div className = { styles.restaurantBox } style = {{ backgroundImage: `url(${props.restaurant.imageURL})`}}/>
             <div className = { styles.nameRating }>
                 <span className = { styles.name }>{ props.restaurant.name }</span>
-                <span className = { styles.rating }>*{ props.restaurant.review/10 }/5</span>
+                <span className = { styles.rating }><span className = { styles.star }>&#9733;</span>{ props.restaurant.review/10 }/5</span>
             </div>
             <div className = { styles.priceTags }>
                 <span className = { styles.price }>{ dolarSign }</span>

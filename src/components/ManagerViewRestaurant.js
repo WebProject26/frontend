@@ -7,13 +7,14 @@ import axios from 'axios'
 import FormData from 'form-data'
 
  
-function ManagerViewRestaurant(props) {
+function ManagerViewRestaurant() {
 
     let { restaurantId } = useParams()
 
     const [ menuItems, setMenuItems ] = useState([])
     const [ openRestaurant, setOpenRestaurant ] = useState(null)
     const [ updatingInfo, setUpdatingInfo ] = useState(false)
+    
     useEffect(() => {
         axios.get(`https://webproject26.herokuapp.com/restaurants/${restaurantId}`)
         .then( res => {

@@ -21,6 +21,15 @@
     font-weight: 600;
 }
 
+.star {
+    color: orange;
+}
+
 .rating {
     font-weight: 600;
+}
+
+.price {
+    color: #3B7080;
+    font-weight: bold;
 }

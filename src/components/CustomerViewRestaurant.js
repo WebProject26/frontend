@@ -47,7 +47,6 @@ function CustomerViewRestaurant() {
     }, [restaurantId, updateInfo])
 
     let uniqueCategories = []
-
     let categories = menuItems.map( item => item.foodcategory )
     let uniqueEntries = (value, index, self) => {
         return self.indexOf(value) === index
@@ -58,6 +57,7 @@ function CustomerViewRestaurant() {
     const [ordersView, setOrdersView ] = useState(false)
     const [ordersX, setOrdersX ] = useState('100%')
     const [ordersButtonX, setOrdersButtonX ] = useState('0%')
+    
     const showOrders = () => {
         setOrdersView(true)
         setOrdersButtonX('100%')

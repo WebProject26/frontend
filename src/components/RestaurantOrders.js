@@ -3,7 +3,7 @@ import styles from './RestaurantOrders.module.css'
 import Order from './Order'
 import axios from 'axios'
 
-function RestaurantOrders(props) {
+function RestaurantOrders({ restaurants, openMenu, getMenu, users }) {
 
     const [ orders, setOrders ] = useState([])
     const [ restaurantId, setRestaurantId ] = useState(0)
@@ -11,7 +11,7 @@ function RestaurantOrders(props) {
 
     const selectRestaurant = (id) => {
         console.log('doing')
-        props.getMenu(id)
+        getMenu(id)
         setRestaurantId(id)
     }
 
@@ -45,7 +45,7 @@ function RestaurantOrders(props) {
         return () => clearInterval( checkInterval )
     }, [restaurantId, updating])
 
-    let trackedRestaurant = props.restaurants.filter(restaurant => restaurant.id === restaurantId)
+    let trackedRestaurant = restaurants.filter(restaurant => restaurant.id === restaurantId)
     //console.log(props.openMenu)
 
     return (
@@ -53,25 +53,25 @@ function RestaurantOrders(props) {
             <div className = { styles.topBar }>
                 <div className = { styles.statusText }>Orders status: <span className = { styles.restaurantName }>{trackedRestaurant[0]? trackedRestaurant[0].name : '' }</span></div>
                 <div className = { styles.buttonsContainer }>
-                    { props.restaurants.map( ( restaurant, index ) => <button key = { index } onClick = {() => selectRestaurant(restaurant.id) } className = { styles.selectRestaurant }>{restaurant.name}</button>)}
+                    { restaurants.map( ( restaurant, index ) => <button key = { index } onClick = {() => selectRestaurant(restaurant.id) } className = { styles.selectRestaurant }>{restaurant.name}</button>)}
                 </div>
             </div>
             <div className = { styles.fieldsContainer }>
                 <div className = { styles.received }>
                     <div className = { styles.fieldName }>Received</div>
-                    { receivedOrders.map( ( order, index ) => <Order key = { index } setOrder = { setUpdating } order = { order } menu = { props.openMenu } users = { props.users } button = 'Accept order' />)}
+                    { receivedOrders.map( ( order, index ) => <Order key = { index } setOrder = { setUpdating } order = { order } menu = { openMenu } users = { users } button = 'Accept order' />)}
                 </div>
                 <div className = { styles.accepted }>
                     <div className = { styles.fieldName }>Accepted</div>
-                    { acceptedOrders.map( ( order, index ) => <Order key = { index } setOrder = { setUpdating }  order = { order } menu = { props.openMenu } users = { props.users } button = 'Send to customer' />)}
+                    { acceptedOrders.map( ( order, index ) => <Order key = { index } setOrder = { setUpdating }  order = { order } menu = { openMenu } users = { users } button = 'Send to customer' />)}
                 </div>
                 <div className = { styles.inDelivery }>
                     <div className = { styles.fieldName }>In delivery</div>
-                    { deliveryOrders.map( ( order, index ) => <Order key = { index } order = { order } menu = { props.openMenu } users = { props.users } />)}
+                    { deliveryOrders.map( ( order, index ) => <Order key = { index } order = { order } menu = { openMenu } users = { users } />)}
                 </div>
                 <div className = { styles.closed }>
                     <div className = { styles.fieldName }>Closed</div>
-                    { closedOrders.map( ( order, index ) => <Order key = { index } order = { order } menu = { props.openMenu } users = { props.users }/>)}
+                    { closedOrders.map( ( order, index ) => <Order key = { index } order = { order } menu = { openMenu } users = { users }/>)}
                 </div>
             </div>
         </>

@@ -49,6 +49,33 @@
     width: 25%;
     padding: 1%;
     background-color: #3B7080;
+    transition: all 1s ease-in-out;
+}
+
+.paymentInfo {
+    font-size: 1.5rem;
+    text-align: center;
+    position: relative;
+    top: 0;
+}
+
+.closePaymentButton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #3B7080;
+    background-color: orange;
+    color: #3B7080;
+    cursor: pointer;
+    height: 1.5rem;
+    width: 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-left: none;
+    border-top: none;
+}
+.closePaymentButton:hover {
+    color: #fff;
 }
 
 .paymentForm {
@@ -60,9 +87,24 @@
 
 .paymentInput {
     margin: 1%;
-    height: 2rem
+    height: 2rem;
+    outline: none;
 }
 
 .payButton {
-    width: 90%
+    width: 98%;
+    margin-left: 1%;
+    height: 2rem;
+    color: #3B7080;
+    background-color: orange;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 1px solid #3b7080;
+    cursor: pointer;
+}
+
+.payButton:hover {
+    background-color: #3b7080;
+    color: orange;
+    border: 2px solid orange;
 }

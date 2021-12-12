@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 
-
-function ManagerViewMain(props) {
+function ManagerViewMain({restaurants}) {
 
     let token = localStorage.getItem('token26')
 
@@ -36,7 +35,6 @@ function ManagerViewMain(props) {
         .catch(err => console.log( err ))
     }
 
-
     const deleteRestaurant = ( restaurantId ) => {
         let payload = { token: token }
         let confirmation = prompt('If you want to delete this restaurant, please type - yes')
@@ -52,11 +50,11 @@ function ManagerViewMain(props) {
 
     return (
         <div className = { styles.mainContainer }>
-            { props.restaurants.map( (restaurant, index) => <div className = { styles.linkContainer } key = { index }>
-                                                                <Link to = {restaurant.id} className = { styles.link } key = { index } >
-                                                                <RestaurantBox key = { index } restaurant = { {...restaurant} }/></Link>
-                                                                <button className = { styles.deleteButton } key = { index + 1 } onClick = { () => deleteRestaurant(restaurant.id) }>delete</button>
-                                                            </div>) }
+            { restaurants.map( (restaurant, index) => <div className = { styles.linkContainer } key = { index }>
+                                                        <Link to = {restaurant.id} className = { styles.link } key = { index } >
+                                                        <RestaurantBox key = { index } restaurant = { {...restaurant} }/></Link>
+                                                        <button className = { styles.deleteButton } key = { index + 1 } onClick = { () => deleteRestaurant(restaurant.id) }>delete</button>
+                                                      </div>) }
             <div className = { styles.addRestaurant } onClick = { createRestaurant }>+</div>
         </div>
     );

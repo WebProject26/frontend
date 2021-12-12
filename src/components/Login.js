@@ -3,7 +3,14 @@ import styles from './Login.module.css'
 import axios from 'axios'
 import { loginValidation } from './validation'
 
-const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser = f => f, setOwnRestaurants = f => f, setUsers = f => f}) => {
+const Login = ({ view = Boolean,
+                 loginClick = f => f,
+                 regClick = f => f,
+                 setUser = f => f,
+                 setOwnRestaurants = f => f,
+                 setUsers = f => f 
+}) => {
+
     //changing the vertical position of the login window, based on the state in App.js
     //height is changed if there is an error on display
     const [ padding, setPadding ] = useState('')
@@ -123,7 +130,7 @@ const Login = ({ view = Boolean, loginClick = f => f, regClick = f => f, setUser
 
     return (
         <form className = {styles.frame} style = {topStyle} onSubmit = { login }>
-            <button onClick = { closeForm } className = { styles.closeButton }>x</button>
+            <button onClick = { closeForm } className = { styles.closeButton }>&times;</button>
             <input name = 'email' style = { emailBorderColor } className = {styles.input} type="text" placeholder="your@email.com"></input>
             <input name = 'password' style = { passwordBorderColor } className = {styles.input} type="password" placeholder="password"></input>
             <div className = {styles.buttonsContainer}>

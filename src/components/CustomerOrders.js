@@ -47,7 +47,7 @@ function CustomerOrders({ setOrdersX, setOrdersButtonX, ordersView, setOrdersVie
                     console.log(res.data)
                     setOrders(res.data)
                 })
-                .catch( err => console.error(err))
+                .catch( err => console.error(err.response.data))
                 console.log('count')
             }, 10000) 
         }
