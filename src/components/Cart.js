@@ -4,7 +4,7 @@ import PaymentTotal from './PaymentTotal';
 import styles from './Cart.module.css'
 
 
-const Cart = ({menuItems, cartItemsIds, restaurant, updateInfo }) => {
+const Cart = ({menuItems, cartItemsIds, restaurant, updateInfo, loginMessage }) => {
 
     let menuItemsIds = menuItems.map(item => item.id) //Extract the Ids of the food items in the current menu
     console.log(menuItemsIds)
@@ -35,6 +35,7 @@ const Cart = ({menuItems, cartItemsIds, restaurant, updateInfo }) => {
             <div className={styles.innerContainer2}>
                 <div className={styles.upperContainer}>
                     <h1 className={styles.restName}>{restaurant? restaurant.name : ''}</h1>
+                    { loginMessage ? <div className = { styles.loginMessage } >Please, login or register to be able to make orders!</div> : null }
                     {idAndAmount.map( idArray  => <CartItem key = {idArray[0]} itemId = { idArray[0] } amount={idArray[1]} menuItems = { menuItems } updateInfo = { updateInfo } />)}
                 </div>
                 <PaymentTotal itemsTotal={itemsTotal} deliveryFee = { restaurant? restaurant.deliveryfee : 0 } orderItems = { currentRestaurantItems } updateInfo = { updateInfo } /> 

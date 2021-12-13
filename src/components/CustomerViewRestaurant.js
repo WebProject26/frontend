@@ -15,6 +15,7 @@ function CustomerViewRestaurant() {
     const [ menuItems, setMenuItems ] = useState([]) //current menu
     const [ cartItemsIds, setCartItemsIds ] = useState([]) //cart items of the user
     const [ updateInfo, setUpdateInfo ] = useState(false) //Changing this value in the subcomponents triggers the useEffect
+    const [ loginMessage, setLoginMessage ] = useState(true)
 
     useEffect(() => {
         //get the current restaurant info
@@ -41,6 +42,7 @@ function CustomerViewRestaurant() {
         axios.get('https://webproject26.herokuapp.com/cart', { params: { token : localStorage.getItem('token26')}})
         .then(res => {
             setCartItemsIds( res.data.cartitems ? res.data.cartitems : [])
+            setLoginMessage(false)
         })
         .catch( err => console.log( err))
         setUpdateInfo(false)
@@ -74,7 +76,7 @@ function CustomerViewRestaurant() {
             { uniqueCategories.map((category, index) => <CustomerViewCategory key = {index} name = { category } items = { menuItems.filter(item => item.foodcategory === category) } updateInfo = { setCartItemsIds }/>) }
             </div>
             <div className = { styles.cartContainer}>
-            <Cart menuItems = {menuItems} cartItemsIds = { cartItemsIds } restaurant = { openRestaurant } updateInfo = { setCartItemsIds } />
+            <Cart menuItems = {menuItems} cartItemsIds = { cartItemsIds } restaurant = { openRestaurant } updateInfo = { setCartItemsIds } loginMessage = { loginMessage } />
             </div>
             <button className = {styles.showOrders} style = { {transform: `translateX(${ordersButtonX})`}} onClick = { showOrders }>My orders</button>
             <div className = { styles.orders } style = { {transform: `translateX(${ordersX})`} } >

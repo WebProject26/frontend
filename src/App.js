@@ -20,7 +20,6 @@ class App extends React.Component {
       logForm: false,
       regForm: false,
       user: null,
-      isManager: false,
       searchFilter: '',
       ownRestaurants: [],
       openMenu: null,
@@ -109,7 +108,6 @@ class App extends React.Component {
       this.setState( { openMenu: []})
     })
   }
-  //<Route path = '/' element = { <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants } search = { this.search }/></div> } />
 
   render() {
   
@@ -119,12 +117,15 @@ class App extends React.Component {
         <Routes>
             <Route path = '/' element = { <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants.filter( restaurant => restaurant.tags.toString().toLowerCase().includes(this.state.searchFilter.toLowerCase()) )} search = { this.search }/></div> } />
             <Route path = '/:restaurantId' element = { <div className = { styles.abc }><CustomerViewRestaurant /></div> } />
-            <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants }/></div> } />
-            <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant /></div> } />
-            <Route path = '/orders' element = { <div className = { styles.abc }><RestaurantOrders restaurants = { this.state.ownRestaurants }
-                                                                                                  openMenu = { this.state.openMenu }
-                                                                                                  getMenu = { this.getMenuItems }
-                                                                                                  users = { this.state.users }/></div> } />
+            <Route path = '/restaurants' element = { !this.state.user || !this.state.user.ismanager ? <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants.filter( restaurant => restaurant.tags.toString().toLowerCase().includes(this.state.searchFilter.toLowerCase()) )} search = { this.search }/></div> :
+                                                                                                      <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants }/></div> } />
+            <Route path = '/restaurants/:restaurantId' element = { !this.state.user || !this.state.user.ismanager ? <div className = { styles.abc }><CustomerViewRestaurant /></div> :
+                                                                                                                    <div className = { styles.abc }><ManagerViewRestaurant /></div> } />
+            <Route path = '/orders' element = { !this.state.user || !this.state.user.ismanager ? <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants.filter( restaurant => restaurant.tags.toString().toLowerCase().includes(this.state.searchFilter.toLowerCase()) )} search = { this.search }/></div>  :
+                                                                                                 <div className = { styles.abc }><RestaurantOrders restaurants = { this.state.ownRestaurants }
+                                                                                                                                                  openMenu = { this.state.openMenu }
+                                                                                                                                                  getMenu = { this.getMenuItems }
+                                                                                                                                                  users = { this.state.users }/></div> } />
         </Routes>
         <div>
           <Login view = { this.state.logForm }

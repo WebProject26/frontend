@@ -12,6 +12,10 @@ const PaymentTotal = ({itemsTotal, deliveryFee, orderItems, updateInfo }) => {
 
     const makeOrder = (event) => {
         event.preventDefault()
+        if( event.target.address.value === '' || event.target.card.value === '' ) {
+            alert('Please fill in all fields!')
+        } else {
+            
         let payload = {
             token: localStorage.getItem('token26'),
             foodids: orderItems
@@ -39,6 +43,7 @@ const PaymentTotal = ({itemsTotal, deliveryFee, orderItems, updateInfo }) => {
         .catch( err => console.error(err))
         console.log('restaurant id is ' + restaurantId)
         console.log('items to order are: ' + orderItems)
+        }
     }
 
     const [ paymentX, setPaymentX ] = useState('100%')
