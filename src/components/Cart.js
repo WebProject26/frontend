@@ -28,7 +28,7 @@ const Cart = ({menuItems, cartItemsIds, restaurant, updateInfo, loginMessage }) 
             return previous + price
         },0)
     }
-
+    console.log(loginMessage)
   return ( 
     <div className={styles.container}>
         <div className={styles.innerContainer}>

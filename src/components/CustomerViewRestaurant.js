@@ -7,7 +7,7 @@ import Cart from './Cart';
 import { useParams } from 'react-router';
 import axios from 'axios'
 
-function CustomerViewRestaurant() {
+function CustomerViewRestaurant({ user }) {
 
     let { restaurantId } = useParams()
   
@@ -46,7 +46,8 @@ function CustomerViewRestaurant() {
         })
         .catch( err => console.log( err))
         setUpdateInfo(false)
-    }, [restaurantId, updateInfo])
+        !user? setLoginMessage(true) : setLoginMessage(false)
+    }, [restaurantId, updateInfo, user])
 
     let uniqueCategories = []
     let categories = menuItems.map( item => item.foodcategory )
