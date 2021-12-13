@@ -21,6 +21,7 @@ class App extends React.Component {
       regForm: false,
       user: null,
       isManager: false,
+      searchFilter: '',
       ownRestaurants: [],
       openMenu: null,
       users: [],
@@ -32,7 +33,10 @@ class App extends React.Component {
     var token = localStorage.getItem( 'token26' )
     let payload = { token: token }
     axios.get('https://webproject26.herokuapp.com/restaurants')
-    .then( res => this.setState( { publicRestaurants: res.data }))
+    .then( res => {
+      this.setState( { publicRestaurants: res.data })
+      this.addNameToTags(res.data)
+    })
     .catch( err => console.error(err))
     axios.get('https://webproject26.herokuapp.com/login', { params: payload } )
     .then( ( res ) => {
@@ -57,6 +61,11 @@ class App extends React.Component {
       console.log( error )
       this.setUser(null)
     })
+  }
+
+  addNameToTags = (array) => {
+    array.map(element => element.tags.push(element.name))
+    console.log( this.state.publicRestaurants)
   }
 
   login = () => {
@@ -86,6 +95,10 @@ class App extends React.Component {
     this.setState({ ownRestaurants: restaurantsArray })
   }
 
+  search = (string) => {
+    this.setState({ searchFilter: string })
+  }
+
   getMenuItems = (restaurantId) => {
     axios.get(`https://webproject26.herokuapp.com/menu/${restaurantId}`)
     .then( (res) => {
@@ -96,6 +109,7 @@ class App extends React.Component {
       this.setState( { openMenu: []})
     })
   }
+  //<Route path = '/' element = { <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants } search = { this.search }/></div> } />
 
   render() {
   
@@ -103,7 +117,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Header user = { this.state.user } login = { this.login } register = { this.register } logout = { this.logout }/>
         <Routes>
-            <Route path = '/' element = { <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants }/></div> } />
+            <Route path = '/' element = { <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants.filter( restaurant => restaurant.tags.toString().toLowerCase().includes(this.state.searchFilter.toLowerCase()) )} search = { this.search }/></div> } />
             <Route path = '/:restaurantId' element = { <div className = { styles.abc }><CustomerViewRestaurant /></div> } />
             <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants }/></div> } />
             <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant /></div> } />

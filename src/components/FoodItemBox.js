@@ -13,15 +13,18 @@ export default function FoodItemBox(props) {
             token: token,
             itemid: id
         }
-        axios.delete(`https://webproject26.herokuapp.com/menu/${restaurantId}`, { data: payload })
-        .then( (res) => {
-            console.log(res)
-            props.updateInfo(true)
-        })
-        .catch( err => {
-            console.log(err)
-        }) 
-    }
+        let confirmation = prompt('If you want to delete this item, please type - yes')
+        if( confirmation === 'yes' ){
+            axios.delete(`https://webproject26.herokuapp.com/menu/${restaurantId}`, { data: payload })
+            .then( (res) => {
+                console.log(res)
+                props.updateInfo(true)
+            })
+            .catch( err => {
+                console.log(err)
+            })
+        }
+    }   
 
    
     /*
