@@ -9,9 +9,9 @@
     height: 10rem;
     background-repeat: no-repeat;
     background-size: contain;
-    cursor: pointer;
     display: flex;
     flex-direction: column;
+    background-size: cover ;
 }
 
 .namePrice, .description {
@@ -60,4 +60,35 @@
     background-color: #3B7080;
     color: #fff;
     cursor: pointer;
+}
+
+.selectImageButton {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    height: 2rem;
+    width: 9rem;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+.selectImageButton:hover {
+    background-color: #3b7080;
+    border: 1px solid #3b7080;
+    color: #fff;
+}
+
+.uploadButton {
+    width: 5rem;
+}
+
+.imgUpload {
+    position: relative;
+    background-color: #fff;
+    width: 100%;
+    top: -3%;
+    border: 1px solid #3B7080;
+    border-left: none;
+    border-top: none;
+    margin: 1% 0;
+    display: flex;
 }

@@ -11,7 +11,7 @@ function CustomerView({restaurants, search}) {
 
     return (
         <div className = { styles.outterContainer }>
-            <input className = { styles.search } placeholder = 'What are you craving?        🔎︎' onChange = { searchFilter }></input>
+            <input className = { styles.search } placeholder = 'What are you looking for...  🔎︎' onChange = { searchFilter }></input>
             <div className = { styles.mainContainer }>
                 { restaurants.map( (restaurant, index) => <div className = { styles.linkContainer } key = { index }>
                                                             <Link to = {restaurant.id} className = { styles.link } key = { index } >
