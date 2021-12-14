@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="491px" preserveAspectRatio="none" style="width:772px;height:491px;" version="1.1" viewBox="0 0 772 491" width="772px" zoomAndPan="magnify"><defs/><g><ellipse cx="670.3854" cy="395.5707" fill="#F8F8F8" rx="55.8534" ry="13.5707" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="77" x="631.8854" y="399.3129">AddFoodItem</text><ellipse cx="88.3816" cy="299.742" fill="#F8F8F8" rx="17.8492" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="21" x="77.8816" y="303.4842">App</text><ellipse cx="463.7955" cy="101.742" fill="#F8F8F8" rx="19.2635" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="23" x="452.2955" y="105.4842">Cart</text><ellipse cx="670.3873" cy="123.742" fill="#F8F8F8" rx="38.3553" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="50" x="645.3873" y="127.4842">CartItem</text><ellipse cx="670.5165" cy="168.3969" fill="#F8F8F8" rx="59.9845" ry="14.3969" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="88" x="626.5165" y="172.1391">CustomerOrder</text><ellipse cx="464.2604" cy="146.4457" fill="#F8F8F8" rx="62.7284" ry="14.9457" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="95" x="416.7604" y="150.1879">CustomerOrders</text><ellipse cx="463.7878" cy="197.3512" fill="#F8F8F8" rx="82.2558" ry="18.8512" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="141" x="393.2878" y="201.0933">CustomerRestaurantInfo</text><ellipse cx="265.7333" cy="186.4403" fill="#F8F8F8" rx="57.7013" ry="13.9403" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="82" x="224.7333" y="190.1824">CustomerView</text><ellipse cx="464.2518" cy="29.644" fill="#F8F8F8" rx="78.7198" ry="18.144" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="133" x="397.7518" y="33.3861">CustomerViewCategory</text><ellipse cx="670.3456" cy="28.5627" fill="#F8F8F8" rx="90.8136" ry="20.5627" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="160" x="590.3456" y="32.3049">CustomerViewFoodItemBox</text><ellipse cx="265.6786" cy="136.5293" fill="#F8F8F8" rx="83.1466" ry="19.0293" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="143" x="194.1786" y="140.2715">CustomerViewRestaurant</text><ellipse cx="670.7507" cy="439.6437" fill="#F8F8F8" rx="56.2187" ry="13.6437" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="78" x="631.7507" y="443.3859">FoodItemBox</text><ellipse cx="265.3163" cy="230.742" fill="#F8F8F8" rx="31.2843" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="40" x="245.3163" y="234.4842">Header</text><ellipse cx="265.4523" cy="322.742" fill="#F8F8F8" rx="24.9203" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="31" x="249.9523" y="326.4842">Login</text><ellipse cx="265.7672" cy="276.347" fill="#F8F8F8" rx="64.7352" ry="15.347" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="100" x="215.7672" y="280.0892">ManagerViewMain</text><ellipse cx="265.6315" cy="414.3199" fill="#F8F8F8" rx="79.5995" ry="18.3199" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="135" x="198.1315" y="418.0621">ManagerViewRestaurant</text><ellipse cx="464.1594" cy="465.742" fill="#F8F8F8" rx="25.6274" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="32" x="448.1594" y="469.4842">Order</text><ellipse cx="670.7507" cy="79.6437" fill="#F8F8F8" rx="56.2187" ry="13.6437" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="78" x="631.7507" y="83.3859">PaymentTotal</text><ellipse cx="265.5589" cy="365.742" fill="#F8F8F8" rx="35.5269" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="46" x="242.5589" y="369.4842">Register</text><ellipse cx="88.2925" cy="254.552" fill="#F8F8F8" rx="60.7601" ry="14.552" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="90" x="43.2925" y="258.2942">reportWebVitals</text><ellipse cx="464.1091" cy="266.5154" fill="#F8F8F8" rx="58.0771" ry="14.0154" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="83" x="422.6091" y="270.2576">RestaurantBox</text><ellipse cx="464.2196" cy="417.3375" fill="#F8F8F8" rx="69.6876" ry="16.3375" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="112" x="408.2196" y="421.0797">RestaurantCategory</text><ellipse cx="463.8664" cy="369.6669" fill="#F8F8F8" rx="58.8344" ry="14.1669" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="85" x="421.3664" y="373.4091">RestaurantInfo</text><ellipse cx="265.7672" cy="465.347" fill="#F8F8F8" rx="64.7352" ry="15.347" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="100" x="215.7672" y="469.0892">RestaurantOrders</text><ellipse cx="88.3816" cy="209.742" fill="#F8F8F8" rx="17.8492" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="21" x="77.8816" y="213.4842">src</text><ellipse cx="463.9229" cy="323.742" fill="#F8F8F8" rx="41.8909" ry="13.242" style="stroke: #383838; stroke-width: 0.5;"/><text fill="#000000" font-family="Tahoma, sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="55" x="436.4229" y="327.4842">validation</text><!--MD5=[3d41fb2fd54dd04dba1aafd1e4b9bd35]
+link App to CustomerView--><path d="M106.323,296.881 C119.448,294.07 137.436,288.439 149.532,277.5 C174.448,254.968 156.757,231.044 182.532,209.5 C190.429,202.899 200.094,198.188 209.982,194.826 " fill="none" id="App-&gt;CustomerView" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="214.847,193.282,205.0586,192.1926,210.0814,194.7948,207.4791,199.8176,214.847,193.282" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[84b84a9ecb0289ea542938af82265ef7]
+link App to CustomerViewRestaurant--><path d="M106.571,297.462 C120.017,294.974 138.319,289.495 149.532,277.5 C185.262,239.28 146.377,202.317 182.532,164.5 C187.337,159.474 193.08,155.351 199.265,151.967 " fill="none" id="App-&gt;CustomerViewRestaurant" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="204.073,149.522,194.2376,150.0371,199.6164,151.7889,197.8646,157.1676,204.073,149.522" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[aa1091f531fbe5a05d43f0853b1d1dd8]
+link App to Header--><path d="M105.6278,295.028 C118.04,291.245 135.413,285.211 149.532,277.5 C165.681,268.68 166.006,260.59 182.532,252.5 C197.638,245.106 215.568,239.932 230.804,236.469 " fill="none" id="App-&gt;Header" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="235.859,235.359,226.211,233.3803,230.9751,236.4303,227.9251,241.1945,235.859,235.359" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[c12c7b4f4f89bf532c65e21e4ffcf9c3]
+link App to Login--><path d="M106.312,301.705 C136.237,305.638 199.123,313.903 235.965,318.745 " fill="none" id="App-&gt;Login" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="241.205,319.434,232.8027,314.2958,236.2476,318.7827,231.7607,322.2276,241.205,319.434" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[a98b1f3023b886a300cd5b2e61cdc713]
+link App to ManagerViewMain--><path d="M106.312,297.295 C128.572,294.369 169.071,289.046 203.522,284.519 " fill="none" id="App-&gt;ManagerViewMain" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="208.558,283.857,199.1128,281.0664,203.6008,284.5099,200.1573,288.9979,208.558,283.857" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[e152d46ed4380ac2f36725f51fd8aec8]
+link App to ManagerViewRestaurant--><path d="M98.3793,310.591 C113.666,329.064 146.836,366.203 182.532,387.5 C189.887,391.888 198.044,395.6623 206.278,398.8783 " fill="none" id="App-&gt;ManagerViewRestaurant" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="211.409,400.809,204.395,393.895,206.7295,399.0477,201.5768,401.3822,211.409,400.809" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[0685ec04516eb55a8d58c0d473902279]
+link App to Register--><path d="M103.3312,307.262 C121.165,317.037 153.391,333.84 182.532,344.5 C197.536,349.988 214.584,354.602 229.234,358.095 " fill="none" id="App-&gt;Register" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="234.104,359.236,226.253,353.2895,229.2357,358.0961,224.4291,361.0788,234.104,359.236" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[2890068ad69b7f72e597b043da77dbf3]
+link App to RestaurantOrders--><path d="M94.1387,311.874 C105.054,339.476 135.182,406.4038 182.532,441.5 C190.143,447.1412 199.06,451.4615 208.158,454.7688 " fill="none" id="App-&gt;RestaurantOrders" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="212.926,456.4076,205.7155,449.6988,208.1976,454.782,203.1145,457.2641,212.926,456.4076" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[b2d2a66d0e582d737a40269c2ea7db91]
+link Cart to CartItem--><path d="M483.541,103.491 C516.108,106.995 584.381,114.339 628.53,119.089 " fill="none" id="Cart-&gt;CartItem" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="633.523,119.626,625.002,114.6872,628.5516,119.0917,624.1471,122.6414,633.523,119.626" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[86e0058d58024e19d024963defcea833]
+link Cart to PaymentTotal--><path d="M483.541,99.509 C512.641,96.378 570.248,90.181 613.68,85.509 " fill="none" id="Cart-&gt;PaymentTotal" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="618.904,84.947,609.5272,81.9346,613.9328,85.4828,610.3845,89.8885,618.904,84.947" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[b6a67a8fe12d7f33752d75121f19c1b7]
+link CustomerOrders to CustomerOrder--><path d="M521.454,152.57 C549.056,155.539 582.275,159.113 610.25,162.122 " fill="none" id="CustomerOrders-&gt;CustomerOrder" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="615.409,162.677,606.888,157.7382,610.4376,162.1427,606.0331,165.6924,615.409,162.677" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[ae24ddf9fac5ce47f3bab72261d959bb]
+link CustomerView to RestaurantBox--><path d="M307.065,196.244 C320.444,199.888 335.287,204.398 348.532,209.5 C352.89,211.178 400.965,235.265 433.419,251.585 " fill="none" id="CustomerView-&gt;RestaurantBox" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="438.086,253.933,431.8435,246.3152,433.6193,251.6861,428.2484,253.4619,438.086,253.933" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[1452dbf4735ed24d0514b1c07caf094e]
+link CustomerViewCategory to CustomerViewFoodItemBox--><path d="M542.637,29.121 C552.93,29.07 563.577,29.018 574.126,28.967 " fill="none" id="CustomerViewCategory-&gt;CustomerViewFoodItemBox" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="579.295,28.941,570.2757,24.9848,574.2951,28.9653,570.3145,32.9847,579.295,28.941" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[941afbd40e193295b5256106eca9f453]
+link CustomerViewRestaurant to Cart--><path d="M331.418,124.943 C368.728,118.297 413.322,110.354 439.849,105.629 " fill="none" id="CustomerViewRestaurant-&gt;Cart" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="444.907,104.729,435.3449,102.3698,439.9845,105.6061,436.7482,110.2457,444.907,104.729" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[277a976834f9d89ca13bb9c62b28a678]
+link CustomerViewRestaurant to CustomerOrders--><path d="M346.74,140.582 C363.666,141.443 381.333,142.342 397.635,143.172 " fill="none" id="CustomerViewRestaurant-&gt;CustomerOrders" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="402.648,143.427,393.863,138.9745,397.6545,143.1728,393.4562,146.9642,402.648,143.427" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[b2c1cd87919034c208b980a5b4d71742]
+link CustomerViewRestaurant to CustomerRestaurantInfo--><path d="M315.611,151.736 C343.98,160.542 379.719,171.637 408.902,180.696 " fill="none" id="CustomerViewRestaurant-&gt;CustomerRestaurantInfo" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="413.899,182.247,406.4887,175.7595,409.1236,180.7652,404.1179,183.4001,413.899,182.247" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[0a9c2407ea821718bc29aaac9bf8b03f]
+link CustomerViewRestaurant to CustomerViewCategory--><path d="M298.98,118.831 C334.45,99.517 391.096,68.672 427.676,48.753 " fill="none" id="CustomerViewRestaurant-&gt;CustomerViewCategory" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="432.478,46.138,422.661,46.9294,428.0869,48.5293,426.487,53.9552,432.478,46.138" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[734dcfe99d1f7c06da14a9a02775927b]
+link Login to validation--><path d="M290.627,322.623 C321.914,322.782 377.188,323.063 416.719,323.264 " fill="none" id="Login-&gt;validation" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="421.944,323.291,412.9647,319.2448,416.9441,323.2653,412.9235,327.2447,421.944,323.291" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[06898a8e55269c0870625a74f47b7596]
+link ManagerViewMain to RestaurantBox--><path d="M328.706,273.336 C352.017,272.15 378.474,270.803 401.707,269.621 " fill="none" id="ManagerViewMain-&gt;RestaurantBox" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="406.921,269.356,397.7292,265.8188,401.9275,269.6102,398.136,273.8085,406.921,269.356" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[2d1c9575a7cfa5881b936532306d8de8]
+link ManagerViewRestaurant to RestaurantCategory--><path d="M345.042,415.6986 C359.608,415.921 374.779,416.1526 389.2,416.3728 " fill="none" id="ManagerViewRestaurant-&gt;RestaurantCategory" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="394.477,416.4534,385.5386,412.3176,389.4776,416.3777,385.4175,420.3167,394.477,416.4534" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[00ad586494ed5e66563958ba4209656e]
+link ManagerViewRestaurant to RestaurantInfo--><path d="M322.841,401.6048 C352.308,394.8567 387.971,386.6895 415.953,380.282 " fill="none" id="ManagerViewRestaurant-&gt;RestaurantInfo" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="421.085,379.106,411.4193,377.2155,416.2111,380.2219,413.2047,385.0137,421.085,379.106" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[3943aef062600e52dccc172aa649145a]
+link Register to validation--><path d="M296.805,359.03 C331.011,351.718 386.779,339.799 424.173,331.806 " fill="none" id="Register-&gt;validation" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="429.096,330.754,419.4584,328.7251,424.2066,331.7999,421.1318,336.5481,429.096,330.754" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[c1451d8d86f4dc6b04292701d7ef6b4e]
+link RestaurantCategory to AddFoodItem--><path d="M527.779,410.7498 C555.297,407.7894 587.325,404.3438 613.969,401.4775 " fill="none" id="RestaurantCategory-&gt;AddFoodItem" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="619.223,400.9123,609.8462,397.8996,614.2518,401.448,610.7034,405.8535,619.223,400.9123" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[7518a387aa798dc3315bdf030999bc22]
+link RestaurantCategory to FoodItemBox--><path d="M527.779,424.2502 C555.297,427.2106 587.325,430.6562 613.969,433.5225 " fill="none" id="RestaurantCategory-&gt;FoodItemBox" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="619.223,434.0877,610.7034,429.1465,614.2518,433.552,609.8462,437.1004,619.223,434.0877" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[364425d90cebe73cfa7bf0e301bc63f1]
+link RestaurantOrders to Order--><path d="M330.059,465.5 C364.539,465.5 405.566,465.5 432.84,465.5 " fill="none" id="RestaurantOrders-&gt;Order" style="stroke: #000000; stroke-width: 0.5;"/><polygon fill="#000000" points="438.105,465.5,429.105,461.5,433.105,465.5,429.105,469.5,438.105,465.5" style="stroke: #000000; stroke-width: 0.5;"/><!--MD5=[f39319d2be27e673ece5aa4b202a2579]
+link <b>src</b> to App--><path d="M70.4822,210.642 C51.7115,212.931 23.3775,219.754 11.0324,240 C4.3225,251.005 4.3225,257.995 11.0324,269 C22.3166,287.507 46.9597,294.798 65.4472,297.662 " fill="none" id="&lt;b&gt;src&lt;/b&gt;-&gt;App" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="70.4822,298.358,62.1149,293.163,65.5293,297.6731,61.0191,301.0876,70.4822,298.358" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[f1a337901fa5ebf3530ace6eeadcb81b]
+link <b>src</b> to reportWebVitals--><path d="M88.5324,222.728 C88.5324,226.714 88.5324,230.699 88.5324,234.685 " fill="none" id="&lt;b&gt;src&lt;/b&gt;-&gt;reportWebVitals" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="88.5324,239.734,92.5324,230.734,88.5324,234.734,84.5324,230.734,88.5324,239.734" style="stroke: #000000; stroke-width: 1.0;"/><script type="text/plantuml"><![CDATA[MD5=[e432eaa6eac82092ddd6b5c8edb28438]
+@startuml
+
+scale max 1920 width
+left to right direction
+
+skinparam nodesep 17
+skinparam ranksep 33
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Tahoma
+skinparam defaultFontSize 12
+skinparam roundCorner 6
+skinparam dpi 150
+skinparam arrowColor black
+skinparam arrowThickness 0.5
+skinparam packageTitleAlignment left
+
+skinparam usecase {
+  borderThickness 0.5
+}
+
+skinparam rectangle {
+  borderThickness 0.5
+}
+
+skinparam component {
+  borderThickness 1
+}
+
+
+(AddFoodItem)
+(App)
+(Cart)
+(CartItem)
+(CustomerOrder)
+(CustomerOrders)
+(CustomerRestaurantInfo)
+(CustomerView)
+(CustomerViewCategory)
+(CustomerViewFoodItemBox)
+(CustomerViewRestaurant)
+(FoodItemBox)
+(Header)
+(Login)
+(ManagerViewMain)
+(ManagerViewRestaurant)
+(Order)
+(PaymentTotal)
+(Register)
+(reportWebVitals)
+(RestaurantBox)
+(RestaurantCategory)
+(RestaurantInfo)
+(RestaurantOrders)
+(<b>src</b>)
+(validation)
+
+
+(App) --> (CustomerView)
+(App) --> (CustomerViewRestaurant)
+(App) --> (Header)
+(App) --> (Login)
+(App) --> (ManagerViewMain)
+(App) --> (ManagerViewRestaurant)
+(App) --> (Register)
+(App) --> (RestaurantOrders)
+(Cart) --> (CartItem)
+(Cart) --> (PaymentTotal)
+(CustomerOrders) --> (CustomerOrder)
+(CustomerView) --> (RestaurantBox)
+(CustomerViewCategory) --> (CustomerViewFoodItemBox)
+(CustomerViewRestaurant) --> (Cart)
+(CustomerViewRestaurant) --> (CustomerOrders)
+(CustomerViewRestaurant) --> (CustomerRestaurantInfo)
+(CustomerViewRestaurant) --> (CustomerViewCategory)
+(Login) --> (validation)
+(ManagerViewMain) --> (RestaurantBox)
+(ManagerViewRestaurant) --> (RestaurantCategory)
+(ManagerViewRestaurant) --> (RestaurantInfo)
+(Register) --> (validation)
+(RestaurantCategory) --> (AddFoodItem)
+(RestaurantCategory) --> (FoodItemBox)
+(RestaurantOrders) --> (Order)
+(<b>src</b>) -[thickness=1]> (App)
+(<b>src</b>) -[thickness=1]> (reportWebVitals)
+
+@enduml
+
+
+' View and edit on https://arkit.pro
+]]></script></g></svg>

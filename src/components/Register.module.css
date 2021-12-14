@@ -3,8 +3,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 15%;
-    height:37%;
+    width: 32rem;
+    height: 32rem;
     border: 2px solid #3B7080;
     display: flex;
     flex-direction: column;
@@ -15,13 +15,6 @@
     -moz-transition: all 1s ease-in-out;
     -o-transition: all 1s ease-in-out;
     transition: all 1s ease-in-out;
-}
-
-@media (max-aspect-ratio: 16/8) {
-    .frame { 
-        width: 30%;
-        height:55%;
-    }
 }
 
 .input {

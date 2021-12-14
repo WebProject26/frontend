@@ -107,7 +107,6 @@ class App extends React.Component {
       this.setState( { openMenu: []})
     })
   }
-
   render() {
   
     return (
@@ -115,15 +114,16 @@ class App extends React.Component {
         <Header user = { this.state.user } login = { this.login } register = { this.register } logout = { this.logout }/>
         <Routes>
             <Route path = '/' element = { <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants.filter( restaurant => restaurant.tags.toString().toLowerCase().includes(this.state.searchFilter.toLowerCase()) )} search = { this.search }/></div> } />
-            <Route path = '/:restaurantId' element = { <div className = { styles.abc }><CustomerViewRestaurant user = { this.state.user } restaurants = { this.state.publicRestaurants }/></div> } />
-            <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants } user = { this.state.user } setOwnRestaurants = { this.setOwnRestaurants}/></div> } />
-            <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant user = { this.state.user } setOwnRestaurants = { this.setOwnRestaurants} setPublicRestaurants = { this.setPublicRestaurants}/></div> } />
-            <Route path = '/orders' element = { <div className = { styles.abc }><RestaurantOrders restaurants = { this.state.ownRestaurants }
-                                                                                                  openMenu = { this.state.openMenu }
-                                                                                                  getMenu = { this.getMenuItems }
-                                                                                                  users = { this.state.users }
-                                                                                                  user = { this.state.user }/></div> } >
-            </Route>
+            <Route path = '/:restaurantId' element = { <div className = { styles.abc }><CustomerViewRestaurant user = { this.state.user }/></div> } />
+            <Route path = '/restaurants' element = { !this.state.user || !this.state.user.ismanager ? <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants.filter( restaurant => restaurant.tags.toString().toLowerCase().includes(this.state.searchFilter.toLowerCase()) )} search = { this.search }/></div> :
+                                                                                                      <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants } user = { this.state.user } setOwnRestaurants = { this.setOwnRestaurants } setPublicRestaurants = { this.setPublicRestaurants}/></div> } />
+            <Route path = '/restaurants/:restaurantId' element = { !this.state.user || !this.state.user.ismanager ? <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants.filter( restaurant => restaurant.tags.toString().toLowerCase().includes(this.state.searchFilter.toLowerCase()) )} search = { this.search }/></div> : 
+                                                                                                                    <div className = { styles.abc }><ManagerViewRestaurant user = { this.state.user } setOwnRestaurants = { this.setOwnRestaurants } setPublicRestaurants = { this.setPublicRestaurants }/></div> } />
+            <Route path = '/orders' element = { !this.state.user || !this.state.user.ismanager ? <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants.filter( restaurant => restaurant.tags.toString().toLowerCase().includes(this.state.searchFilter.toLowerCase()) )} search = { this.search }/></div>  :
+                                                                                                 <div className = { styles.abc }><RestaurantOrders restaurants = { this.state.ownRestaurants }
+                                                                                                                                                   openMenu = { this.state.openMenu }
+                                                                                                                                                   getMenu = { this.getMenuItems }
+                                                                                                                                                   users = { this.state.users }/></div> } />
         </Routes>
         <div>
           <Login view = { this.state.logForm }
