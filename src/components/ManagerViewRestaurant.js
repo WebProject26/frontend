@@ -8,7 +8,7 @@ import axios from 'axios'
 import FormData from 'form-data'
 
  
-function ManagerViewRestaurant({ user, setOwnRestaurants }) {
+function ManagerViewRestaurant({ user, setOwnRestaurants, setPublicRestaurants }) {
 
     let { restaurantId } = useParams()
     let navigate = useNavigate()
@@ -82,8 +82,16 @@ function ManagerViewRestaurant({ user, setOwnRestaurants }) {
             }
             axios.put(`https://webproject26.herokuapp.com/restaurants/${ openRestaurant.id }`, payload )
             .then( (res) => {
+                let payload = { managerid : user.id }
+                axios.get('https://webproject26.herokuapp.com/restaurants', { headers : payload } )
+                .then( ( res ) => {
+                setOwnRestaurants(res.data)
+                })
+                axios.get('https://webproject26.herokuapp.com/restaurants')
+                .then( res => {
+                    setPublicRestaurants( res.data )
+                })
                 setUpdatingInfo(true)
-                window.location.reload()
             })
             .catch( err => {})
         })
@@ -108,7 +116,7 @@ function ManagerViewRestaurant({ user, setOwnRestaurants }) {
                             <input type = 'file' name = 'img' onChange = { handleFile } className = { styles.chooseFile }></input>
                             <button type = 'submit' className = { styles.uploadButton }>Upload</button>
                         </form> : null }
-            <RestaurantInfo openRestaurant = { openRestaurant } updateInfo = { setUpdatingInfo } user = { user } setOwnRestaurants = { setOwnRestaurants }/>
+            <RestaurantInfo openRestaurant = { openRestaurant } updateInfo = { setUpdatingInfo } user = { user } setOwnRestaurants = { setOwnRestaurants } setPublicRestaurants = { setPublicRestaurants }/>
             { uniqueCategories.map((category, index) => <RestaurantCategory key = {index} name = { category } items = { menuItems.filter(item => item.foodcategory === category) } setNewCategory = { setNewCategory } setUpdatingInfo = { setUpdatingInfo }/>) }
             { newCategory.map( (category, index) => <RestaurantCategory key = {index} categoryName = {category} items = { [] } setNewCategory = { setNewCategory } setUpdatingInfo = { setUpdatingInfo }/>)}
             <form className = { styles.newCategoryContainer } onSubmit = { addCategory }>

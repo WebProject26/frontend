@@ -90,6 +90,10 @@ function RestaurantInfo(props) {
             .then( ( res ) => {
                 props.setOwnRestaurants(res.data)
             })
+            axios.get('https://webproject26.herokuapp.com/restaurants')
+                .then( res => {
+                    props.setPublicRestaurants( res.data )
+                })
             props.updateInfo(true)
             })
         .catch( err => {})

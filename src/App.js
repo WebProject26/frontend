@@ -33,7 +33,7 @@ class App extends React.Component {
     let payload = { token: token }
     axios.get('https://webproject26.herokuapp.com/restaurants')
     .then( res => {
-      this.setState( { publicRestaurants: res.data })
+      this.setPublicRestaurants( res.data )
       this.addNameToTags(res.data)
     })
     .catch( err => console.error(err))
@@ -90,6 +90,10 @@ class App extends React.Component {
     this.setState({ ownRestaurants: restaurantsArray })
   }
 
+  setPublicRestaurants = ( restaurantsArray ) => {
+    this.setState({ publicRestaurants: restaurantsArray })
+  }
+
   search = (string) => {
     this.setState({ searchFilter: string })
   }
@@ -113,7 +117,7 @@ class App extends React.Component {
             <Route path = '/' element = { <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants.filter( restaurant => restaurant.tags.toString().toLowerCase().includes(this.state.searchFilter.toLowerCase()) )} search = { this.search }/></div> } />
             <Route path = '/:restaurantId' element = { <div className = { styles.abc }><CustomerViewRestaurant user = { this.state.user } restaurants = { this.state.publicRestaurants }/></div> } />
             <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants } user = { this.state.user } setOwnRestaurants = { this.setOwnRestaurants}/></div> } />
-            <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant user = { this.state.user } setOwnRestaurants = { this.setOwnRestaurants}/></div> } />
+            <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant user = { this.state.user } setOwnRestaurants = { this.setOwnRestaurants} setPublicRestaurants = { this.setPublicRestaurants}/></div> } />
             <Route path = '/orders' element = { <div className = { styles.abc }><RestaurantOrders restaurants = { this.state.ownRestaurants }
                                                                                                   openMenu = { this.state.openMenu }
                                                                                                   getMenu = { this.getMenuItems }
