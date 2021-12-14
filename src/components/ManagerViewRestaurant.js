@@ -3,7 +3,6 @@ import styles from './ManagerViewRestaurant.module.css'
 import RestaurantInfo from './RestaurantInfo'
 import RestaurantCategory from './RestaurantCategory'
 import { useParams } from 'react-router';
-import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import FormData from 'form-data'
 
@@ -11,16 +10,12 @@ import FormData from 'form-data'
 function ManagerViewRestaurant({ user, setOwnRestaurants, setPublicRestaurants }) {
 
     let { restaurantId } = useParams()
-    let navigate = useNavigate()
 
     const [ menuItems, setMenuItems ] = useState([])
     const [ openRestaurant, setOpenRestaurant ] = useState(null)
     const [ updatingInfo, setUpdatingInfo ] = useState(false)
     
     useEffect(() => {
-        if( !user || !user.ismanager ){
-            navigate('/', { replace: true })
-        } else {
             axios.get(`https://webproject26.herokuapp.com/restaurants/${restaurantId}`)
             .then( res => {
                 setOpenRestaurant(res.data)
@@ -35,8 +30,7 @@ function ManagerViewRestaurant({ user, setOwnRestaurants, setPublicRestaurants }
             .catch( (err) => {
                 setMenuItems([])
             })
-        }
-    }, [restaurantId, updatingInfo, user, navigate])
+    }, [restaurantId, updatingInfo, user])
     
     let uniqueCategories = []
     let [newCategory, setNewCategory] = useState([])
@@ -117,8 +111,8 @@ function ManagerViewRestaurant({ user, setOwnRestaurants, setPublicRestaurants }
                             <button type = 'submit' className = { styles.uploadButton }>Upload</button>
                         </form> : null }
             <RestaurantInfo openRestaurant = { openRestaurant } updateInfo = { setUpdatingInfo } user = { user } setOwnRestaurants = { setOwnRestaurants } setPublicRestaurants = { setPublicRestaurants }/>
-            { uniqueCategories.map((category, index) => <RestaurantCategory key = {index} name = { category } items = { menuItems.filter(item => item.foodcategory === category) } setNewCategory = { setNewCategory } setUpdatingInfo = { setUpdatingInfo }/>) }
-            { newCategory.map( (category, index) => <RestaurantCategory key = {index} categoryName = {category} items = { [] } setNewCategory = { setNewCategory } setUpdatingInfo = { setUpdatingInfo }/>)}
+            { uniqueCategories.map((category, index) => <RestaurantCategory key = {index} category = { category } items = { menuItems.filter(item => item.foodcategory === category) } setNewCategory = { setNewCategory } setUpdatingInfo = { setUpdatingInfo }/>) }
+            { newCategory.map( (category, index) => <RestaurantCategory key = {index} category = {category} items = { [] } setNewCategory = { setNewCategory } setUpdatingInfo = { setUpdatingInfo }/>)}
             <form className = { styles.newCategoryContainer } onSubmit = { addCategory }>
                 <input type = 'text' name = 'categoryName' className = { styles.newCategory } placeholder = "Category name" ></input>
                 <button className = { styles.addCategoryButton } type = 'submit'>Add category</button>

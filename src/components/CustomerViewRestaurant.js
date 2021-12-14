@@ -5,15 +5,12 @@ import CustomerViewCategory from './CustomerViewCategory'
 import CustomerOrders from './CustomerOrders';
 import Cart from './Cart';
 import { useParams } from 'react-router';
-import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-function CustomerViewRestaurant({ user, restaurants }) {
+function CustomerViewRestaurant({ user }) {
 
     let { restaurantId } = useParams()
-    let navigate = useNavigate()
 
-  
     const [ openRestaurant, setOpenRestaurant ] = useState(null) //current restaurant
     const [ menuItems, setMenuItems ] = useState([]) //current menu
     const [ cartItemsIds, setCartItemsIds ] = useState([]) //cart items of the user
@@ -21,17 +18,12 @@ function CustomerViewRestaurant({ user, restaurants }) {
     const [ loginMessage, setLoginMessage ] = useState(true)
 
     useEffect(() => {
-        if(restaurants.map(restaurant => restaurant.id).indexOf(restaurantId) === -1) {
-            navigate('/', { replace: true })
-        } else {
-            //get the current restaurant info
+        //get the current restaurant info
         axios.get(`https://webproject26.herokuapp.com/restaurants/${restaurantId}`)
         .then( res => {
             setOpenRestaurant(res.data)
         })
-        .catch( err => { 
-            if(err.response.status === 500 )
-            navigate('/', { replace: true })
+        .catch( err => {
         })
         //get the current restaurant menu
         axios.get(`https://webproject26.herokuapp.com/menu/${restaurantId}`)
@@ -48,8 +40,7 @@ function CustomerViewRestaurant({ user, restaurants }) {
         .catch( err => {})
         setUpdateInfo(false)
         !user? setLoginMessage(true) : setLoginMessage(false)
-        }
-    }, [restaurantId, updateInfo, user, navigate, restaurants])
+    }, [restaurantId, updateInfo, user])
 
     let uniqueCategories = []
     let categories = menuItems.map( item => item.foodcategory )

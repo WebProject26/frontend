@@ -2,14 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styles from './RestaurantOrders.module.css'
 import Order from './Order'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 
-function RestaurantOrders({ restaurants, openMenu, getMenu, users, user }) {
-
-    let navigate = useNavigate()
+function RestaurantOrders({ restaurants, openMenu, getMenu, users }) {
 
     const [ orders, setOrders ] = useState([])
-    const [ restaurantId, setRestaurantId ] = useState(0)
+    const [ restaurantId, setRestaurantId ] = useState( restaurants[0] ? restaurants[0].id : 0)
     const [ updating, setUpdating ] = useState(false)
 
     const selectRestaurant = (id) => {
@@ -23,10 +20,7 @@ function RestaurantOrders({ restaurants, openMenu, getMenu, users, user }) {
     let closedOrders = orders.filter( order => order.status === 3 )
 
     useEffect(() => {
-        if( !user || !user.ismanager ){
-            navigate('/', { replace: true })
-        }
-        let token = localStorage.getItem('token26')
+            let token = localStorage.getItem('token26')
             let payload = { token }
             axios.get(`https://webproject26.herokuapp.com/orders/${restaurantId}`, { params : payload } )
             .then( ( res ) => {
@@ -44,7 +38,7 @@ function RestaurantOrders({ restaurants, openMenu, getMenu, users, user }) {
                 .catch( err => {} )
             }, 10000)
         return () => clearInterval( checkInterval )
-    }, [restaurantId, updating, user, navigate])
+    }, [restaurantId, updating, restaurants])
 
     let trackedRestaurant = restaurants.filter(restaurant => restaurant.id === restaurantId)
 

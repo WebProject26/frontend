@@ -1,22 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './ManagerViewMain.module.css'
 import RestaurantBox from './RestaurantBox';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 
-function ManagerViewMain({restaurants, user, setOwnRestaurants}) {
+function ManagerViewMain({restaurants, user, setOwnRestaurants, setPublicRestaurants}) {
 
     let token = localStorage.getItem('token26')
-    let navigate = useNavigate()
     
-    useEffect(() => {
-        if( !user || !user.ismanager ){
-            navigate('/', { replace: true })
-        }
-    }, [user, navigate])
-
-
     const createRestaurant = () => {
         let payload = {   
             token: token,
@@ -41,6 +33,10 @@ function ManagerViewMain({restaurants, user, setOwnRestaurants}) {
             axios.get('https://webproject26.herokuapp.com/restaurants', { headers : payload } )
             .then( ( res ) => {
                 setOwnRestaurants(res.data)
+                axios.get('https://webproject26.herokuapp.com/restaurants')
+                .then( res => {
+                setPublicRestaurants( res.data )
+                })
             })
         })
         .catch(err => {})
@@ -56,6 +52,10 @@ function ManagerViewMain({restaurants, user, setOwnRestaurants}) {
                 axios.get('https://webproject26.herokuapp.com/restaurants', { headers : payload } )
                 .then( ( res ) => {
                     setOwnRestaurants(res.data)
+                    axios.get('https://webproject26.herokuapp.com/restaurants')
+                    .then( res => {
+                    setPublicRestaurants( res.data )
+                    })
                 })
             })
             .catch( err => {})
