@@ -11,10 +11,9 @@ function CustomerViewFoodItemBox(props) {
         }
         axios.post('https://webproject26.herokuapp.com/cart', payload)
         .then( res => {
-            console.log(res)
             props.updateInfo(res.data)
         })
-        .catch( err => console.log(err))
+        .catch( err => {})
     }
 
     return (

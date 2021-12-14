@@ -14,7 +14,6 @@ function Order(props) {
         }
         axios.put(`https://webproject26.herokuapp.com/orders/${props.order.restaurantid}`, payload)
         .then( (res) => {
-            console.log(res.data)
             props.setOrder(true)
         })
     }

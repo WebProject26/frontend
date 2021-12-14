@@ -7,10 +7,8 @@ import styles from './Cart.module.css'
 const Cart = ({menuItems, cartItemsIds, restaurant, updateInfo, loginMessage }) => {
 
     let menuItemsIds = menuItems.map(item => item.id) //Extract the Ids of the food items in the current menu
-    console.log(menuItemsIds)
 
     let currentRestaurantItems = cartItemsIds.filter(id => menuItemsIds.indexOf(id) !== -1) // From all items in the cart, extract only those that are valid for the current restaurant
-    console.log(currentRestaurantItems)
 
     let idAndAmount = Object.entries( currentRestaurantItems.reduce( (map, object) => (
         {...map, [object] : (map[object] || 0) + 1}
@@ -28,7 +26,6 @@ const Cart = ({menuItems, cartItemsIds, restaurant, updateInfo, loginMessage }) 
             return previous + price
         },0)
     }
-    console.log(loginMessage)
   return ( 
     <div className={styles.container}>
         <div className={styles.innerContainer}>

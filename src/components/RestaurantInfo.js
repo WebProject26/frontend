@@ -85,10 +85,14 @@ function RestaurantInfo(props) {
 
         axios.put(`https://webproject26.herokuapp.com/restaurants/${ restaurant.id }`, payload )
         .then( (res) => {
-            console.log(res)
+            let payload = { managerid : props.user.id }
+            axios.get('https://webproject26.herokuapp.com/restaurants', { headers : payload } )
+            .then( ( res ) => {
+                props.setOwnRestaurants(res.data)
+            })
             props.updateInfo(true)
             })
-        .catch( err => console.log(err))
+        .catch( err => {})
         editSave()        
     }
 

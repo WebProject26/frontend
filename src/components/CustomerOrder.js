@@ -22,10 +22,9 @@ function CustomerOrder({ order, restaurant, menuItems, update }) {
         }
         axios.put(`https://webproject26.herokuapp.com/orders/${order.restaurantid}`, payload)
         .then( (res) => {
-            console.log(res.data)
             update(true)
         })
-        .catch( err => console.log(err))
+        .catch( err => {})
     }
 
     let button = <button className = {styles.acceptButton } onClick = { acceptOrder }>Close order</button>

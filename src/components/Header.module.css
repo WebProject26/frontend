@@ -21,9 +21,6 @@
     text-decoration: none;
     font-family: 'Fruktur', cursive;
 }
-.logo:hover {
-    color: #fff;
-}
 
 .buttonsContainer {
     margin-right: 1%;

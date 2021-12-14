@@ -100,22 +100,20 @@ const Login = ({ view = Boolean,
                 errorHide()
                 if(res.data.ismanager) {
                     let payload = { managerid : res.data.id }
-                    console.log(payload)
                     axios.get('https://webproject26.herokuapp.com/restaurants', { headers : payload } )
                     .then( res => setOwnRestaurants(res.data) )
-                    .catch( err => console.log( err ) )
+                    .catch( err => {} )
                     axios.get('https://webproject26.herokuapp.com/register')
                         .then( res => {
                         setUsers( res.data )
                         })
-                        .catch( err => console.log( err ) )
+                        .catch( err => {} )
                 }
                 setTimeout( () =>{
                     loginClick()
                  }, padding === '1%' ? 1500 : 1000 )
             })
             .catch((error) => {
-                console.log(error)
                 errorDisplay()
             })
         } else { //if allValid is false, the error message is displayed and the height of the window is adjusted

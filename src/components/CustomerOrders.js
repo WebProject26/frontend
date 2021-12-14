@@ -28,27 +28,21 @@ function CustomerOrders({ setOrdersX, setOrdersButtonX, ordersView, setOrdersVie
     const [ update, setUpdate ] = useState(false)
     let currentOrders = orders.filter( order => order.restaurantid === restaurantId && order.status < 3 )
     let closedOrders = orders.filter( order => order.restaurantid === restaurantId && order.status === 3)
-    console.log(closedOrders)
-    console.log(currentOrders)
 
     useEffect(() => {
         let count 
         if( ordersView ) {
             axios.get('https://webproject26.herokuapp.com/orders', { params: { token: localStorage.getItem('token26')}})
             .then( res => {
-                console.log(res.data)
                 setOrders(res.data)
             })
-            .catch( err => console.error(err))
-            console.log('count')
+            .catch( err => {})
             count = setInterval( () => {
                 axios.get('https://webproject26.herokuapp.com/orders', { params: { token: localStorage.getItem('token26')}})
                 .then( res => {
-                    console.log(res.data)
                     setOrders(res.data)
                 })
-                .catch( err => console.error(err.response.data))
-                console.log('count')
+                .catch( err => {})
             }, 10000) 
         }
         setUpdate(false)

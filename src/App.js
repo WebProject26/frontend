@@ -40,15 +40,13 @@ class App extends React.Component {
     axios.get('https://webproject26.herokuapp.com/login', { params: payload } )
     .then( ( res ) => {
       this.setUser( res.data )
-      console.log('userSet')
       if(this.state.user.ismanager) {
         let payload = { managerid : this.state.user.id }
         axios.get('https://webproject26.herokuapp.com/restaurants', { headers : payload } )
         .then( ( res ) => {
           this.setOwnRestaurants(res.data)
-          console.log('restSet')
         })
-        .catch( err => console.log( err ) )
+        .catch( err => console.log(err) )
         axios.get('https://webproject26.herokuapp.com/register')
         .then( res => {
           this.setUsers( res.data )
@@ -57,14 +55,12 @@ class App extends React.Component {
       }
     })
     .catch(( error ) => {
-      console.log( error )
       this.setUser(null)
     })
   }
 
   addNameToTags = (array) => {
     array.map(element => element.tags.push(element.name))
-    console.log( this.state.publicRestaurants)
   }
 
   login = () => {
@@ -104,7 +100,6 @@ class App extends React.Component {
       this.setState( { openMenu: res.data} )
     })
     .catch( (err) => {
-      console.log( err )
       this.setState( { openMenu: []})
     })
   }
@@ -116,16 +111,15 @@ class App extends React.Component {
         <Header user = { this.state.user } login = { this.login } register = { this.register } logout = { this.logout }/>
         <Routes>
             <Route path = '/' element = { <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants.filter( restaurant => restaurant.tags.toString().toLowerCase().includes(this.state.searchFilter.toLowerCase()) )} search = { this.search }/></div> } />
-            <Route path = '/:restaurantId' element = { <div className = { styles.abc }><CustomerViewRestaurant user = { this.state.user }/></div> } />
-            <Route path = '/restaurants' element = { !this.state.user || !this.state.user.ismanager ? <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants.filter( restaurant => restaurant.tags.toString().toLowerCase().includes(this.state.searchFilter.toLowerCase()) )} search = { this.search }/></div> :
-                                                                                                      <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants }/></div> } />
-            <Route path = '/restaurants/:restaurantId' element = { !this.state.user || !this.state.user.ismanager ? <div className = { styles.abc }><CustomerViewRestaurant /></div> :
-                                                                                                                    <div className = { styles.abc }><ManagerViewRestaurant /></div> } />
-            <Route path = '/orders' element = { !this.state.user || !this.state.user.ismanager ? <div className = { styles.abc }><CustomerView restaurants = { this.state.publicRestaurants.filter( restaurant => restaurant.tags.toString().toLowerCase().includes(this.state.searchFilter.toLowerCase()) )} search = { this.search }/></div>  :
-                                                                                                 <div className = { styles.abc }><RestaurantOrders restaurants = { this.state.ownRestaurants }
-                                                                                                                                                  openMenu = { this.state.openMenu }
-                                                                                                                                                  getMenu = { this.getMenuItems }
-                                                                                                                                                  users = { this.state.users }/></div> } />
+            <Route path = '/:restaurantId' element = { <div className = { styles.abc }><CustomerViewRestaurant user = { this.state.user } restaurants = { this.state.publicRestaurants }/></div> } />
+            <Route path = '/restaurants' element = { <div className = { styles.abc }><ManagerViewMain restaurants = { this.state.ownRestaurants } user = { this.state.user } setOwnRestaurants = { this.setOwnRestaurants}/></div> } />
+            <Route path = '/restaurants/:restaurantId' element = { <div className = { styles.abc }><ManagerViewRestaurant user = { this.state.user } setOwnRestaurants = { this.setOwnRestaurants}/></div> } />
+            <Route path = '/orders' element = { <div className = { styles.abc }><RestaurantOrders restaurants = { this.state.ownRestaurants }
+                                                                                                  openMenu = { this.state.openMenu }
+                                                                                                  getMenu = { this.getMenuItems }
+                                                                                                  users = { this.state.users }
+                                                                                                  user = { this.state.user }/></div> } >
+            </Route>
         </Routes>
         <div>
           <Login view = { this.state.logForm }

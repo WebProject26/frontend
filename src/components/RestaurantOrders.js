@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 import styles from './RestaurantOrders.module.css'
 import Order from './Order'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
-function RestaurantOrders({ restaurants, openMenu, getMenu, users }) {
+function RestaurantOrders({ restaurants, openMenu, getMenu, users, user }) {
+
+    let navigate = useNavigate()
 
     const [ orders, setOrders ] = useState([])
     const [ restaurantId, setRestaurantId ] = useState(0)
     const [ updating, setUpdating ] = useState(false)
 
     const selectRestaurant = (id) => {
-        console.log('doing')
         getMenu(id)
         setRestaurantId(id)
     }
@@ -21,32 +23,30 @@ function RestaurantOrders({ restaurants, openMenu, getMenu, users }) {
     let closedOrders = orders.filter( order => order.status === 3 )
 
     useEffect(() => {
+        if( !user || !user.ismanager ){
+            navigate('/', { replace: true })
+        }
         let token = localStorage.getItem('token26')
             let payload = { token }
             axios.get(`https://webproject26.herokuapp.com/orders/${restaurantId}`, { params : payload } )
             .then( ( res ) => {
-              console.log(res.data)
-              //console.log(restaurantId)
               setOrders(res.data)
               setUpdating(false)
             })
-            .catch( err => console.log( err ) )
+            .catch( err => {} )
             const checkInterval = setInterval(() => {
                 let token = localStorage.getItem('token26')
                 let payload = { token }
                 axios.get(`https://webproject26.herokuapp.com/orders/${restaurantId}`, { params : payload } )
                 .then( ( res ) => {
-                console.log(res.data)
-                //console.log(restaurantId)
-                setOrders(res.data)
+                    setOrders(res.data)
                 })
-                .catch( err => console.log( err ) )
+                .catch( err => {} )
             }, 10000)
         return () => clearInterval( checkInterval )
-    }, [restaurantId, updating])
+    }, [restaurantId, updating, user, navigate])
 
     let trackedRestaurant = restaurants.filter(restaurant => restaurant.id === restaurantId)
-    //console.log(props.openMenu)
 
     return (
         <>

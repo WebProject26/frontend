@@ -18,7 +18,6 @@ export default function FoodItemBox(props) {
         if( confirmation === 'yes' ){
             axios.delete(`https://webproject26.herokuapp.com/menu/${restaurantId}`, { data: payload })
             .then( (res) => {
-                console.log(res)
                 props.updateInfo(true)
             })
             .catch( err => {
@@ -46,17 +45,15 @@ export default function FoodItemBox(props) {
             }
             axios.put(`https://webproject26.herokuapp.com/menu/${restaurantId}`, payload )
             .then( (res) => {
-                console.log(res)
                 props.updateInfo(true)
                 editSave()
             })
-            .catch(err=> console.log(err))
+            .catch(err=> {})
         } else {
             let formData = new FormData()
             formData.append("img", selectedFile)
             axios.post('https://webproject26.herokuapp.com/upload', formData, { headers : {"Content-Type": "multipart/form-data"} } )
             .then(res => {
-                console.log(res.data.externalPath)
                 let payload = { 
                     token: localStorage.getItem('token26'),
                     itemid: props.item.id,
@@ -68,13 +65,12 @@ export default function FoodItemBox(props) {
                 }
                 axios.put(`https://webproject26.herokuapp.com/menu/${restaurantId}`, payload )
                 .then( (res) => {
-                    console.log(res)
                     props.updateInfo(true)
                     editSave()
                 })
-                .catch(err=> console.log(err))
+                .catch(err=> {})
             })
-            .catch(err=> console.log(err.response))
+            .catch(err=> {})
         }
     }
 

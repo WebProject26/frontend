@@ -16,14 +16,14 @@ const CartItem = ({ itemId, amount, menuItems, updateInfo }) => {
         .then( res => {
             updateInfo(res.data)
         })
-        .catch( err => console.log(err))
+        .catch( err => {})
     }  
     const incrementItem = () => {
         axios.post('https://webproject26.herokuapp.com/cart', payload)
         .then( res => {
             updateInfo(res.data)
         })
-        .catch( err => console.log(err))
+        .catch( err => {})
     }
   
     const decrementItem = () => {
@@ -31,7 +31,7 @@ const CartItem = ({ itemId, amount, menuItems, updateInfo }) => {
         .then( res => {
             updateInfo(res.data)
         })
-        .catch( err => console.log(err))
+        .catch( err => {})
   }
     
     return(

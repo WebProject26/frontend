@@ -5,11 +5,14 @@ import CustomerViewCategory from './CustomerViewCategory'
 import CustomerOrders from './CustomerOrders';
 import Cart from './Cart';
 import { useParams } from 'react-router';
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-function CustomerViewRestaurant({ user }) {
+function CustomerViewRestaurant({ user, restaurants }) {
 
     let { restaurantId } = useParams()
+    let navigate = useNavigate()
+
   
     const [ openRestaurant, setOpenRestaurant ] = useState(null) //current restaurant
     const [ menuItems, setMenuItems ] = useState([]) //current menu
@@ -18,36 +21,35 @@ function CustomerViewRestaurant({ user }) {
     const [ loginMessage, setLoginMessage ] = useState(true)
 
     useEffect(() => {
-        //get the current restaurant info
+        if(restaurants.map(restaurant => restaurant.id).indexOf(restaurantId) === -1) {
+            navigate('/', { replace: true })
+        } else {
+            //get the current restaurant info
         axios.get(`https://webproject26.herokuapp.com/restaurants/${restaurantId}`)
         .then( res => {
-            console.log('restraurant ')
             setOpenRestaurant(res.data)
         })
-        .catch( err => {
-            console.error( err )
-            console.log('restaurant err')
+        .catch( err => { 
+            if(err.response.status === 500 )
+            navigate('/', { replace: true })
         })
         //get the current restaurant menu
         axios.get(`https://webproject26.herokuapp.com/menu/${restaurantId}`)
         .then( (res) => {
             setMenuItems(res.data)
-            console.log( 'menu')
         })
-        .catch( (err) => {
-            console.log( err )
-            console.log( 'menu err')
-        })
+        .catch( (err) => {})
         //get the cart items of the user
         axios.get('https://webproject26.herokuapp.com/cart', { params: { token : localStorage.getItem('token26')}})
         .then(res => {
             setCartItemsIds( res.data.cartitems ? res.data.cartitems : [])
             setLoginMessage(false)
         })
-        .catch( err => console.log( err))
+        .catch( err => {})
         setUpdateInfo(false)
         !user? setLoginMessage(true) : setLoginMessage(false)
-    }, [restaurantId, updateInfo, user])
+        }
+    }, [restaurantId, updateInfo, user, navigate, restaurants])
 
     let uniqueCategories = []
     let categories = menuItems.map( item => item.foodcategory )

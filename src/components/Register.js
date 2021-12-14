@@ -48,7 +48,6 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
         let email = event.target.value
         axios.get(`https://webproject26.herokuapp.com/register/${email}`)
         .then( function(res) {
-            console.log(res)
             if (res.data === true) {
             setEmailBorderColor(errorBorder)
             setError(errorsArray[0])
@@ -151,7 +150,6 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
         !validationArray[6] ? setCityBorderColor(errorBorder) : setCityBorderColor(normalBorder)
         !validationArray[7] ? setZipBorderColor(errorBorder) : setZipBorderColor(normalBorder)
 
-        console.log(payload)
         
         if (allValid) {
             if ( padding === '3%' ) { //if there was an error displayed, it first hides the error message and adjust the height of the window
@@ -159,9 +157,8 @@ const Register = ({ view = Boolean, regClick = f => f, logClick = f => f }) => {
             }
             axios.post('https://webproject26.herokuapp.com/register', payload)
             .then( (res) => {
-                console.log(res.data)
             })
-            .catch(error => console.log(error))
+            .catch(error => {})
             setTimeout( () =>{
                 regClick()
                 logClick()

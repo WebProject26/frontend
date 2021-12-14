@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './ManagerViewMain.module.css'
 import RestaurantBox from './RestaurantBox';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 
-function ManagerViewMain({restaurants}) {
+function ManagerViewMain({restaurants, user, setOwnRestaurants}) {
 
     let token = localStorage.getItem('token26')
+    let navigate = useNavigate()
+    
+    useEffect(() => {
+        if( !user || !user.ismanager ){
+            navigate('/', { replace: true })
+        }
+    }, [user, navigate])
+
 
     const createRestaurant = () => {
         let payload = {   
@@ -29,10 +37,13 @@ function ManagerViewMain({restaurants}) {
         }
         axios.post('https://webproject26.herokuapp.com/restaurants', payload)
         .then( (res) => {
-            console.log(res)
-            window.location.reload()
+            let payload = { managerid : user.id }
+            axios.get('https://webproject26.herokuapp.com/restaurants', { headers : payload } )
+            .then( ( res ) => {
+                setOwnRestaurants(res.data)
+            })
         })
-        .catch(err => console.log( err ))
+        .catch(err => {})
     }
 
     const deleteRestaurant = ( restaurantId ) => {
@@ -41,10 +52,13 @@ function ManagerViewMain({restaurants}) {
         if( confirmation === 'yes' ){
             axios.delete(`https://webproject26.herokuapp.com/restaurants/${restaurantId}`, { data: payload } )
             .then( (res) => {
-                console.log(res)
-                window.location.reload()
+                let payload = { managerid : user.id }
+                axios.get('https://webproject26.herokuapp.com/restaurants', { headers : payload } )
+                .then( ( res ) => {
+                    setOwnRestaurants(res.data)
+                })
             })
-            .catch( err => console.log(err))
+            .catch( err => {})
         }
     }
 

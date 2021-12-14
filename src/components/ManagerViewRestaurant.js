@@ -3,40 +3,40 @@ import styles from './ManagerViewRestaurant.module.css'
 import RestaurantInfo from './RestaurantInfo'
 import RestaurantCategory from './RestaurantCategory'
 import { useParams } from 'react-router';
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import FormData from 'form-data'
 
  
-function ManagerViewRestaurant() {
+function ManagerViewRestaurant({ user, setOwnRestaurants }) {
 
     let { restaurantId } = useParams()
+    let navigate = useNavigate()
 
     const [ menuItems, setMenuItems ] = useState([])
     const [ openRestaurant, setOpenRestaurant ] = useState(null)
     const [ updatingInfo, setUpdatingInfo ] = useState(false)
     
     useEffect(() => {
-        axios.get(`https://webproject26.herokuapp.com/restaurants/${restaurantId}`)
-        .then( res => {
-            console.log('getting restaurant')
-            setOpenRestaurant(res.data)
-            setUpdatingInfo(false)
-        })
-        .catch( err => {
-            console.error( err )
-        })
-        axios.get(`https://webproject26.herokuapp.com/menu/${restaurantId}`)
-        .then( res => {
-            setMenuItems(res.data)
-            console.log(res.data)
-            console.log('getting menu')
-            setUpdatingInfo(false)
-        })
-        .catch( (err) => {
-            console.log( err )
-            setMenuItems([])
-        })
-    }, [restaurantId, updatingInfo])
+        if( !user || !user.ismanager ){
+            navigate('/', { replace: true })
+        } else {
+            axios.get(`https://webproject26.herokuapp.com/restaurants/${restaurantId}`)
+            .then( res => {
+                setOpenRestaurant(res.data)
+                setUpdatingInfo(false)
+            })
+            .catch( err => {})
+            axios.get(`https://webproject26.herokuapp.com/menu/${restaurantId}`)
+            .then( res => {
+                setMenuItems(res.data)
+                setUpdatingInfo(false)
+            })
+            .catch( (err) => {
+                setMenuItems([])
+            })
+        }
+    }, [restaurantId, updatingInfo, user, navigate])
     
     let uniqueCategories = []
     let [newCategory, setNewCategory] = useState([])
@@ -54,7 +54,6 @@ function ManagerViewRestaurant() {
             alert('please input category name')
         } else {
             setNewCategory([...newCategory, event.target.categoryName.value])
-            console.log(newCategory)
             event.target.categoryName.value = ''
         }
     }
@@ -67,7 +66,6 @@ function ManagerViewRestaurant() {
         formData.append("img", selectedFile);
         axios.post('https://webproject26.herokuapp.com/upload', formData, { headers : {"Content-Type": "multipart/form-data"} }  )
         .then(res => {
-            console.log(res.data.externalPath)
             let payload = { 
                 token: localStorage.getItem('token26'),
                 restaurantName : openRestaurant.name,
@@ -84,13 +82,12 @@ function ManagerViewRestaurant() {
             }
             axios.put(`https://webproject26.herokuapp.com/restaurants/${ openRestaurant.id }`, payload )
             .then( (res) => {
-                console.log(res)
                 setUpdatingInfo(true)
                 window.location.reload()
             })
-            .catch( err => console.log(err))
+            .catch( err => {})
         })
-        .catch( err => console.log(err))
+        .catch( err => {})
       }
 
     const handleFile = (event) => {
@@ -111,7 +108,7 @@ function ManagerViewRestaurant() {
                             <input type = 'file' name = 'img' onChange = { handleFile } className = { styles.chooseFile }></input>
                             <button type = 'submit' className = { styles.uploadButton }>Upload</button>
                         </form> : null }
-            <RestaurantInfo openRestaurant = { openRestaurant } updateInfo = { setUpdatingInfo }/>
+            <RestaurantInfo openRestaurant = { openRestaurant } updateInfo = { setUpdatingInfo } user = { user } setOwnRestaurants = { setOwnRestaurants }/>
             { uniqueCategories.map((category, index) => <RestaurantCategory key = {index} name = { category } items = { menuItems.filter(item => item.foodcategory === category) } setNewCategory = { setNewCategory } setUpdatingInfo = { setUpdatingInfo }/>) }
             { newCategory.map( (category, index) => <RestaurantCategory key = {index} categoryName = {category} items = { [] } setNewCategory = { setNewCategory } setUpdatingInfo = { setUpdatingInfo }/>)}
             <form className = { styles.newCategoryContainer } onSubmit = { addCategory }>

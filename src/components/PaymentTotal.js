@@ -22,7 +22,6 @@ const PaymentTotal = ({itemsTotal, deliveryFee, orderItems, updateInfo }) => {
         }
         axios.post(`https://webproject26.herokuapp.com/orders/${restaurantId}`, payload)
         .then( res => {
-            console.log(res)
             setPaymentX('100%')
             event.target.address.value = ''
             event.target.card.value = ''
@@ -33,16 +32,13 @@ const PaymentTotal = ({itemsTotal, deliveryFee, orderItems, updateInfo }) => {
                 }
                 axios.delete('https://webproject26.herokuapp.com/cart', { data: payload })
                 .then( res => {
-                    console.log(res)
                     updateInfo(res.data)
                 })
-                .catch( err => console.error(err))
+                .catch( err => {})
                 return true
             })
         })
-        .catch( err => console.error(err))
-        console.log('restaurant id is ' + restaurantId)
-        console.log('items to order are: ' + orderItems)
+        .catch( err => {})
         }
     }
 
