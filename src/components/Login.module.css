@@ -1,0 +1,107 @@
+.frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 15%;
+    height: 18%;
+    border: 2px solid #3B7080;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    background-color: #fff;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+@media (max-aspect-ratio: 16/8) {
+    .frame {
+        width: 30%;
+        height: 27%;
+    }
+}
+
+.input {
+    margin-left: 4%;
+    margin-top: 6%;
+    width: 90%;
+    height: 15%;
+    font-size: 18px;
+    border: 1px solid #3b7080;
+    outline: none;
+}
+
+.buttonsContainer {
+    margin-top: 6%;
+    margin-left: 5%;
+    display: flex;
+    width: 90%;
+    height: 15%;
+    justify-content: space-between;
+}
+
+.login {
+    border-radius: 30px;
+    border: 1px solid #3B7080;
+    background-color: #3B7080;
+    color: orange;
+    width: 48%;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+}
+.login:hover {
+    color: #fff;
+}
+
+.register {
+    border-radius: 30px;
+    border: 1px solid #3B7080;
+    background-color: #fff;
+    width: 48%;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    color: orange;
+}
+.register:hover {
+    border: 1px solid orange;
+    color: #3b7080;
+}
+
+.error {
+    position: absolute;
+    bottom: -5%;
+    color: red;
+    font-size: 24px;
+    margin-top: 4%;
+    opacity: 0;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    align-self: center;
+}
+
+.closeButton {
+    width: 1.4rem;
+    height: 1.4rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    border: 1px solid #3B7080;
+    background-color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border-top: none;
+    border-right: none;
+    background-color: orange;
+    color: #3B7080;
+}
+
+.closeButton:hover {
+    color: #fff;
+}

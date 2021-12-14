@@ -1,0 +1,60 @@
+.headerContainer {
+    background-color: #3B7080;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #3B7080;
+    height: 4.5rem;
+    z-index: 5;
+}
+
+.homeLogo {
+    display: flex;
+    margin-left: 1%;
+    
+}
+
+.logo {
+    font-size: 3.5rem;
+    font-weight: normal;
+    color: orange;
+    text-decoration: none;
+    font-family: 'Fruktur', cursive;
+}
+
+.buttonsContainer {
+    margin-right: 1%;
+    display: flex;
+    gap: 1%;
+}
+
+.button {
+    width: 15rem;
+    height: 4rem;
+    font-size: 2rem;
+    border: none;
+    outline: none;
+    background-color: #3B7080;
+    color: orange;
+    cursor: pointer;
+    font-family: 'Fruktur', cursive;
+}
+.button:hover {
+    color: #fff
+}
+
+.homeButton {
+    width: 12rem;
+    height: 4rem;
+    font-size: 2rem;
+    border: none;
+    outline: none;
+    background-color: #3B7080;
+    color: orange;
+    cursor: pointer;
+    font-family: 'Fruktur', cursive;
+}
+
+.homeButton:hover {
+    color: #fff
+}

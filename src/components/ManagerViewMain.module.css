@@ -1,0 +1,49 @@
+.mainContainer {
+    margin-left: 3%;
+    width: 94%;
+    height: auto;
+    border: 2px solid #3B7080;
+    border-top: none;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+}
+
+.addRestaurant {
+    width: 20%;
+    margin: 2%;
+    border: 2px solid #3B7080;
+    height: 10rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    font-size: 6.5rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.linkContainer {
+    width: 20%;
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.link {
+    width: 100%;
+    
+    text-decoration: none;
+    color: black;
+}
+
+.deleteButton {
+    width: 100%;
+    margin-top: 2%;
+    border: 1px solid #3B7080;
+    cursor: pointer;
+}
+
+.deleteButton:hover {
+    background-color: #3B7080;
+    color: #fff;
+}

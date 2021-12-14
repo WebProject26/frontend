@@ -1,0 +1,35 @@
+.boxContainer {
+    width:100%;
+}
+
+.restaurantBox {
+    width: 100%;
+    border: 2px solid #3B7080;
+    height: 10rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+
+.nameRating, .priceTags {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.name {
+    font-weight: 600;
+}
+
+.star {
+    color: orange;
+}
+
+.rating {
+    font-weight: 600;
+}
+
+.price {
+    color: #3B7080;
+    font-weight: bold;
+}

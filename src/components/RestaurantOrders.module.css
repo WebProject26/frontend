@@ -1,0 +1,80 @@
+.topBar { 
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    height: 3rem;
+    align-items: center;
+    border: 2px solid #3b7080;
+    border-top: none;
+    border-bottom: none;
+}
+
+.statusText {
+    font-size: 2rem;
+    margin: 1%;
+    color: orange;
+    font-weight: bold;
+}
+
+.restaurantName {
+    color: #3b7080;
+    font-weight: bold;
+}
+
+.buttonsContainer { 
+    position: relative;
+    right: 1%;
+    display: flex;
+    gap: 1%;
+}
+
+.selectRestaurant {
+    width: 10rem;
+    height: 2rem;
+    cursor: pointer;
+    background-color: orange;
+    border: 1px solid #3b7080;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #3b7080;
+}
+.selectRestaurant:hover {
+    background-color: #3b7080;
+    color: orange;
+}
+
+.fieldsContainer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+}
+
+.received {
+    width: 24.5%;
+    border: 2px solid #3b7080;
+    background-color: #fff;
+}
+
+.accepted {
+    width: 24.5%;
+    border: 2px solid #3b7080;
+    background-color: #fff;
+}
+
+.inDelivery {
+    width: 24.5%;
+    border: 2px solid #3b7080;
+    background-color: #fff;
+}
+
+.closed {
+    width: 24.5%;
+    border: 2px solid #3b7080;
+    background-color: #fff;
+}
+
+.fieldName {
+    text-align: center;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #3b7080;
+}

@@ -1,0 +1,64 @@
+.testImg {
+    width: 94%;
+    height: 12rem;
+    background-color: #fff;
+    border: 2px solid #3B7080;
+    position: relative;
+    left: 3%;
+    margin-top: 2%;
+    text-align: center;
+    font-size: 4rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.innerContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.cartContainer {
+    width: 30%;
+}
+
+.orders {
+    position: absolute;
+    width: 26%;
+    top: 4.6rem;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    border: 2px solid #3B7080;
+    z-index: 2;
+    transform: translateX(100%);
+    transition: all 1s ease-in-out;
+    overflow-y: scroll;
+}
+
+.showOrders {
+    position: absolute;
+    top: 6rem;
+    right: 0;
+    cursor: pointer;
+    height: 3rem;
+    width: 9rem;
+    background-color: orange;
+    color: #3B7080;
+    font-size: 1.5rem;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    transition: transform .5s ease-in-out;
+}
+.showOrders:hover {
+    color: #fff;
+}

@@ -1,0 +1,94 @@
+.boxContainer {
+    width:23%;
+    margin: 1%;
+}
+
+.foodBox {
+    width: 100%;
+    border: 2px solid #3B7080;
+    height: 10rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+    background-size: cover ;
+}
+
+.namePrice, .description {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.name {
+    font-weight: 600;
+}
+
+.cost {
+    font-weight: 600;
+}
+
+.buttonsDiv {
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input {
+    width: 90%;
+    outline: none;
+}
+
+.deleteEdit {
+    width: 40%;
+    border: 1px solid #3B7080;
+    cursor: pointer;
+}
+
+.deleteEdit:hover {
+    background-color: #3B7080;
+    color: #fff;
+}
+
+.saveButton {
+    width: 100%;
+    border: 1px solid #3B7080;
+    margin-top: 3%;
+}
+
+.saveButton:hover {
+    background-color: #3B7080;
+    color: #fff;
+    cursor: pointer;
+}
+
+.selectImageButton {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    height: 2rem;
+    width: 9rem;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+.selectImageButton:hover {
+    background-color: #3b7080;
+    border: 1px solid #3b7080;
+    color: #fff;
+}
+
+.uploadButton {
+    width: 5rem;
+}
+
+.imgUpload {
+    position: relative;
+    background-color: #fff;
+    width: 100%;
+    top: -3%;
+    border: 1px solid #3B7080;
+    border-left: none;
+    border-top: none;
+    margin: 1% 0;
+    display: flex;
+}

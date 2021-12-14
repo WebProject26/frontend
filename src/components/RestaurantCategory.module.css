@@ -1,0 +1,25 @@
+.categoryContainer {
+    width: 94%;
+    border: 2px solid #3B7080;
+    position: relative;
+    left: 3%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.categoryName {
+    margin-left: 4%;
+    color: #3B7080;
+}
+
+.addFoodItem {
+    width: 22%;
+    margin: 1%;
+    border: 2px solid #3B7080;
+    height: 10rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    font-size: 6.5rem;
+    text-align: center;
+    cursor: pointer;
+}
